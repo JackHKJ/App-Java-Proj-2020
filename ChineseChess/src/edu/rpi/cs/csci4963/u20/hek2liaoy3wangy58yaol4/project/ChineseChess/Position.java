@@ -11,9 +11,12 @@ public class Position {
 	private int y;
 	/** the piece representation on this position */
 	private Piece piece;
-	//TODO: implement the relationship of this point and the chess board(not yet implemented)
 	/** indicator of whether this position is being taken*/
 	private boolean hasPiece;
+	/** the board */
+	private Board board;
+	//TODO: implement the relationship of this point and the chess board(not yet implemented)
+	
 	
 	/** the constructor of a position, which initialize the position without a piece 
 	 * @param x_coord the x coordinate of the position
@@ -54,7 +57,39 @@ public class Position {
 	}
 	
 	
-	//TODO: placePiece, interaction with the board
+	/** place the piece p on this (position) on the board b */
+	public void placePiece(Piece p, Board b) {
+		this.piece = p;
+		this.board = b;
+		//TODO: add the piece to the board
+		//TODO: set the bounds of the piece to be correctly visualized
+		this.hasPiece = true;
+		//TODO: validate the board
+	}
+	
+	/** getter of the piece on this position
+	 * @return the piece if has one or null otherwise
+	 */
+	public Piece getPiece() {
+		if(this.hasPiece) {
+			return this.piece;
+		}
+		else {
+			return null;
+		}
+	}
+	
+	/** remove the piece on this position if possible
+	 * @param p piece to be removed
+	 * @param b board that contains this piece
+	 */
+	public void removePiece(Piece p, Board b) {
+		this.board = b;
+		this.piece = p;
+		//TODO: remove the board from the piece;
+		//TODO: validate the board
+		this.hasPiece = false;
+	}
 	
 	
 
