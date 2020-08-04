@@ -26,10 +26,7 @@ enum PieceName{
 }
 
 
-
-
-
-
+// indicator of which side the piece belongs to
 enum Side{
 //	goes first
 	red,
@@ -52,7 +49,7 @@ public class Piece extends JLabel{
 	/** the padding for drawing content*/
 	private int padding = 2;
 	
-	//TODO: Implement the interaction with the chess board 
+	//TODO: Implement the interaction with the chess board(not yet implemented)
 	
 	
 	
@@ -166,7 +163,7 @@ public class Piece extends JLabel{
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(100,100,300,300);
-		frame.add(new Piece(PieceName.Pawn, Side.red, 100));
+		frame.add(new Piece(PieceName.General, Side.red, 100));
 		frame.setVisible(true);
 		
 		
