@@ -166,7 +166,7 @@ public class Piece extends JLabel{
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(100,100,300,300);
-		frame.add(new Piece(PieceName.General, Side.red, 100, new Board()));
+		frame.add(new Piece(PieceName.General, Side.red, 100, new Board(200,100,10)));
 		frame.setVisible(true);
 		
 		

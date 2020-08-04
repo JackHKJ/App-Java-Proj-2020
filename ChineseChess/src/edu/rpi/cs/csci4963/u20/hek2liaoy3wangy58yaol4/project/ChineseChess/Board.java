@@ -38,6 +38,22 @@ public class Board {
 	/** the current y coordinate under operation */
 	public int currentY;
 	
+	/** the constructor of the board
+	 * @param l the length (up to down) of the board
+	 * @param w the width (left to right) of the board
+	 * @param s the size of a single piece
+	 */
+	public Board(int l, int w, int s) {
+		this.length = l;
+		this.width = w;
+		this.pieceSize = s;
+		
+		//TODO: initialize the board
+		
+		
+
+		
+	}
 	
 	
 	
