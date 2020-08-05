@@ -16,9 +16,9 @@ public class Position {
 	/** the board */
 	private Board board;
 	//TODO: implement the relationship of this point and the chess board(not yet implemented)
-	
-	
-	/** the constructor of a position, which initialize the position without a piece 
+
+
+	/** the constructor of a position, which initialize the position without a piece
 	 * @param x_coord the x coordinate of the position
 	 * @param y_coord the y coordinate of the position
 	 */
@@ -27,46 +27,48 @@ public class Position {
 		this.y = y_coord;
 		this.hasPiece = false;
 	}
-	
+
 	/** getter of whether this position is taken
 	 * @return true if this position is taken, false otherwise
 	 */
 	public boolean hasPiece() {
 		return this.hasPiece;
 	}
-	
+
 	/** getter of x_coordinate
 	 * @return x the x coordinate
 	 */
 	public int getX() {
 		return this.x;
 	}
-	
+
 	/** getter of y_coordinate
 	 * @return y the y coordinate
 	 */
 	public int getY() {
 		return this.y;
 	}
-	
+
 	/** setter of the hasPiece boolean
 	 * @param tf the boolean to be loaded
 	 */
 	public void setHasPiece(boolean tf) {
 		this.hasPiece = tf;
 	}
-	
-	
+
+
 	/** place the piece p on this (position) on the board b */
 	public void placePiece(Piece p, Board b) {
 		this.piece = p;
 		this.board = b;
-		//TODO: add the piece to the board
-		//TODO: set the bounds of the piece to be correctly visualized
+		int size = p.getLength();
+		// board.add(piece); // add the chess piece to the [x][y] coordinate
+		// set the position to the center of drawing by halving the unit size
+		piece.setBounds(this.x - size/2, this.y - size/2, size, size);
 		this.hasPiece = true;
 		//TODO: validate the board
 	}
-	
+
 	/** getter of the piece on this position
 	 * @return the piece if has one or null otherwise
 	 */
@@ -78,7 +80,7 @@ public class Position {
 			return null;
 		}
 	}
-	
+
 	/** remove the piece on this position if possible
 	 * @param p piece to be removed
 	 * @param b board that contains this piece
@@ -90,7 +92,7 @@ public class Position {
 		//TODO: validate the board
 		this.hasPiece = false;
 	}
-	
-	
+
+
 
 }
