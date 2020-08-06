@@ -2,6 +2,9 @@ package edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.*;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -28,13 +31,13 @@ public class GUI extends JFrame{
 	private boolean actionPerformed;
 	/** double check of whether user wanna select defeat */
 	private boolean defeatSelection;
-	
-//	GUI SEGMENT 
-	
+
+//	GUI SEGMENT
+
 	private Container c;
-	
-	
-//	The JMenu Bar 
+
+
+//	The JMenu Bar
 	private JMenuBar menuBar;
 		// the game selection
 		private JMenu jmGame;
@@ -51,15 +54,15 @@ public class GUI extends JFrame{
 			private JMenuItem jmiSetUIColor;
 			// hides the configuration bar
 			private JMenuItem jmiHideConfigBar;
-			
-	
+
+
 // the main board area
-	private JPanel boardPanel;
-	
+	private Board boardPanel;
+
 //	the Console
 	private JScrollPane consolePane;
 	private JTextArea console;
-	
+
 //	the Configuration Panel
 	private JPanel configPanel;
 		// defeat
@@ -68,9 +71,9 @@ public class GUI extends JFrame{
 		private JButton drawBtn;
 		// hide
 		private JButton hideBtn;
-	
+
 	/** the constructor of the GUI*/
-	public GUI() {
+	public GUI() throws IOException{
 //		sizing
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.deviceHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
@@ -80,6 +83,10 @@ public class GUI extends JFrame{
 		this.countDown = 30;
 		this.actionPerformed = false;
 		this.defeatSelection = false;
+		// set up frame icon
+		File folderInput = new File("./image/chess2.png");
+		BufferedImage folderImage = ImageIO.read(folderInput);
+		this.setIconImage(folderImage);
 //		GUI settings
 		this.c = this.getContentPane();
 		c.setLayout(new BorderLayout());
@@ -97,7 +104,7 @@ public class GUI extends JFrame{
 				this.jmGame.add(jmiAdmitDefeat);
 				this.jmGame.add(jmiCallDraw);
 			this.menuBar.add(jmGame);
-			
+
 			this.jmUtilities = new JMenu("Utilities");
 			this.jmUtilities.setFont(new Font("Georgia",Font.BOLD, 40));
 				this.jmiHideConfigBar = new JMenuItem("Hide Config Bar");
@@ -107,16 +114,16 @@ public class GUI extends JFrame{
 				this.jmUtilities.add(jmiHideConfigBar);
 				this.jmUtilities.add(jmiSetUIColor);
 			this.menuBar.add(jmUtilities);
-			
+
 			c.add(menuBar, BorderLayout.NORTH);
-			
+
 //			Center the board panel (pre-filled in Gray)
-			this.boardPanel = new JPanel();
+			this.boardPanel = new Board(9, 10, 65);
 			boardPanel.setPreferredSize(new Dimension(this.getHeight()/11*9, this.getHeight()/11*10));
 			boardPanel.add(new JLabel("Load Board Needed"));
 			boardPanel.setBackground(Color.gray);
 			c.add(boardPanel, BorderLayout.CENTER);
-		
+
 //			East the Console
 			this.console = new JTextArea("---Console---\n");
 			this.console.setEditable(false);
@@ -125,12 +132,12 @@ public class GUI extends JFrame{
 			this.console.setFont(new Font("Georgia",Font.BOLD, 30));
 			this.consolePane = new JScrollPane(console);
 			this.consolePane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-			this.consolePane.setPreferredSize(new Dimension(450,deviceHeight));			
+			this.consolePane.setPreferredSize(new Dimension(450,deviceHeight));
 			c.add(consolePane, BorderLayout.EAST);
-			
+
 //			South the configuration panel
 			this.configPanel = new JPanel();
-			configPanel.setLayout(new GridLayout(1,3));			
+			configPanel.setLayout(new GridLayout(1,3));
 				this.defeatBtn = new JButton("Admit Defeat");
 				this.defeatBtn.setFont(new Font("Georgia",Font.BOLD, 40));
 				this.drawBtn = new JButton("Call Draw");
@@ -142,56 +149,56 @@ public class GUI extends JFrame{
 				configPanel.add(hideBtn);
 			this.c.add(configPanel, BorderLayout.SOUTH);
 //			window listener of this game
-			this.addWindowListener(new WindowListener() {				
+			this.addWindowListener(new WindowListener() {
 				@Override
-				public void windowOpened(WindowEvent e) {}				
+				public void windowOpened(WindowEvent e) {}
 				@Override
-				public void windowIconified(WindowEvent e) {}				
+				public void windowIconified(WindowEvent e) {}
 				@Override
-				public void windowDeiconified(WindowEvent e) {}				
+				public void windowDeiconified(WindowEvent e) {}
 				@Override
-				public void windowDeactivated(WindowEvent e) {}				
+				public void windowDeactivated(WindowEvent e) {}
 				@Override
-				public void windowClosing(WindowEvent e) {}				
+				public void windowClosing(WindowEvent e) {}
 				@Override
 				public void windowClosed(WindowEvent e) {
-					// TODO implement NET operation, signal losing game				
-				}				
+					// TODO implement NET operation, signal losing game
+				}
 				@Override
 				public void windowActivated(WindowEvent e) {}
 			});
-			
+
 //			add the listeners to the GUI
-			
+
 //			UI color operation
-			this.jmiSetUIColor.addActionListener(new ActionListener() {				
+			this.jmiSetUIColor.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					changeUIColor();				
+					changeUIColor();
 				}
 			});
 //			set visible/hidden of the config bar
-			this.jmiHideConfigBar.addActionListener(new ActionListener() {				
+			this.jmiHideConfigBar.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					changeConfigPaneStatus();					
+					changeConfigPaneStatus();
 				}
 			});
-			this.hideBtn.addActionListener(new ActionListener() {				
+			this.hideBtn.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					changeConfigPaneStatus();
 				}
 			});
 //			set countdown
-			this.jmiSetCountDown.addActionListener(new ActionListener() {				
+			this.jmiSetCountDown.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					setCountDown();					
+					setCountDown();
 				}
 			});
 //			admit defeat
-			this.jmiAdmitDefeat.addActionListener(new ActionListener() {				
+			this.jmiAdmitDefeat.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if(!defeatSelection) {
@@ -203,8 +210,8 @@ public class GUI extends JFrame{
 					defeat();
 				}
 			});
-			
-			this.defeatBtn.addActionListener(new ActionListener() {				
+
+			this.defeatBtn.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if(!defeatSelection) {
@@ -216,30 +223,30 @@ public class GUI extends JFrame{
 					defeat();
 				}
 			});
-			
+
 //			call draw
-			this.jmiCallDraw.addActionListener(new ActionListener() {				
+			this.jmiCallDraw.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					displayMsg("Asking for a DRAW");
 					callDraw();
 				}
 			});
-			this.drawBtn.addActionListener(new ActionListener() {				
+			this.drawBtn.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					displayMsg("Asking for a DRAW");
 					callDraw();
 				}
 			});
-			
-			
+
+
 //			end of the listeners
 
 			this.setVisible(true);
 	}
-	
-	
+
+
 	/** display the message by appending to the end of the console
 	 * @param message message to be appended
 	 */
@@ -247,30 +254,30 @@ public class GUI extends JFrame{
 		this.console.append(message);
 		this.console.append("\n");
 	}
-	
+
 	/** use the color chooser to change the color of the UI	 */
 	private void changeUIColor() {
 		JDialog action = new JDialog(this, "Select the Color using Color Chooser", true);
 		action.setBounds(deviceWidth/2 -deviceHeight*9/20 - 225,100,600,500);
 		action.setLayout(new BorderLayout());
 		JColorChooser jcc = new JColorChooser();
-		action.add(jcc,BorderLayout.CENTER);		
+		action.add(jcc,BorderLayout.CENTER);
 		JButton confirm = new JButton("Confirm");
 		confirm.setMnemonic('c');
-		confirm.addActionListener(new ActionListener() {			
+		confirm.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Color thisColor = jcc.getColor();
 				setColor(thisColor);
 				action.dispose();
-				return;				
+				return;
 			}
 		});
 		action.add(confirm,BorderLayout.PAGE_END);
-		action.setVisible(true);		
-		
+		action.setVisible(true);
+
 	}
-	
+
 	/** helper function for setting the color
 	 * @param color the color to be modified
 	 */
@@ -280,7 +287,7 @@ public class GUI extends JFrame{
 		this.console.setBackground(color);
 		this.displayMsg("Color modified");
 	}
-	
+
 	/** helper function for changing the configpane's status */
 	private void changeConfigPaneStatus() {
 		if(this.configPanel.isVisible()) {
@@ -291,7 +298,7 @@ public class GUI extends JFrame{
 		}
 		this.configPanel.setVisible(!this.configPanel.isVisible());
 	}
-	
+
 	private void setCountDown() {
 		JDialog action = new JDialog(this, true);
 		action.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -308,7 +315,7 @@ public class GUI extends JFrame{
 		JButton confirm = new JButton("Confirm");
 		confirm.setFont(new Font("Georgia",Font.BOLD, 40));
 		this.actionPerformed = false;
-		confirm.addActionListener(new ActionListener() {			
+		confirm.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int newCountDown = 0;
@@ -325,56 +332,56 @@ public class GUI extends JFrame{
 				displayMsg("Set countdown to: "+ String.valueOf(countDown));
 				//TODO: implement NET operation of the new countDown
 			}
-		});		
+		});
 		action.add(confirm);
-		action.addWindowListener(new WindowListener() {				
+		action.addWindowListener(new WindowListener() {
 			@Override
-			public void windowOpened(WindowEvent e) {}				
+			public void windowOpened(WindowEvent e) {}
 			@Override
-			public void windowIconified(WindowEvent e) {}				
+			public void windowIconified(WindowEvent e) {}
 			@Override
-			public void windowDeiconified(WindowEvent e) {}				
+			public void windowDeiconified(WindowEvent e) {}
 			@Override
-			public void windowDeactivated(WindowEvent e) {}				
+			public void windowDeactivated(WindowEvent e) {}
 			@Override
-			public void windowClosing(WindowEvent e) {}				
+			public void windowClosing(WindowEvent e) {}
 			@Override
 			public void windowClosed(WindowEvent e) {
 				if(!actionPerformed) {
 					displayMsg("Canceled");
-				}		
-			}				
+				}
+			}
 			@Override
 			public void windowActivated(WindowEvent e) {}
 		});
 		action.setVisible(true);
 	}
-	
+
 	/** net operation of defeat procedure */
 	private void defeat() {
 		//TODO: implement the NET procedure of defeat
 	}
-	
+
 	/** net operation of the draw procedure */
 	public void callDraw() {
 		//TODO implement the NET procedure of draw
 	}
-	
+
 	public void reloadBoard() {
 		boardPanel.removeAll();
-		//TODO: implement this operation, boardPane shall be used as an container		
+		//TODO: implement this operation, boardPane shall be used as an container
 		boardPanel.validate();
 	}
-	
-		
-	
-	public static void main(String[] args) {
+
+
+
+	public static void main(String[] args) throws IOException {
 		GUI gui = new GUI();
 //		gui.displayMsg("Hello");
 //		gui.displayMsg("LONGGGGGGGGGGGG msg example");
 	}
-	
-	
-	
-	
+
+
+
+
 }

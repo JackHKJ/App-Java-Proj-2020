@@ -7,31 +7,7 @@ import java.awt.*;
  * @version JRE 1.8.0_231 *
  */
 
-//  The list for the name of the pieces
-enum PieceName{
-//
-	General,
-//
-	Advisor,
-//
-	Bishop,
-//
-	Knight,
-//
-	Chariot,
-//
-	Cannon,
-//
-	Pawn
-}
 
-// indicator of which side the piece belongs to
-enum Side{
-//	goes first
-	red,
-//	goes second
-	black
-}
 
 /** the single chess piece to be implemented */
 public class Piece extends JLabel{
@@ -44,7 +20,22 @@ public class Piece extends JLabel{
 	private Board board; // the board that this piece lies on
 	//TODO: Implement the interaction with the chess board(not yet implemented)
 
+	//  The list for the name of the pieces
+	public enum PieceName{
+	 General,
+	 Advisor,
+	 Bishop,
+	 Knight,
+	 Chariot,
+	 Cannon,
+	 Pawn
+	}
 
+	// indicator of which side the piece belongs to
+	enum Side{
+		Han, // move first
+		Chu // move second
+	}
 
 	/** the constructor of a piece
 	 * @param nameIn the classification of the piece
@@ -64,7 +55,7 @@ public class Piece extends JLabel{
 	@Override
 	public void paint(Graphics g) {
 //		set the color according to the side
-		if(this.side.toString().equals("red")) {
+		if(this.side.toString().equals("Han")) {
 			g.setColor(Board.colorHan); // getting public static variable from Board
 		}
 		else {
@@ -86,7 +77,7 @@ public class Piece extends JLabel{
 	 */
 	private String nameConverter() {
 
-		if(this.side == Side.red ) {
+		if(this.side == Side.Han ) {
 			switch (this.name) {
 			case General:
 				return "Shuai";
@@ -159,7 +150,7 @@ public class Piece extends JLabel{
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(100,100,300,300);
-		frame.add(new Piece(PieceName.General, Side.red, 100, new Board(200,100,10)));
+		frame.add(new Piece(PieceName.General, Side.Han, 100, new Board(200,100,10)));
 		frame.setVisible(true);
 
 
