@@ -120,8 +120,11 @@ public class GUI extends JFrame{
 //			East the Console
 			this.console = new JTextArea("---Console---\n");
 			this.console.setEditable(false);
+			this.console.setWrapStyleWord(true);
+			this.console.setLineWrap(true);
 			this.console.setFont(new Font("Georgia",Font.BOLD, 30));
 			this.consolePane = new JScrollPane(console);
+			this.consolePane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 			this.consolePane.setPreferredSize(new Dimension(450,deviceHeight));			
 			c.add(consolePane, BorderLayout.EAST);
 			
@@ -367,7 +370,8 @@ public class GUI extends JFrame{
 	
 	public static void main(String[] args) {
 		GUI gui = new GUI();
-		gui.displayMsg("Hello");
+//		gui.displayMsg("Hello");
+//		gui.displayMsg("LONGGGGGGGGGGGG msg example");
 	}
 	
 	
