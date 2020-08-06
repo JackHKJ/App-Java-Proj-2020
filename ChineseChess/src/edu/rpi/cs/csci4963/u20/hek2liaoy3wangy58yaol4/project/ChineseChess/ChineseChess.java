@@ -13,7 +13,7 @@ public class ChineseChess {
   public static void main(String[] args){
     EventQueue.invokeLater(() ->
       {
-        var frame = new MainFrame();
+        frame = new MainFrame();
         frame.setTitle("Chinese Chess");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
