@@ -78,7 +78,7 @@ public class GUI extends JFrame{
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.deviceHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
 		this.deviceWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
-		this.setBounds(deviceWidth/2 -deviceHeight*9/20 - 225, 5, deviceHeight + 450,deviceHeight-50);
+		this.setBounds(deviceWidth/2 -deviceHeight*9/20 - 225, 5, deviceHeight/11*9 + 450,deviceHeight-50);
 //		Data segment settings
 		this.countDown = 30;
 		this.actionPerformed = false;
@@ -118,8 +118,8 @@ public class GUI extends JFrame{
 			c.add(menuBar, BorderLayout.NORTH);
 
 //			Center the board panel (pre-filled in Gray)
-			this.boardPanel = new Board(9, 10, 65);
-			boardPanel.setPreferredSize(new Dimension(this.getHeight()/11*9, this.getHeight()/11*10));
+			this.boardPanel = new Board(9, 10, this.deviceHeight/13);
+			boardPanel.setPreferredSize(new Dimension(this.getHeight()/11*9, this.getHeight()/11*8));
 			boardPanel.add(new JLabel("Load Board Needed"));
 			boardPanel.setBackground(Color.gray);
 			c.add(boardPanel, BorderLayout.CENTER);
