@@ -21,6 +21,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	public int unitX; // the length of the horizontal (X) axis
 	public int unitY; // the length of the vertical (Y) axis
 	public int pieceSize; // the size of a single piece to be created
+	public boolean move;
 	public static Color colorChu;
 	public static Color colorHan;
 	/*
@@ -65,8 +66,6 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 				positionBoard[i][j] = new Position(i*pieceSize, j*pieceSize);
 			}
 		}
-
-
 
 		// Han side chess
 		// piece parameters: (PieceName, Side, size, Board)
@@ -144,8 +143,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 		positionBoard[5][4].placePiece(B_P3,this);
 		positionBoard[7][4].placePiece(B_P4,this);
 		positionBoard[9][4].placePiece(B_P5,this);
-
-
+		// all pieces should be drew after placePiece
 	}
 
 
@@ -199,7 +197,9 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 
 
 	//  override for the MouseListener
-	public void mousePressed(MouseEvent e){}
+	public void mousePressed(MouseEvent e){
+
+	}
 	public void mouseReleased(MouseEvent e){}
 	public void mouseEntered(MouseEvent e){}
 	public void mouseExited(MouseEvent e){}

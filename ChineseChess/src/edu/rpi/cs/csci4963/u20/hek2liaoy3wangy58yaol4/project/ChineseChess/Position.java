@@ -58,15 +58,17 @@ public class Position {
 
 
 	/** place the piece p on this (position) on the board b */
-	public void placePiece(Piece p, Board b) {
-		this.piece = p;
-		this.board = b;
-		int size = p.getLength();
-		// board.add(piece); // add the chess piece to the [x][y] coordinate
+	public void placePiece(Piece piece, Board board) {
+		System.out.println(piece.getName() );
+
+		this.piece = piece;
+		this.board = board;
+		int size = piece.getLength();
+		board.add(piece); // add the chess piece to the [x][y] coordinate
 		// set the position to the center of drawing by halving the unit size
 		piece.setBounds(this.x - size/2, this.y - size/2, size, size);
 		this.hasPiece = true;
-		//TODO: validate the board
+		//this.board.validate();
 	}
 
 	/** getter of the piece on this position
