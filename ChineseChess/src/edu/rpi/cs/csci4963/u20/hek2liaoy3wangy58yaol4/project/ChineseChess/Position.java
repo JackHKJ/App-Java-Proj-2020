@@ -109,7 +109,7 @@ public class Position {
 	}
 	
 	/** place the piece p on this (position) on the board b */
-	public void rePlacePiece() {
+	public void scaleBoardPosition() {
 
 		int len = board.getHeight()/10;
 		int wid = board.getWidth()/9;
@@ -142,6 +142,7 @@ public class Position {
 	public void removePiece(Piece p, Board b) {
 		this.board = b;
 		this.piece = p;
+		this.board.remove(piece);
 		//TODO: remove the board from the piece;
 		//TODO: validate the board
 		this.hasPiece = false;

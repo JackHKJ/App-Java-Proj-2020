@@ -379,7 +379,11 @@ public class GUI extends JFrame{
 	
 	public static void main(String[] args) throws IOException {
 		GUI gui = new GUI();
-		gui.boardPanel.initializeAllPieces();
+		Piece p1 = gui.boardPanel.positionBoard[1][1].getPiece();
+		gui.boardPanel.positionBoard[1][1].removePiece(p1, gui.boardPanel);
+		gui.boardPanel.positionBoard[1][2].placePiece(p1, gui.boardPanel);
+//		gui.boardPanel.positionBoard[1][1]
+//		gui.boardPanel.initializeAllPieces();
 //		gui.displayMsg("Hello");
 //		gui.displayMsg("LONGGGGGGGGGGGG msg example");
 	}
