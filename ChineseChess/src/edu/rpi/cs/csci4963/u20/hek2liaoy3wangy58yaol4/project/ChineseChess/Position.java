@@ -66,7 +66,7 @@ public class Position {
 		// set the position to the center of drawing by halving the unit size
 		piece.setBounds(this.x - size/2, this.y - size/2, size, size);
 		this.hasPiece = true;
-		//TODO: validate the board
+		//this.board.validate();
 	}
 
 	/** getter of the piece on this position

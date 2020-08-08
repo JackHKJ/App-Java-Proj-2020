@@ -48,7 +48,9 @@ public class Piece extends JLabel{
 		this.side = side;
 		this.length = length;
 		this.board = board;
-		//TODO: add the interaction with the board
+		setSize(length,length);
+		setBackground(Color.PINK);
+		System.out.println("piece init " + length);
 	}
 
 
@@ -56,6 +58,7 @@ public class Piece extends JLabel{
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 //		set the color according to the side
+	System.out.println("paint");
 		if(this.side.toString().equals("Han")) {
 			g.setColor(Board.colorHan); // getting public static variable from Board
 		}
@@ -155,8 +158,6 @@ public class Piece extends JLabel{
 		frame.setBounds(100,100,300,300);
 		frame.add(new Piece(PieceName.General, Side.Han, 100, new Board(200,100,10)));
 		frame.setVisible(true);
-
-
 	}
 
 

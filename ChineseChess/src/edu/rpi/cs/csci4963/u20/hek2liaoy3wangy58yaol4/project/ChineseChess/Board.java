@@ -23,6 +23,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	public int unitX; // the length of the horizontal (X) axis
 	public int unitY; // the length of the vertical (Y) axis
 	public int pieceSize; // the size of a single piece to be created
+	public boolean move;
 	public static Color colorChu;
 	public static Color colorHan;
 	/*
@@ -218,7 +219,9 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 
 
 	//  override for the MouseListener
-	public void mousePressed(MouseEvent e){}
+	public void mousePressed(MouseEvent e){
+
+	}
 	public void mouseReleased(MouseEvent e){}
 	public void mouseEntered(MouseEvent e){}
 	public void mouseExited(MouseEvent e){}
