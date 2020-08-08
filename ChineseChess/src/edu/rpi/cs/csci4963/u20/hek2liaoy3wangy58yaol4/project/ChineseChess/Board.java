@@ -77,7 +77,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 		}
 
 
-//		initializeAllPieces();
+		initializeAllPieces();
 		
 	}
 	
