@@ -1,6 +1,8 @@
 package edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -56,7 +58,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 		this.pieceSize = unitSize;
 		this.colorChu = new Color(0, 0, 0);
 		this.colorHan = new Color(255, 0, 0);
-
+		this.setLayout(null);
 		// add ActionListeners
 		// initializing the positionBoard
 		positionBoard = new Position[rowSize+1][colSize+1]; // start at 1 for visualizzation
@@ -67,6 +69,14 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 			}
 		}
 
+
+		initializeAllPieces();
+		
+	}
+	
+	/** this is the method that initialize all the pieces and place them to the desired position
+	 */
+	private void initializeAllPieces() {
 		// Han side chess
 		// piece parameters: (PieceName, Side, size, Board)
 		R_R1 = new Piece(PieceName.Chariot, Side.Han, pieceSize, this);
@@ -108,7 +118,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 		B_P3 = new Piece(PieceName.Pawn, Side.Chu, pieceSize, this);
 		B_P4 = new Piece(PieceName.Pawn, Side.Chu, pieceSize, this);
 		B_P5 = new Piece(PieceName.Pawn, Side.Chu, pieceSize, this);
-
+		
 		// (x , y)
 		positionBoard[1][10].placePiece(R_R1, this);
 		positionBoard[2][10].placePiece(R_K1,this);
@@ -143,14 +153,12 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 		positionBoard[5][4].placePiece(B_P3,this);
 		positionBoard[7][4].placePiece(B_P4,this);
 		positionBoard[9][4].placePiece(B_P5,this);
-		// all pieces should be drew after placePiece
 	}
 
 
-	//@Override
+	@Override
 	// called automatically
 	public void paintComponent(Graphics g) {
-
 		//----------- horizontal line--------------/
 		super.paintComponent(g);
 		for(int j = 1; j <= colSize; j++) {
@@ -191,6 +199,20 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 			g.drawString("" + c, pieceSize/4, j*pieceSize);
 			j++;
 		}
+		
+		for (int i = 1; i <= rowSize; i++) {
+			for (int k = 1; k <= colSize; k++) {
+				//System.out.println(i + " | " + j);
+				if(positionBoard[i][k].getPiece() != null) {					
+//					positionBoard[i][k].getPiece().setLocation(200,200);
+					positionBoard[i][k].getPiece().validate();
+					positionBoard[i][k].getPiece().repaint();
+//					positionBoard[i][k].getPiece().setVisible(true);
+//					System.out.println(positionBoard[i][k].getPiece().toString()); 
+				}
+			}
+		}
+		
 
 		for (int i = 1; i <= rowSize; i++) {
    for (int k = 1; k <= colSize; k++) {

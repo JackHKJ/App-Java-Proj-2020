@@ -56,6 +56,7 @@ public class Piece extends JLabel{
 
 	@Override
 	public void paint(Graphics g) {
+		super.paintComponent(g);
 //		set the color according to the side
 	System.out.println("paint");
 		if(this.side.toString().equals("Han")) {
@@ -119,6 +120,8 @@ public class Piece extends JLabel{
 		return null;
 
 	}
+	
+	
 
 
 
