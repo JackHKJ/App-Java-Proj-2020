@@ -48,7 +48,7 @@ public class Piece extends JLabel{
 		this.side = side;
 		this.length = length;
 		this.board = board;
-		setSize(length,length);
+		//setSize(length,length);
 		setBackground(Color.PINK);
 		System.out.println("piece init " + length);
 	}

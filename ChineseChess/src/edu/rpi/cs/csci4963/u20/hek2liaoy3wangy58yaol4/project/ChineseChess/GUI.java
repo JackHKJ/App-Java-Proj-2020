@@ -120,7 +120,7 @@ public class GUI extends JFrame{
 //			Center the board panel (pre-filled in Gray)
 			this.boardPanel = new Board(9, 10, this.deviceHeight/13);
 			boardPanel.setPreferredSize(new Dimension(this.getHeight()/11*9, this.getHeight()/11*8));
-			boardPanel.add(new JLabel("Load Board Needed"));
+		//	boardPanel.add(new JLabel("Load Board Needed"));
 			boardPanel.setBackground(Color.gray);
 			c.add(boardPanel, BorderLayout.CENTER);
 

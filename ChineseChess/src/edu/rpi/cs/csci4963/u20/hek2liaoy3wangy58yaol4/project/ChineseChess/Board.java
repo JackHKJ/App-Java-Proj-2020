@@ -185,11 +185,24 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 		for(int i = 1; i <= rowSize; i++){
 			g.drawString("" + i, i*pieceSize, pieceSize/2);
 		}
+
 		int j = 1;
 		for(char c = 'A'; c <= 'J'; c++){
-			g.drawString("" + c,pieceSize/4, j*pieceSize);
+			g.drawString("" + c, pieceSize/4, j*pieceSize);
 			j++;
 		}
+
+		for (int i = 1; i <= rowSize; i++) {
+   for (int k = 1; k <= colSize; k++) {
+    //System.out.println(i + " | " + j);
+    if(positionBoard[i][k].getPiece() != null) {
+//     positionBoard[i][k].getPiece().setLocation(200,200);
+     positionBoard[i][k].getPiece().validate();
+     positionBoard[i][k].getPiece().setVisible(true);
+     System.out.println(positionBoard[i][k].getPiece().toString() );
+    }
+   }
+  }
 
 
 	}
