@@ -1,4 +1,5 @@
 package edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -6,6 +7,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
 import edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess.Piece.PieceName;
 import edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess.Piece.Side;
 
@@ -25,7 +30,9 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	public int pieceSize; // the size of a single piece to be created
 	public boolean move;
 	public static Color colorChu;
-	public static Color colorHan;
+	public static Color colorHan;	
+	public File folderInput = new File("./image/chessBoard.png");
+	public BufferedImage folderImage;
 	/*
 	naming convention of the Pieces
 	B        _   R     1
@@ -199,18 +206,27 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 			j++;
 		}
 		
-		for (int i = 1; i <= rowSize; i++) {
-			for (int k = 1; k <= colSize; k++) {
-				//System.out.println(i + " | " + j);
-				if(positionBoard[i][k].getPiece() != null) {					
-//					positionBoard[i][k].getPiece().setLocation(200,200);
-					positionBoard[i][k].getPiece().validate();
-					positionBoard[i][k].getPiece().repaint();
-//					positionBoard[i][k].getPiece().setVisible(true);
-//					System.out.println(positionBoard[i][k].getPiece().toString()); 
-				}
-			}
+//		for (int i = 1; i <= rowSize; i++) {
+//			for (int k = 1; k <= colSize; k++) {
+//				//System.out.println(i + " | " + j);
+//				if(positionBoard[i][k].getPiece() != null) {					
+////					positionBoard[i][k].getPiece().setLocation(200,200);
+//					positionBoard[i][k].getPiece().validate();
+//					positionBoard[i][k].getPiece().repaint();
+////					positionBoard[i][k].getPiece().setVisible(true);
+////					System.out.println(positionBoard[i][k].getPiece().toString()); 
+//				}
+//			}
+//		}
+		
+		
+		try {
+			folderImage = ImageIO.read(folderInput);
+			g.drawImage(folderImage, 0, 0,this.getWidth(),this.getHeight(), null);
+		} catch (IOException e) {
+			System.out.println("Failed to load image");
 		}
+		
 		
 
 
