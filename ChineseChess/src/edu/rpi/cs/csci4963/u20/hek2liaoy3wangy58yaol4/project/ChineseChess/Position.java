@@ -61,8 +61,8 @@ public class Position {
 	public void placePiece(Piece p, Board b) {
 		this.piece = p;
 		this.board = b;
-		int size = p.getLength();
-		// board.add(piece); // add the chess piece to the [x][y] coordinate
+		int size = p.getLength();	
+		board.add(piece); // add the chess piece to the [x][y] coordinate
 		// set the position to the center of drawing by halving the unit size
 		piece.setBounds(this.x - size/2, this.y - size/2, size, size);
 		this.hasPiece = true;

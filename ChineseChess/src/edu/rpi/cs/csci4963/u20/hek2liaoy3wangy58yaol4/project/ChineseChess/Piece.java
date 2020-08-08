@@ -54,6 +54,7 @@ public class Piece extends JLabel{
 
 	@Override
 	public void paint(Graphics g) {
+		super.paintComponent(g);
 //		set the color according to the side
 		if(this.side.toString().equals("Han")) {
 			g.setColor(Board.colorHan); // getting public static variable from Board
@@ -116,6 +117,8 @@ public class Piece extends JLabel{
 		return null;
 
 	}
+	
+	
 
 
 
