@@ -1,4 +1,6 @@
 package edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess;
+import edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess.Piece.PieceName;
+import edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess.Piece.Side;
 
 public class Rule {
   Board board = null;
@@ -22,7 +24,7 @@ public class Rule {
     int max_j = Math.max(startj,endj);
     int i = 0;
     boolean move = false;
-    if (piece.getName().equals("Ju")) {
+    if (piece.getName().equals(PieceName.Chariot.toString())) {
       if (starti == endi) {
         for (i = min_j+1; i<=max_j-1; i++) {
           if (pos[starti][i].hasPiece()) {
@@ -44,7 +46,7 @@ public class Rule {
       } else {
         move = false;
       }
-    } else if (piece.getName().equals("Ma")) {
+    } else if (piece.getName().equals(PieceName.Knight.toString())) {
       int x = Math.abs(starti - endi);
       int y = Math.abs(startj - endj);
       if (x == 2 && y == 1) {
@@ -78,7 +80,7 @@ public class Rule {
       } else {
         move = false;
       }
-    } else if (piece.getName().equals("Xiang")) {  // 象
+    } else if (piece.getName().equals(PieceName.Bishop.toString())) {  // 璞�
       int mid_i = (starti + endi) / 2;
       int mid_j = (startj + endj) / 2;
       int x = Math.abs(starti - endi);
@@ -92,7 +94,7 @@ public class Rule {
       } else {
         move =  false;
       }
-    } else if (piece.getName().equals("Xiang")) {  // 相
+    } else if (piece.getName().equals(PieceName.Bishop.toString())) {  // 鐩�
       int mid_i = (starti + endi) / 2;
       int mid_j = (startj + endj) / 2;
       int x = Math.abs(starti - endi);
@@ -106,7 +108,7 @@ public class Rule {
       } else {
         move =  false;
       }
-    }else if (piece.getName().equals("Pao")) {
+    }else if (piece.getName().equals(PieceName.Cannon.toString())) {
       int count = 0;
       if (starti == endi) {
         for (i = min_j+1; i <= max_j-1; i++) {
@@ -137,7 +139,7 @@ public class Rule {
            move = false;
         }
       }
-    } else if (piece.getName().equals("Bing")) {
+    } else if (piece.getName().equals(PieceName.Pawn.toString()) && piece.getSide().equals(Side.Han)) {
       int x = Math.abs(starti - endi);
       int y = Math.abs(startj - endj);
       if (endj >= 6) {
@@ -155,7 +157,7 @@ public class Rule {
           move = false;
         }
       }
-    } else if (piece.getName().equals("Zu")) {
+    } else if (piece.getName().equals(PieceName.Pawn.toString()) && piece.getSide().equals(Side.Chu)) {
       int x = Math.abs(starti - endi);
       int y = Math.abs(startj - endj);
       if (endj <= 5) {
@@ -173,7 +175,7 @@ public class Rule {
           move = false;
         }
       }
-    } else if (piece.getName().equals("Shi")) {
+    } else if (piece.getName().equals(PieceName.Advisor.toString())) {
       int x = Math.abs(starti - endi);
       int y = Math.abs(startj - endj);
       if (endi >= 4 && endi <= 6 && x == 1 && y == 1) {
@@ -181,7 +183,7 @@ public class Rule {
       } else {
         move = false;
       }
-    } else if (piece.getName().equals("Shuai") || piece.getName().equals("Jiang")) {
+    } else if (piece.getName().equals(PieceName.General.toString())) {
       int x = Math.abs(starti - endi);
       int y = Math.abs(startj - endj);
       if (endi >=4 && endi <= 6) {

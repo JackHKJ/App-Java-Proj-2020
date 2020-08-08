@@ -23,13 +23,13 @@ public class Piece extends JLabel{
 
 	//  The list for the name of the pieces
 	public enum PieceName{
-	 General,
-	 Advisor,
-	 Bishop,
-	 Knight,
-	 Chariot,
-	 Cannon,
-	 Pawn
+	 General, //jiang
+	 Advisor, //shi
+	 Bishop, //xiang
+	 Knight, //ma
+	 Chariot, //ju
+	 Cannon, //pao
+	 Pawn //bing
 	}
 
 	// indicator of which side the piece belongs to
