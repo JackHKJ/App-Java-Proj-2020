@@ -9,6 +9,10 @@ public class Position {
 	private int x;
 	/** the y coordinate of the position */
 	private int y;
+	/** the length of the x times the scalar for locating */
+	private int x_len; 
+	/** the length of the y times the scalar for locating */
+	private int y_len;
 	/** the piece representation on this position */
 	private Piece piece;
 	/** indicator of whether this position is being taken*/
@@ -48,6 +52,29 @@ public class Position {
 	public int getY() {
 		return this.y;
 	}
+	
+	/** get the len of the x axis
+	 * @return the x axis length
+	 */
+	public int getXLen() {
+		return x_len;
+	}
+	
+	/** get the len of the y axis
+	 * @return the y axis length
+	 */
+	public int getYLen() {
+		return y_len;
+	}
+	
+	public void setBoard(Board b) {
+		this.board = b;
+		int len = board.getHeight()/10;
+		int wid = board.getWidth()/9;		
+		this.x_len = this.x * len - len/2;
+		this.y_len = this.y * wid - wid/2;
+	}
+	
 
 	/** setter of the hasPiece boolean
 	 * @param tf the boolean to be loaded
@@ -58,15 +85,40 @@ public class Position {
 
 
 	/** place the piece p on this (position) on the board b */
-	public void placePiece(Piece piece, Board board) {
-		System.out.println(piece.getName() );
-
-		this.piece = piece;
-		this.board = board;
-		int size = piece.getLength();
+	public void placePiece(Piece p, Board b) {
+		this.piece = p;
+		this.board = b;
+		
+		int len = board.getHeight()/10;
+		int wid = board.getWidth()/9;
+		
+		this.x_len = this.x * len - len /2;
+		this.y_len = this.y * wid - wid /2;
+		
+		this.piece.setLength(len);
+		this.piece.setWidth(wid);
+		
+//		System.out.println("wid:" + wid + "len:" + len);
+		
+//		int size = p.getLength();	
 		board.add(piece); // add the chess piece to the [x][y] coordinate
 		// set the position to the center of drawing by halving the unit size
-		piece.setBounds(this.x - size/2, this.y - size/2, size, size);
+		piece.setBounds(this.x * wid - wid, this.y*len - len, wid, len);
+		this.hasPiece = true;
+		//this.board.validate();
+	}
+	
+	/** place the piece p on this (position) on the board b */
+	public void rePlacePiece() {
+
+		int len = board.getHeight()/10;
+		int wid = board.getWidth()/9;
+		this.x_len = this.x * len - len/2;
+		this.y_len = this.y * wid - wid/2;
+		this.piece.setLength(len);
+		this.piece.setWidth(wid);
+		
+		piece.setBounds(this.x * wid - wid, this.y*len - len, wid, len);
 		this.hasPiece = true;
 		//this.board.validate();
 	}

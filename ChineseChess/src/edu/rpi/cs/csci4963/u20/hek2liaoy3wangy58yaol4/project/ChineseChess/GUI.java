@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
@@ -78,7 +79,8 @@ public class GUI extends JFrame{
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.deviceHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
 		this.deviceWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
-		this.setBounds(deviceWidth/2 -deviceHeight*9/20 - 225, 5, deviceHeight/11*9 + 450,deviceHeight-50);
+//		this.setBounds(deviceWidth/2 -deviceHeight*9/20 - 225, 5, deviceHeight/13*9 + 450,deviceHeight/13*10+113);
+		this.setLocation(deviceWidth/2 -deviceHeight*9/20 - 225, 5);
 //		Data segment settings
 		this.countDown = 30;
 		this.actionPerformed = false;
@@ -118,9 +120,10 @@ public class GUI extends JFrame{
 			c.add(menuBar, BorderLayout.NORTH);
 
 //			Center the board panel (pre-filled in Gray)
-			this.boardPanel = new Board(9, 10, this.deviceHeight/13);
-			boardPanel.setPreferredSize(new Dimension(this.getHeight()/11*9, this.getHeight()/11*8));
-			boardPanel.add(new JLabel("Load Board Needed"));
+			this.boardPanel = new Board(9, 10, (this.deviceHeight-113)/10);
+			boardPanel.setPreferredSize(new Dimension(this.deviceHeight/12*9,this.deviceHeight/12*10));
+//			boardPanel.setPreferredSize(new Dimension(this.getWidth()-450, this.getHeight()-113));
+//			boardPanel.add(new JLabel("Load Board Needed"));
 			boardPanel.setBackground(Color.gray);
 			c.add(boardPanel, BorderLayout.CENTER);
 
@@ -132,7 +135,7 @@ public class GUI extends JFrame{
 			this.console.setFont(new Font("Georgia",Font.BOLD, 30));
 			this.consolePane = new JScrollPane(console);
 			this.consolePane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-			this.consolePane.setPreferredSize(new Dimension(450,deviceHeight));
+			this.consolePane.setPreferredSize(new Dimension(450,deviceHeight/12*9));
 			c.add(consolePane, BorderLayout.EAST);
 
 //			South the configuration panel
@@ -242,7 +245,8 @@ public class GUI extends JFrame{
 
 
 //			end of the listeners
-
+			this.pack();
+			this.setResizable(false);
 			this.setVisible(true);
 	}
 
@@ -372,11 +376,10 @@ public class GUI extends JFrame{
 		//TODO: implement this operation, boardPane shall be used as an container
 		boardPanel.validate();
 	}
-
-
-
+	
 	public static void main(String[] args) throws IOException {
 		GUI gui = new GUI();
+		gui.boardPanel.initializeAllPieces();
 //		gui.displayMsg("Hello");
 //		gui.displayMsg("LONGGGGGGGGGGGG msg example");
 	}
