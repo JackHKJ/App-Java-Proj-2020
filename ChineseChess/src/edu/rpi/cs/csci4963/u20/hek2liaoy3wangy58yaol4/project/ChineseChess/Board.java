@@ -166,36 +166,48 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	@Override
 	// called automatically
 	public void paintComponent(Graphics g) {
-		//----------- horizontal line--------------/
+		
+		
+		/** set the board */
+		for (int i = 1; i <= rowSize; i++) {
+			for (int k = 1; k <= colSize; k++) {
+				//System.out.println(i + " | " + j);
+				positionBoard[i][k].setBoard(this);					
+			}
+		}
+		
+		
+		
+		//----------- horizontal line--------------/		
 		super.paintComponent(g);
 		for(int j = 1; j <= colSize; j++) {
 			// drawline (x1, y1) -> (x2, y2)
-			g.drawLine(positionBoard[1][j].getX(), positionBoard[1][j].getY(),
-			positionBoard[rowSize][j].getX(), positionBoard[rowSize][j].getY());
+			g.drawLine(positionBoard[1][j].getXLen(), positionBoard[1][j].getYLen(),
+			positionBoard[rowSize][j].getXLen(), positionBoard[rowSize][j].getYLen());
 		}
 		//----------- vertical line--------------/
 		for(int i = 1; i <= rowSize; i++){
 				if(i != 1 && i != rowSize){
 					// first half of vertical line (Chu area)
-					g.drawLine(positionBoard[i][1].getX(), positionBoard[i][1].getY(),
-					positionBoard[i][colSize-5].getX(), positionBoard[i][colSize-5].getY());
+					g.drawLine(positionBoard[i][1].getXLen(), positionBoard[i][1].getYLen(),
+					positionBoard[i][colSize-5].getXLen(), positionBoard[i][colSize-5].getYLen());
 					// second half of the vertical line (Han area)
-					g.drawLine(positionBoard[i][colSize-4].getX(), positionBoard[i][colSize-4].getY(),
-					positionBoard[i][colSize].getX(), positionBoard[i][colSize].getY());
+					g.drawLine(positionBoard[i][colSize-4].getXLen(), positionBoard[i][colSize-4].getYLen(),
+					positionBoard[i][colSize].getXLen(), positionBoard[i][colSize].getYLen());
 				}
 				else{
 					// veritcal line for two border sides
-					g.drawLine(positionBoard[i][1].getX(), positionBoard[i][1].getY(),
-					positionBoard[i][colSize].getX(), positionBoard[i][colSize].getY());
+					g.drawLine(positionBoard[i][1].getXLen(), positionBoard[i][1].getYLen(),
+					positionBoard[i][colSize].getXLen(), positionBoard[i][colSize].getYLen());
 				}
 		}
 		//----------- X mark --------------/
 		// for Chu
-		g.drawLine(positionBoard[4][1].getX(),positionBoard[4][1].getY(),positionBoard[6][3].getX(),positionBoard[6][3].getY());
-		g.drawLine(positionBoard[6][1].getX(),positionBoard[6][1].getY(),positionBoard[4][3].getX(),positionBoard[4][3].getY());
+		g.drawLine(positionBoard[4][1].getXLen(),positionBoard[4][1].getYLen(),positionBoard[6][3].getXLen(),positionBoard[6][3].getYLen());
+		g.drawLine(positionBoard[6][1].getXLen(),positionBoard[6][1].getYLen(),positionBoard[4][3].getXLen(),positionBoard[4][3].getYLen());
 		// for Han
-		g.drawLine(positionBoard[4][8].getX(),positionBoard[4][8].getY(),positionBoard[6][colSize].getX(),positionBoard[6][colSize].getY());
-		g.drawLine(positionBoard[4][colSize].getX(),positionBoard[4][colSize].getY(),positionBoard[6][8].getX(),positionBoard[6][8].getY());
+		g.drawLine(positionBoard[4][8].getXLen(),positionBoard[4][8].getYLen(),positionBoard[6][colSize].getXLen(),positionBoard[6][colSize].getYLen());
+		g.drawLine(positionBoard[4][colSize].getXLen(),positionBoard[4][colSize].getYLen(),positionBoard[6][8].getXLen(),positionBoard[6][8].getYLen());
 		//----------- coordinate marks --------------/
 		for(int i = 1; i <= rowSize; i++){
 			g.drawString("" + i, i*pieceSize, pieceSize/2);
@@ -223,12 +235,12 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 		
 		try {
 			folderImage = ImageIO.read(folderInput);
-			g.drawImage(folderImage, 0, 0,this.getWidth(),this.getHeight(), null);
+//			g.drawImage(folderImage, 0, 0,this.getWidth(),this.getHeight(), null);
 		} catch (IOException e) {
 			System.out.println("Failed to load image");
 		}
 		
-		
+		System.out.printf("Boardlen: %d, Boardwid: %d\n", this.getHeight(), this.getWidth());
 
 
 	}
