@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
@@ -245,6 +246,7 @@ public class GUI extends JFrame{
 
 //			end of the listeners
 			this.pack();
+			this.setResizable(false);
 			this.setVisible(true);
 	}
 
@@ -374,9 +376,7 @@ public class GUI extends JFrame{
 		//TODO: implement this operation, boardPane shall be used as an container
 		boardPanel.validate();
 	}
-
-
-
+	
 	public static void main(String[] args) throws IOException {
 		GUI gui = new GUI();
 		gui.boardPanel.initializeAllPieces();
