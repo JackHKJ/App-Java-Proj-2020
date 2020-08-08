@@ -78,12 +78,12 @@ public class Rule {
       } else {
         move = false;
       }
-    } else if (piece.getName().equals("Xiang")) {
+    } else if (piece.getName().equals("Xiang")) {  // 象
       int mid_i = (starti + endi) / 2;
       int mid_j = (startj + endj) / 2;
-      int x = Math.abs(starti-endi);
-      int y = Math.abs(startj-endj);
-      if (x == 2 && y == 2 && endj>=6) {
+      int x = Math.abs(starti - endi);
+      int y = Math.abs(startj - endj);
+      if (x == 2 && y == 2 && endj <= 5) {
         if (pos[mid_i][mid_j].hasPiece()) {
           move = false;
         } else {
@@ -92,7 +92,21 @@ public class Rule {
       } else {
         move =  false;
       }
-    } else if (piece.getName().equals("Pao")) {
+    } else if (piece.getName().equals("Xiang")) {  // 相
+      int mid_i = (starti + endi) / 2;
+      int mid_j = (startj + endj) / 2;
+      int x = Math.abs(starti - endi);
+      int y = Math.abs(startj - endj);
+      if (x == 2 && y == 2 && endj >= 6) {
+        if (pos[mid_i][mid_j].hasPiece()) {
+          move = false;
+        } else {
+          move = true;
+        }
+      } else {
+        move =  false;
+      }
+    }else if (piece.getName().equals("Pao")) {
       int count = 0;
       if (starti == endi) {
         for (i = min_j+1; i <= max_j-1; i++) {
