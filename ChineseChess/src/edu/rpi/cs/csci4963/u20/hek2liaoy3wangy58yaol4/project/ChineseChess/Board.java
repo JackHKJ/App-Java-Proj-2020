@@ -72,59 +72,59 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 		for (int i = 1; i <= rowSize; i++) {
 			for (int j = 1; j <= colSize; j++) {
 				//System.out.println(i + " | " + j);
-				positionBoard[i][j] = new Position(i*pieceSize, j*pieceSize);
+				positionBoard[i][j] = new Position(i, j);
 			}
 		}
 
 
-		initializeAllPieces();
+//		initializeAllPieces();
 		
 	}
 	
 	/** this is the method that initialize all the pieces and place them to the desired position
 	 */
-	private void initializeAllPieces() {
+	public void initializeAllPieces() {
 		// Han side chess
 		// piece parameters: (PieceName, Side, size, Board)
-		R_R1 = new Piece(PieceName.Chariot, Side.Han, pieceSize, this);
-		R_K1 = new Piece(PieceName.Knight, Side.Han, pieceSize, this);
-		R_B1 = new Piece(PieceName.Bishop, Side.Han, pieceSize, this);
-		R_A1 = new Piece(PieceName.Advisor, Side.Han, pieceSize, this);
-		R_G = new Piece(PieceName.General, Side.Han, pieceSize, this);
-		R_A2 = new Piece(PieceName.Advisor, Side.Han, pieceSize, this);
-		R_B2 = new Piece(PieceName.Bishop, Side.Han, pieceSize, this);
-		R_K2 = new Piece(PieceName.Knight, Side.Han, pieceSize, this);
-		R_R2 = new Piece(PieceName.Chariot, Side.Han, pieceSize, this);
+		R_R1 = new Piece(PieceName.Chariot, Side.Han, pieceSize,pieceSize, this);
+		R_K1 = new Piece(PieceName.Knight, Side.Han, pieceSize,pieceSize, this);
+		R_B1 = new Piece(PieceName.Bishop, Side.Han, pieceSize,pieceSize, this);
+		R_A1 = new Piece(PieceName.Advisor, Side.Han, pieceSize,pieceSize, this);
+		R_G = new Piece(PieceName.General, Side.Han, pieceSize,pieceSize, this);
+		R_A2 = new Piece(PieceName.Advisor, Side.Han, pieceSize,pieceSize, this);
+		R_B2 = new Piece(PieceName.Bishop, Side.Han, pieceSize,pieceSize, this);
+		R_K2 = new Piece(PieceName.Knight, Side.Han, pieceSize,pieceSize, this);
+		R_R2 = new Piece(PieceName.Chariot, Side.Han, pieceSize,pieceSize, this);
 
-		R_C1 = new Piece(PieceName.Cannon, Side.Han, pieceSize, this);
-		R_C2 = new Piece(PieceName.Cannon, Side.Han, pieceSize, this);
+		R_C1 = new Piece(PieceName.Cannon, Side.Han, pieceSize,pieceSize, this);
+		R_C2 = new Piece(PieceName.Cannon, Side.Han, pieceSize,pieceSize, this);
 
-		R_P1 = new Piece(PieceName.Pawn, Side.Han, pieceSize, this);
-		R_P2 = new Piece(PieceName.Pawn, Side.Han, pieceSize, this);
-		R_P3 = new Piece(PieceName.Pawn, Side.Han, pieceSize, this);
-		R_P4 = new Piece(PieceName.Pawn, Side.Han, pieceSize, this);
-		R_P5 = new Piece(PieceName.Pawn, Side.Han, pieceSize, this);
+		R_P1 = new Piece(PieceName.Pawn, Side.Han, pieceSize,pieceSize, this);
+		R_P2 = new Piece(PieceName.Pawn, Side.Han, pieceSize,pieceSize, this);
+		R_P3 = new Piece(PieceName.Pawn, Side.Han, pieceSize,pieceSize, this);
+		R_P4 = new Piece(PieceName.Pawn, Side.Han, pieceSize,pieceSize, this);
+		R_P5 = new Piece(PieceName.Pawn, Side.Han, pieceSize,pieceSize, this);
 
 		// Chu side chess
 		// piece parameters: (PieceName, Side, size, Board)
-		B_R1 = new Piece(PieceName.Chariot, Side.Chu, pieceSize, this);
-		B_K1 = new Piece(PieceName.Knight, Side.Chu, pieceSize, this);
-		B_B1 = new Piece(PieceName.Bishop, Side.Chu, pieceSize, this);
-		B_A1 = new Piece(PieceName.Advisor, Side.Chu, pieceSize, this);
-		B_G = new Piece(PieceName.General, Side.Chu, pieceSize, this);
-		B_A2 = new Piece(PieceName.Advisor, Side.Chu, pieceSize, this);
-		B_B2 = new Piece(PieceName.Bishop, Side.Chu, pieceSize, this);
-		B_K2 = new Piece(PieceName.Knight, Side.Chu, pieceSize, this);
-		B_R2 = new Piece(PieceName.Chariot, Side.Chu, pieceSize, this);
+		B_R1 = new Piece(PieceName.Chariot, Side.Chu, pieceSize,pieceSize, this);
+		B_K1 = new Piece(PieceName.Knight, Side.Chu, pieceSize,pieceSize, this);
+		B_B1 = new Piece(PieceName.Bishop, Side.Chu, pieceSize,pieceSize, this);
+		B_A1 = new Piece(PieceName.Advisor, Side.Chu, pieceSize,pieceSize, this);
+		B_G = new Piece(PieceName.General, Side.Chu, pieceSize,pieceSize, this);
+		B_A2 = new Piece(PieceName.Advisor, Side.Chu, pieceSize,pieceSize, this);
+		B_B2 = new Piece(PieceName.Bishop, Side.Chu, pieceSize,pieceSize, this);
+		B_K2 = new Piece(PieceName.Knight, Side.Chu, pieceSize,pieceSize, this);
+		B_R2 = new Piece(PieceName.Chariot, Side.Chu, pieceSize,pieceSize, this);
 
-		B_C1 = new Piece(PieceName.Cannon, Side.Chu, pieceSize, this);
-		B_C2 = new Piece(PieceName.Cannon, Side.Chu, pieceSize, this);
+		B_C1 = new Piece(PieceName.Cannon, Side.Chu, pieceSize,pieceSize, this);
+		B_C2 = new Piece(PieceName.Cannon, Side.Chu, pieceSize,pieceSize, this);
 
-		B_P1 = new Piece(PieceName.Pawn, Side.Chu, pieceSize, this);
-		B_P2 = new Piece(PieceName.Pawn, Side.Chu, pieceSize, this);
-		B_P3 = new Piece(PieceName.Pawn, Side.Chu, pieceSize, this);
-		B_P4 = new Piece(PieceName.Pawn, Side.Chu, pieceSize, this);
-		B_P5 = new Piece(PieceName.Pawn, Side.Chu, pieceSize, this);
+		B_P1 = new Piece(PieceName.Pawn, Side.Chu, pieceSize,pieceSize, this);
+		B_P2 = new Piece(PieceName.Pawn, Side.Chu, pieceSize,pieceSize, this);
+		B_P3 = new Piece(PieceName.Pawn, Side.Chu, pieceSize,pieceSize, this);
+		B_P4 = new Piece(PieceName.Pawn, Side.Chu, pieceSize,pieceSize, this);
+		B_P5 = new Piece(PieceName.Pawn, Side.Chu, pieceSize,pieceSize, this);
 		
 		// (x , y)
 		positionBoard[1][10].placePiece(R_R1, this);
@@ -206,18 +206,19 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 			j++;
 		}
 		
-//		for (int i = 1; i <= rowSize; i++) {
-//			for (int k = 1; k <= colSize; k++) {
-//				//System.out.println(i + " | " + j);
-//				if(positionBoard[i][k].getPiece() != null) {					
-////					positionBoard[i][k].getPiece().setLocation(200,200);
+		for (int i = 1; i <= rowSize; i++) {
+			for (int k = 1; k <= colSize; k++) {
+				//System.out.println(i + " | " + j);
+				if(positionBoard[i][k].getPiece() != null) {						
+					positionBoard[i][k].rePlacePiece();					
+//					positionBoard[i][k].getPiece().setLocation(200,200);
 //					positionBoard[i][k].getPiece().validate();
 //					positionBoard[i][k].getPiece().repaint();
-////					positionBoard[i][k].getPiece().setVisible(true);
-////					System.out.println(positionBoard[i][k].getPiece().toString()); 
-//				}
-//			}
-//		}
+//					positionBoard[i][k].getPiece().setVisible(true);
+//					System.out.println(positionBoard[i][k].getPiece().toString()); 
+				}
+			}
+		}
 		
 		
 		try {

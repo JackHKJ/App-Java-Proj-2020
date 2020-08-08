@@ -377,6 +377,7 @@ public class GUI extends JFrame{
 
 	public static void main(String[] args) throws IOException {
 		GUI gui = new GUI();
+		gui.boardPanel.initializeAllPieces();
 //		gui.displayMsg("Hello");
 //		gui.displayMsg("LONGGGGGGGGGGGG msg example");
 	}

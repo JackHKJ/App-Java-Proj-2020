@@ -16,6 +16,7 @@ public class Piece extends JLabel{
 	private PieceName name; // the classification of the piece
 	private Side side; // the side of the chess piece
 	private int length; // the length of the piece to be painted
+	private int width; // the width of the piece to be painted
 	private int padding = 2; // the padding for drawing content
 	private Board board; // the board that this piece lies on
 	//TODO: Implement the interaction with the chess board(not yet implemented)
@@ -41,12 +42,14 @@ public class Piece extends JLabel{
 	 * @param nameIn the classification of the piece
 	 * @param side the side of the piece
 	 * @param length length of the piece (length parameter)
+	 * @param width the width of the piece
 	 * @param board the board this piece lies on
 	 */
-	public Piece(PieceName nameIn, Side side, int length, Board board) {
+	public Piece(PieceName nameIn, Side side, int length, int width, Board board) {
 		this.name = nameIn;
 		this.side = side;
 		this.length = length;
+		this.width = width;
 		this.board = board;
 		setSize(length,length);
 		setBackground(Color.PINK);
@@ -147,6 +150,23 @@ public class Piece extends JLabel{
 	public int getLength() {
 		return length;
 	}
+	
+	
+	public void setLength(int len) {
+		this.length = len;
+	}
+	
+	public void setWidth(int wid) {
+		this.width = wid;
+	}
+	
+	
+	/** getter for width
+	 * @return width of the piece
+	 */
+	public int getWidth() {
+		return width;
+	}
 
 
 
@@ -156,7 +176,7 @@ public class Piece extends JLabel{
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(100,100,300,300);
-		frame.add(new Piece(PieceName.General, Side.Han, 100, new Board(200,100,10)));
+		frame.add(new Piece(PieceName.General, Side.Han, 100,100, null));
 		frame.setVisible(true);
 	}
 

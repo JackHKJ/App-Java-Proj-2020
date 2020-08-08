@@ -61,10 +61,32 @@ public class Position {
 	public void placePiece(Piece p, Board b) {
 		this.piece = p;
 		this.board = b;
-		int size = p.getLength();	
+		
+		int len = board.getHeight()/10;
+		int wid = board.getWidth()/9;
+		
+		this.piece.setLength(len);
+		this.piece.setWidth(wid);
+		
+		System.out.println("wid:" + wid + "len:" + len);
+		
+//		int size = p.getLength();	
 		board.add(piece); // add the chess piece to the [x][y] coordinate
 		// set the position to the center of drawing by halving the unit size
-		piece.setBounds(this.x - size/2, this.y - size/2, size, size);
+		piece.setBounds(this.x * wid - wid, this.y*len - len, wid, len);
+		this.hasPiece = true;
+		//this.board.validate();
+	}
+	
+	/** place the piece p on this (position) on the board b */
+	public void rePlacePiece() {
+
+		int len = board.getHeight()/10;
+		int wid = board.getWidth()/9;		
+		this.piece.setLength(len);
+		this.piece.setWidth(wid);
+		
+		piece.setBounds(this.x * wid - wid, this.y*len - len, wid, len);
 		this.hasPiece = true;
 		//this.board.validate();
 	}
