@@ -189,41 +189,31 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	// called automatically
 	public void paintComponent(Graphics g) {
 
-		for (int i = 1; i <= rowSize; i++) {
-			for (int k = 1; k <= colSize; k++) {
-				positionBoard[i][k].setBoard(this);
-			}
-			//	System.out.println();
-		}
-
-
-
 		System.out.println(" ------------------------------------------------ ");
 		System.out.println(" paintComponent ");
-
-
+		/*
 		//----------- horizontal line--------------/
 		super.paintComponent(g);
 		for(int j = 1; j <= colSize; j++) {
 			// drawline (x1, y1) -> (x2, y2)
 			g.drawLine(positionBoard[1][j].getXLen(), positionBoard[1][j].getYLen(),
-					positionBoard[rowSize][j].getXLen(), positionBoard[rowSize][j].getYLen());
+			positionBoard[rowSize][j].getXLen(), positionBoard[rowSize][j].getYLen());
 		}
 		//----------- vertical line--------------/
 		for(int i = 1; i <= rowSize; i++){
-			if(i != 1 && i != rowSize){
-				// first half of vertical line (Chu area)
-				g.drawLine(positionBoard[i][1].getXLen(), positionBoard[i][1].getYLen(),
-						positionBoard[i][colSize-5].getXLen(), positionBoard[i][colSize-5].getYLen());
-				// second half of the vertical line (Han area)
-				g.drawLine(positionBoard[i][colSize-4].getXLen(), positionBoard[i][colSize-4].getYLen(),
-						positionBoard[i][colSize].getXLen(), positionBoard[i][colSize].getYLen());
-			}
-			else{
-				// veritcal line for two border sides
-				g.drawLine(positionBoard[i][1].getXLen(), positionBoard[i][1].getYLen(),
-						positionBoard[i][colSize].getXLen(), positionBoard[i][colSize].getYLen());
-			}
+				if(i != 1 && i != rowSize){
+					// first half of vertical line (Chu area)
+					g.drawLine(positionBoard[i][1].getXLen(), positionBoard[i][1].getYLen(),
+					positionBoard[i][colSize-5].getXLen(), positionBoard[i][colSize-5].getYLen());
+					// second half of the vertical line (Han area)
+					g.drawLine(positionBoard[i][colSize-4].getXLen(), positionBoard[i][colSize-4].getYLen(),
+					positionBoard[i][colSize].getXLen(), positionBoard[i][colSize].getYLen());
+				}
+				else{
+					// veritcal line for two border sides
+					g.drawLine(positionBoard[i][1].getXLen(), positionBoard[i][1].getYLen(),
+					positionBoard[i][colSize].getXLen(), positionBoard[i][colSize].getYLen());
+				}
 		}
 		//----------- X mark --------------/
 		// for Chu
@@ -242,17 +232,17 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 			g.drawString("" + c, pieceSize/4, j*pieceSize);
 			j++;
 		}
-
+		*/
 
 		for (int i = 1; i <= rowSize; i++) {
 			for (int k = 1; k <= colSize; k++) {
 				if(positionBoard[i][k].getPiece() != null) {
-					//	System.out.println(positionBoard[i][k].getPiece().getName() + " | "
-					//	+ positionBoard[i][k].getPiece().getSide() + " -> (" + i + ", " + k + ")");
+				//	System.out.println(positionBoard[i][k].getPiece().getName() + " | "
+				//	+ positionBoard[i][k].getPiece().getSide() + " -> (" + i + ", " + k + ")");
 					positionBoard[i][k].scaleBoardPosition();
 				}
 			}
-			//	System.out.println();
+		//	System.out.println();
 		}
 		System.out.println(i);
 		i += 1;
@@ -260,7 +250,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 
 		try {
 			folderImage = ImageIO.read(folderInput);
-//			g.drawImage(folderImage, 0, 0, this.getWidth(), this.getHeight(), null);
+			g.drawImage(folderImage, 0, 0, this.getWidth(), this.getHeight(), null);
 		}
 		catch (IOException e) {
 			System.out.println("Failed to load chess board image");
@@ -272,26 +262,11 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 
 	}
 
-	@Override
-	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
 
-	}
 
-	@Override
-	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
+	// override for the MouseListener
+	public void mousePressed(MouseEvent e){
 
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
 		Piece piece=null;
 		Rectangle rect=null;
 
@@ -301,34 +276,25 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 		if(e.getSource() instanceof Piece){
 			System.out.println("Chess Pressed");
 		}
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
+	// override for the MouseMotionListener
+	public void mouseDragged(MouseEvent e){
 
 	}
 
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
+	// override for the MouseListener
+	public void mouseReleased(MouseEvent e){
 
 	}
 
 
 
-
-
-
-
-
-
+	public void mouseEntered(MouseEvent e){} // override for the MouseListener
+	public void mouseExited(MouseEvent e){} // override for the MouseListener
+	public void mouseMoved(MouseEvent e){} // override for the MouseMotionListener
+	public void mouseClicked(MouseEvent e){} // override for the MouseMotionListener
 
 
 
