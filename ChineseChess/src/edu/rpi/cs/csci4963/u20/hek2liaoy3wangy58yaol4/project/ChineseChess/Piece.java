@@ -58,33 +58,37 @@ public class Piece extends JButton{
 		this.width = width;
 		this.board = board;
 		this.folderInput = new File(imageName);
+		this.addMouseListener(board);
+		this.addMouseMotionListener(board);
+//		this.setText("123123");
+//		this.setFont(new Font("Georgia", Font.BOLD, 50));
+//		this.setBackground(Color.red);
 	}
 
 
 	@Override
 	public void paint(Graphics g) {
 		System.out.println("chess paint: " + this.getName() + " | side: " + this.getSide());
-		/*
-		//super.paintComponent(g);
-		// set the color according to the side
-		// System.out.println("paint");
-		if(this.side.toString().equals("Han")) {
-			g.setColor(Board.colorHan); // getting public static variable from Board
-		}
-		else {
-			g.setColor(Board.colorChu); // getting public static variable from Board
-		}
-		g.fillOval(padding, padding, length-padding, length-padding);
-		g.setColor(Color.white);
+//		//super.paintComponent(g);
+//		// set the color according to the side
+//		// System.out.println("paint");
+//		if(this.side.toString().equals("Han")) {
+//			g.setColor(Board.colorHan); // getting public static variable from Board
+//		}
+//		else {
+//			g.setColor(Board.colorChu); // getting public static variable from Board
+//		}
+//		g.fillOval(padding, padding, length-padding, length-padding);
+//		g.setColor(Color.white);
+//
+//		//g.setFont(new Font("", Font.BOLD, length-8*padding));
+//		g.drawString(this.nameConverter(), 2*padding, length - 8 * padding);
+//		g.setColor(Color.gray);
+//		g.drawOval(padding, padding, length-padding, length-padding);
 
-		//g.setFont(new Font("", Font.BOLD, length-8*padding));
-		g.drawString(this.nameConverter(), 2*padding, length - 8 * padding);
-		g.setColor(Color.gray);
-		g.drawOval(padding, padding, length-padding, length-padding);
-*/
 		try {
 			folderImage = ImageIO.read(folderInput);
-			g.drawImage(folderImage, 0, 0, null);
+			g.drawImage(folderImage, 0, 0,this.getWidth(), this.getHeight(),  null);
 		}
 		catch (IOException e) {
 			System.out.println("Failed to load chess image");
