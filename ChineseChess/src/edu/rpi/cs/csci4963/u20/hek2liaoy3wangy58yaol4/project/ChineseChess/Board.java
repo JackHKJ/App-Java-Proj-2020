@@ -66,13 +66,13 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	private Piece R_P1,       R_P2,       R_P3,      R_P4,       R_P5;
 	private Piece       R_C1,                              R_C2;
 	private Piece R_R1, R_K1, R_B1, R_A1, R_G ,R_A2, R_B2, R_K2, R_R2;
-
+	
 //	the variable in operation
 	/** the current x coordinate under operation */
 	public int currentX;
 	/** the current y coordinate under operation */
 	public int currentY;
-
+	
 	/** the constructor of the board
 	 * @param l the row size (up to down) of the board
 	 * @param w the col size (left to right) of the board
@@ -85,7 +85,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 		this.colorChu = new Color(0, 0, 0);
 		this.colorHan = new Color(255, 0, 0);
 		this.setLayout(null);
-
+		
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		// initializing the positionBoard
@@ -96,16 +96,16 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 				positionBoard[i][j] = new Position(i, j);
 			}
 		}
-
+		
 		initializeAllPieces();
-
+		
 	}
-
+	
 	/** this is the method that initialize all the pieces and place them to the desired position
 	 */
 	public void initializeAllPieces() {
 		System.out.println(" initializeAllPieces ");
-
+		
 		// Han side chess
 		// piece parameters: (PieceName, Side, size, Board)
 		R_R1 = new Piece(PieceName.Chariot, Side.Han, pieceSize,pieceSize, this, R_R);
@@ -117,16 +117,16 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 		R_B2 = new Piece(PieceName.Bishop, Side.Han, pieceSize,pieceSize, this, R_B);
 		R_K2 = new Piece(PieceName.Knight, Side.Han, pieceSize,pieceSize, this, R_K);
 		R_R2 = new Piece(PieceName.Chariot, Side.Han, pieceSize,pieceSize, this, R_R);
-
+		
 		R_C1 = new Piece(PieceName.Cannon, Side.Han, pieceSize,pieceSize, this, R_C);
 		R_C2 = new Piece(PieceName.Cannon, Side.Han, pieceSize,pieceSize, this, R_C);
-
+		
 		R_P1 = new Piece(PieceName.Pawn, Side.Han, pieceSize,pieceSize, this, R_P);
 		R_P2 = new Piece(PieceName.Pawn, Side.Han, pieceSize,pieceSize, this, R_P);
 		R_P3 = new Piece(PieceName.Pawn, Side.Han, pieceSize,pieceSize, this, R_P);
 		R_P4 = new Piece(PieceName.Pawn, Side.Han, pieceSize,pieceSize, this, R_P);
 		R_P5 = new Piece(PieceName.Pawn, Side.Han, pieceSize,pieceSize, this, R_P);
-
+		
 		// Chu side chess
 		// piece parameters: (PieceName, Side, size, Board)
 		B_R1 = new Piece(PieceName.Chariot, Side.Chu, pieceSize,pieceSize, this, B_R);
@@ -138,16 +138,16 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 		B_B2 = new Piece(PieceName.Bishop, Side.Chu, pieceSize,pieceSize, this, B_B);
 		B_K2 = new Piece(PieceName.Knight, Side.Chu, pieceSize,pieceSize, this, B_K);
 		B_R2 = new Piece(PieceName.Chariot, Side.Chu, pieceSize,pieceSize, this, B_R);
-
+		
 		B_C1 = new Piece(PieceName.Cannon, Side.Chu, pieceSize,pieceSize, this, B_C);
 		B_C2 = new Piece(PieceName.Cannon, Side.Chu, pieceSize,pieceSize, this, B_C);
-
+		
 		B_P1 = new Piece(PieceName.Pawn, Side.Chu, pieceSize,pieceSize, this, B_P);
 		B_P2 = new Piece(PieceName.Pawn, Side.Chu, pieceSize,pieceSize, this, B_P);
 		B_P3 = new Piece(PieceName.Pawn, Side.Chu, pieceSize,pieceSize, this, B_P);
 		B_P4 = new Piece(PieceName.Pawn, Side.Chu, pieceSize,pieceSize, this, B_P);
 		B_P5 = new Piece(PieceName.Pawn, Side.Chu, pieceSize,pieceSize, this, B_P);
-
+		
 		// (x , y)
 		positionBoard[1][10].placePiece(R_R1, this);
 		positionBoard[2][10].placePiece(R_K1,this);
@@ -165,7 +165,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 		positionBoard[5][7].placePiece(R_P3,this);
 		positionBoard[7][7].placePiece(R_P4,this);
 		positionBoard[9][7].placePiece(R_P5,this);
-
+		
 		positionBoard[1][1].placePiece(B_R1, this);
 		positionBoard[2][1].placePiece(B_K1,this);
 		positionBoard[3][1].placePiece(B_B1,this);
@@ -183,38 +183,47 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 		positionBoard[7][4].placePiece(B_P4,this);
 		positionBoard[9][4].placePiece(B_P5,this);
 	}
-
-
+	
+	
 	@Override
 	// called automatically
 	public void paintComponent(Graphics g) {
-
+		
+		for (int i = 1; i <= rowSize; i++) {
+			for (int k = 1; k <= colSize; k++) {
+				positionBoard[i][k].setBoard(this);
+			}
+			//	System.out.println();
+		}
+		
+		
+		
 		System.out.println(" ------------------------------------------------ ");
 		System.out.println(" paintComponent ");
-		/*
-
+		
+		
 		//----------- horizontal line--------------/
 		super.paintComponent(g);
 		for(int j = 1; j <= colSize; j++) {
 			// drawline (x1, y1) -> (x2, y2)
 			g.drawLine(positionBoard[1][j].getXLen(), positionBoard[1][j].getYLen(),
-			positionBoard[rowSize][j].getXLen(), positionBoard[rowSize][j].getYLen());
+					positionBoard[rowSize][j].getXLen(), positionBoard[rowSize][j].getYLen());
 		}
 		//----------- vertical line--------------/
 		for(int i = 1; i <= rowSize; i++){
-				if(i != 1 && i != rowSize){
-					// first half of vertical line (Chu area)
-					g.drawLine(positionBoard[i][1].getXLen(), positionBoard[i][1].getYLen(),
-					positionBoard[i][colSize-5].getXLen(), positionBoard[i][colSize-5].getYLen());
-					// second half of the vertical line (Han area)
-					g.drawLine(positionBoard[i][colSize-4].getXLen(), positionBoard[i][colSize-4].getYLen(),
-					positionBoard[i][colSize].getXLen(), positionBoard[i][colSize].getYLen());
-				}
-				else{
-					// veritcal line for two border sides
-					g.drawLine(positionBoard[i][1].getXLen(), positionBoard[i][1].getYLen(),
-					positionBoard[i][colSize].getXLen(), positionBoard[i][colSize].getYLen());
-				}
+			if(i != 1 && i != rowSize){
+				// first half of vertical line (Chu area)
+				g.drawLine(positionBoard[i][1].getXLen(), positionBoard[i][1].getYLen(),
+						positionBoard[i][colSize-5].getXLen(), positionBoard[i][colSize-5].getYLen());
+				// second half of the vertical line (Han area)
+				g.drawLine(positionBoard[i][colSize-4].getXLen(), positionBoard[i][colSize-4].getYLen(),
+						positionBoard[i][colSize].getXLen(), positionBoard[i][colSize].getYLen());
+			}
+			else{
+				// veritcal line for two border sides
+				g.drawLine(positionBoard[i][1].getXLen(), positionBoard[i][1].getYLen(),
+						positionBoard[i][colSize].getXLen(), positionBoard[i][colSize].getYLen());
+			}
 		}
 		//----------- X mark --------------/
 		// for Chu
@@ -227,75 +236,99 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 		for(int i = 1; i <= rowSize; i++){
 			g.drawString("" + i, i*pieceSize, pieceSize/2);
 		}
-
+		
 		int j = 1;
 		for(char c = 'A'; c <= 'J'; c++){
 			g.drawString("" + c, pieceSize/4, j*pieceSize);
 			j++;
 		}
-		*/
-
+		
+		
 		for (int i = 1; i <= rowSize; i++) {
 			for (int k = 1; k <= colSize; k++) {
 				if(positionBoard[i][k].getPiece() != null) {
-				//	System.out.println(positionBoard[i][k].getPiece().getName() + " | "
-				//	+ positionBoard[i][k].getPiece().getSide() + " -> (" + i + ", " + k + ")");
+					//	System.out.println(positionBoard[i][k].getPiece().getName() + " | "
+					//	+ positionBoard[i][k].getPiece().getSide() + " -> (" + i + ", " + k + ")");
 					positionBoard[i][k].scaleBoardPosition();
 				}
 			}
-		//	System.out.println();
+			//	System.out.println();
 		}
 		System.out.println(i);
 		i += 1;
-
-
+		
+		
 		try {
 			folderImage = ImageIO.read(folderInput);
-			g.drawImage(folderImage, 0, 0, this.getWidth(), this.getHeight(), null);
+//			g.drawImage(folderImage, 0, 0, this.getWidth(), this.getHeight(), null);
 		}
 		catch (IOException e) {
 			System.out.println("Failed to load chess board image");
 		}
-
+		
 //		System.out.printf("Boardlen: %d, Boardwid: %d\n", this.getHeight(), this.getWidth());
-
-
-
+		
+		
+		
 	}
 
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 
-	// override for the MouseListener
-	public void mousePressed(MouseEvent e){
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 
+	@Override
+	public void mousePressed(MouseEvent e) {
 		Piece piece=null;
 		Rectangle rect=null;
-
+			
 		if(e.getSource() == this){
 			System.out.println("Mouse Pressed");
 		}
 		if(e.getSource() instanceof Piece){
 			System.out.println("Chess Pressed");
-		}
-
+		}		
 	}
 
-	// override for the MouseMotionListener
-	public void mouseDragged(MouseEvent e){
-
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
-	// override for the MouseListener
-	public void mouseReleased(MouseEvent e){
-
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 
-
-	public void mouseEntered(MouseEvent e){} // override for the MouseListener
-	public void mouseExited(MouseEvent e){} // override for the MouseListener
-	public void mouseMoved(MouseEvent e){} // override for the MouseMotionListener
-	public void mouseClicked(MouseEvent e){} // override for the MouseMotionListener
 
 
 
