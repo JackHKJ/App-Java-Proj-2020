@@ -40,8 +40,8 @@ public class Piece extends JLabel{
 
 	// indicator of which side the piece belongs to
 	enum Side{
-		Han, // move first
-		Chu // move second
+		Han, // moves first
+		Chu // moves second
 	}
 
 	/** the constructor of a piece
@@ -57,10 +57,7 @@ public class Piece extends JLabel{
 		this.length = length;
 		this.width = width;
 		this.board = board;
-		folderInput = new File(imageName);
-		//setSize(length,length);
-		setBackground(Color.PINK);
-//		System.out.println("piece init " + length);
+		this.folderInput = new File(imageName);
 	}
 
 
@@ -69,8 +66,8 @@ public class Piece extends JLabel{
 		System.out.println("chess paint: " + this.getName() + " | side: " + this.getSide());
 		/*
 		//super.paintComponent(g);
-//		set the color according to the side
-//	System.out.println("paint");
+		// set the color according to the side
+		// System.out.println("paint");
 		if(this.side.toString().equals("Han")) {
 			g.setColor(Board.colorHan); // getting public static variable from Board
 		}
@@ -87,7 +84,7 @@ public class Piece extends JLabel{
 */
 		try {
 			folderImage = ImageIO.read(folderInput);
-			g.drawImage(folderImage, 0, 0, this.length, this.width, null);
+			g.drawImage(folderImage, 0, 0, null);
 		}
 		catch (IOException e) {
 			System.out.println("Failed to load chess image");
@@ -143,9 +140,6 @@ public class Piece extends JLabel{
 
 
 
-
-
-
 	/** getter for name
 	 * @return name of the piece
 	 */
@@ -168,6 +162,12 @@ public class Piece extends JLabel{
 		return this.length;
 	}
 
+	/** getter for width
+	 * @return width of the piece
+	 */
+	public int getWidth() {
+		return width;
+	}
 
 	public void setLength(int len) {
 		this.length = len;
@@ -178,24 +178,6 @@ public class Piece extends JLabel{
 	}
 
 
-	/** getter for width
-	 * @return width of the piece
-	 */
-	public int getWidth() {
-		return width;
-	}
-
-
-
-/*
-	public static void main(String[] args) {
-		JFrame frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setBounds(100,100,300,300);
-		frame.add(new Piece(PieceName.General, Side.Han, 100,100, null));
-		frame.setVisible(true);
-	}
-*/
 
 
 

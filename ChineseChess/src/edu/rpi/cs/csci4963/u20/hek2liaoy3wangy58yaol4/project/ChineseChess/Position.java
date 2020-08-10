@@ -116,7 +116,7 @@ public class Position {
 
 		piece.setBounds(this.x * wid - wid, this.y*len - len, wid, len);
 		this.hasPiece = true;
-		//board.validate();
+		board.validate();
 	}
 
 	/** getter of the piece on this position
