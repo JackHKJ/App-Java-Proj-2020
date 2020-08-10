@@ -104,8 +104,6 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	/** this is the method that initialize all the pieces and place them to the desired position
 	 */
 	public void initializeAllPieces() {
-		System.out.println(" initializeAllPieces ");
-
 		// Han side chess
 		// piece parameters: (PieceName, Side, size, Board)
 		R_R1 = new Piece(PieceName.Chariot, Side.Han, pieceSize,pieceSize, this, R_R);
@@ -189,10 +187,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	// called automatically
 	public void paintComponent(Graphics g) {
 
-		System.out.println(" ------------------------------------------------ ");
-		System.out.println(" paintComponent ");
 		/*
-
 		//----------- horizontal line--------------/
 		super.paintComponent(g);
 		for(int j = 1; j <= colSize; j++) {
@@ -234,6 +229,11 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 			j++;
 		}
 		*/
+		for (int i = 1; i <= rowSize; i++) {
+			for (int k = 1; k <= colSize; k++) {
+				positionBoard[i][k].setBoard(this);
+			}
+		}
 
 		for (int i = 1; i <= rowSize; i++) {
 			for (int k = 1; k <= colSize; k++) {
@@ -243,11 +243,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 					positionBoard[i][k].scaleBoardPosition();
 				}
 			}
-		//	System.out.println();
 		}
-		System.out.println(i);
-		i += 1;
-
 
 		try {
 			folderImage = ImageIO.read(folderInput);
@@ -265,9 +261,26 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 
 
 
-	// override for the MouseListener
-	public void mousePressed(MouseEvent e){
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
 		Piece piece=null;
 		Rectangle rect=null;
 
@@ -277,26 +290,27 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 		if(e.getSource() instanceof Piece){
 			System.out.println("Chess Pressed");
 		}
-
-	}
-
-	// override for the MouseMotionListener
-	public void mouseDragged(MouseEvent e){
-
-	}
-
-	// override for the MouseListener
-	public void mouseReleased(MouseEvent e){
-
 	}
 
 
 
-	public void mouseEntered(MouseEvent e){} // override for the MouseListener
-	public void mouseExited(MouseEvent e){} // override for the MouseListener
-	public void mouseMoved(MouseEvent e){} // override for the MouseMotionListener
-	public void mouseClicked(MouseEvent e){} // override for the MouseMotionListener
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
 
 
 
