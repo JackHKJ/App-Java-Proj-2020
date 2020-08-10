@@ -2,7 +2,10 @@ package edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess;
 
 import javax.swing.*;
 import java.awt.*;
-
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
 /** this is a class for the general chessPiece implementation
  * @version JRE 1.8.0_231 *
  */
@@ -19,10 +22,13 @@ public class Piece extends JLabel{
 	private int width; // the width of the piece to be painted
 	private int padding = 2; // the padding for drawing content
 	private Board board; // the board that this piece lies on
-	//TODO: Implement the interaction with the chess board(not yet implemented)
+
+	public File folderInput;
+	public BufferedImage folderImage;
+
 
 	//  The list for the name of the pieces
-	public enum PieceName{
+ 	enum PieceName{
 	 General, //jiang
 	 Advisor, //shi
 	 Bishop, //xiang
@@ -45,12 +51,13 @@ public class Piece extends JLabel{
 	 * @param width the width of the piece
 	 * @param board the board this piece lies on
 	 */
-	public Piece(PieceName nameIn, Side side, int length, int width, Board board) {
+	public Piece(PieceName nameIn, Side side, int length, int width, Board board, String imageName) {
 		this.name = nameIn;
 		this.side = side;
 		this.length = length;
 		this.width = width;
 		this.board = board;
+		folderInput = new File(imageName);
 		//setSize(length,length);
 		setBackground(Color.PINK);
 //		System.out.println("piece init " + length);
@@ -59,7 +66,9 @@ public class Piece extends JLabel{
 
 	@Override
 	public void paint(Graphics g) {
-		super.paintComponent(g);
+		System.out.println("chess paint: " + this.getName() + " | side: " + this.getSide());
+		/*
+		//super.paintComponent(g);
 //		set the color according to the side
 //	System.out.println("paint");
 		if(this.side.toString().equals("Han")) {
@@ -75,6 +84,14 @@ public class Piece extends JLabel{
 		g.drawString(this.nameConverter(), 2*padding, length - 8 * padding);
 		g.setColor(Color.gray);
 		g.drawOval(padding, padding, length-padding, length-padding);
+*/
+		try {
+			folderImage = ImageIO.read(folderInput);
+			g.drawImage(folderImage, 0, 0, this.length, this.width, null);
+		}
+		catch (IOException e) {
+			System.out.println("Failed to load chess image");
+		}
 
 	}
 
@@ -123,8 +140,8 @@ public class Piece extends JLabel{
 		return null;
 
 	}
-	
-	
+
+
 
 
 
@@ -133,7 +150,7 @@ public class Piece extends JLabel{
 	 * @return name of the piece
 	 */
 	public String getName() {
-		return name.toString();
+		return this.name.toString();
 	}
 
 
@@ -141,26 +158,26 @@ public class Piece extends JLabel{
 	 * @return side of the piece
 	 */
 	public Side getSide() {
-		return side;
+		return this.side;
 	}
 
 	/** getter for length
 	 * @return length of the piece
 	 */
 	public int getLength() {
-		return length;
+		return this.length;
 	}
-	
-	
+
+
 	public void setLength(int len) {
 		this.length = len;
 	}
-	
+
 	public void setWidth(int wid) {
 		this.width = wid;
 	}
-	
-	
+
+
 	/** getter for width
 	 * @return width of the piece
 	 */
@@ -170,8 +187,7 @@ public class Piece extends JLabel{
 
 
 
-
-	/** for debugging usage */
+/*
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -179,7 +195,7 @@ public class Piece extends JLabel{
 		frame.add(new Piece(PieceName.General, Side.Han, 100,100, null));
 		frame.setVisible(true);
 	}
-
+*/
 
 
 

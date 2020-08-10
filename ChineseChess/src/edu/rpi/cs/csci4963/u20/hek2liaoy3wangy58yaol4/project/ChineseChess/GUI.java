@@ -125,7 +125,7 @@ public class GUI extends JFrame{
 //			boardPanel.setPreferredSize(new Dimension(this.getWidth()-450, this.getHeight()-113));
 //			boardPanel.add(new JLabel("Load Board Needed"));
 			boardPanel.setBackground(Color.gray);
-			c.add(boardPanel, BorderLayout.CENTER);
+			c.add(boardPanel, BorderLayout.CENTER); // paintComponent of Board at this moment
 
 //			East the Console
 			this.console = new JTextArea("---Console---\n");
@@ -376,12 +376,12 @@ public class GUI extends JFrame{
 		//TODO: implement this operation, boardPane shall be used as an container
 		boardPanel.validate();
 	}
-	
+
 	public static void main(String[] args) throws IOException {
 		GUI gui = new GUI();
-		Piece p1 = gui.boardPanel.positionBoard[1][1].getPiece();
-		gui.boardPanel.positionBoard[1][1].removePiece(p1, gui.boardPanel);
-		gui.boardPanel.positionBoard[1][2].placePiece(p1, gui.boardPanel);
+		//Piece p1 = gui.boardPanel.positionBoard[1][1].getPiece();
+		//gui.boardPanel.positionBoard[1][1].removePiece(p1, gui.boardPanel);
+		//gui.boardPanel.positionBoard[1][2].placePiece(p1, gui.boardPanel);
 //		gui.boardPanel.positionBoard[1][1]
 //		gui.boardPanel.initializeAllPieces();
 //		gui.displayMsg("Hello");
