@@ -13,7 +13,7 @@ import java.io.IOException;
 
 
 /** the single chess piece to be implemented */
-public class Piece extends JLabel{
+public class Piece extends JButton{
 
 	private static final long serialVersionUID = 1L;
 	private PieceName name; // the classification of the piece

@@ -116,7 +116,6 @@ public class GUI extends JFrame{
 				this.jmUtilities.add(jmiHideConfigBar);
 				this.jmUtilities.add(jmiSetUIColor);
 			this.menuBar.add(jmUtilities);
-
 			c.add(menuBar, BorderLayout.NORTH);
 
 //			Center the board panel (pre-filled in Gray)
@@ -124,7 +123,7 @@ public class GUI extends JFrame{
 			boardPanel.setPreferredSize(new Dimension(this.deviceHeight/12*9,this.deviceHeight/12*10));
 //			boardPanel.setPreferredSize(new Dimension(this.getWidth()-450, this.getHeight()-113));
 //			boardPanel.add(new JLabel("Load Board Needed"));
-			boardPanel.setBackground(Color.gray);
+//			boardPanel.setBackground(Color.gray);
 			c.add(boardPanel, BorderLayout.CENTER); // paintComponent of Board at this moment
 
 //			East the Console
@@ -135,7 +134,7 @@ public class GUI extends JFrame{
 			this.console.setFont(new Font("Georgia",Font.BOLD, 30));
 			this.consolePane = new JScrollPane(console);
 			this.consolePane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-			this.consolePane.setPreferredSize(new Dimension(450,deviceHeight/12*9));
+			this.consolePane.setPreferredSize(new Dimension(280,deviceHeight/12*9));
 			c.add(consolePane, BorderLayout.EAST);
 
 //			South the configuration panel
@@ -150,7 +149,7 @@ public class GUI extends JFrame{
 				configPanel.add(defeatBtn);
 				configPanel.add(drawBtn);
 				configPanel.add(hideBtn);
-			this.c.add(configPanel, BorderLayout.SOUTH);
+			c.add(configPanel, BorderLayout.SOUTH);
 //			window listener of this game
 			this.addWindowListener(new WindowListener() {
 				@Override
