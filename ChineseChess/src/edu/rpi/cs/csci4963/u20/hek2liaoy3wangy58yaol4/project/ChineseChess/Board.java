@@ -192,6 +192,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 		System.out.println(" ------------------------------------------------ ");
 		System.out.println(" paintComponent ");
 		/*
+
 		//----------- horizontal line--------------/
 		super.paintComponent(g);
 		for(int j = 1; j <= colSize; j++) {
