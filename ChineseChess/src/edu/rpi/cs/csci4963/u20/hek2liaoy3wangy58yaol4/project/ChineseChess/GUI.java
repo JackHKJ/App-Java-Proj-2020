@@ -124,7 +124,7 @@ public class GUI extends JFrame{
 //			Original Version
 //			this.boardPanel = new Board(9, 10, (this.deviceHeight-113)/10);
 //			boardPanel.setPreferredSize(new Dimension(this.deviceHeight/12*9,this.deviceHeight/12*10));
-			
+
 //			hardcoded:
 			this.boardPanel = new Board(9, 10, UNIT_SIZE_CONSTANT);
 			boardPanel.setPreferredSize(new Dimension(9*UNIT_SIZE_CONSTANT,10*UNIT_SIZE_CONSTANT));
