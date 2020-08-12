@@ -124,8 +124,8 @@ public class GUI extends JFrame{
 //			boardPanel.setPreferredSize(new Dimension(this.deviceHeight/12*9,this.deviceHeight/12*10));
 
 //			hardcoded:
-			this.boardPanel = new Board(9, 10, 80);
-			boardPanel.setPreferredSize(new Dimension(720,800));
+			this.boardPanel = new Board(9, 10, 50);
+			boardPanel.setPreferredSize(new Dimension(514,464));
 
 
 //			boardPanel.setPreferredSize(new Dimension(this.getWidth()-450, this.getHeight()-113));
@@ -316,14 +316,14 @@ public class GUI extends JFrame{
 		action.setBounds(deviceWidth/2 -deviceHeight*9/20 - 225,5 , 400, 200);
 		action.setLayout(new FlowLayout());
 		JLabel tempLabel = new JLabel("New countdown:");
-		tempLabel.setFont(new Font("Georgia",Font.BOLD, 40));
+		tempLabel.setFont(new Font("Georgia",Font.BOLD, 20));
 		action.add(tempLabel);
 		JTextArea countdownArea = new JTextArea("30");
-		countdownArea.setFont(new Font("Georgia",Font.BOLD, 40));
+		countdownArea.setFont(new Font("Georgia",Font.BOLD, 20));
 		countdownArea.setSize(new Dimension(200,50));
 		action.add(countdownArea);
 		JButton confirm = new JButton("Confirm");
-		confirm.setFont(new Font("Georgia",Font.BOLD, 40));
+		confirm.setFont(new Font("Georgia",Font.BOLD, 20));
 		this.actionPerformed = false;
 		confirm.addActionListener(new ActionListener() {
 			@Override
