@@ -68,7 +68,7 @@ public class Piece extends JLabel{
 	@Override
 	public void paint(Graphics g) {
 		//System.out.println("chess paint: " + this.getName() + " | side: " + this.getSide());
-		/*
+//		/*
 		//super.paintComponent(g);
 		// set the color according to the side
 		// System.out.println("paint");
@@ -85,11 +85,11 @@ public class Piece extends JLabel{
 		g.drawString(this.nameConverter(), 2*padding, height - 8 * padding);
 		g.setColor(Color.gray);
 		g.drawOval(padding, padding, height-padding, height-padding);
-*/
+//		*/
 		try {
 			// System.out.println("chess paint image");
 			folderImage = ImageIO.read(folderInput);
-			g.drawImage(folderImage, 0, 0, this.getWidth(), this.getHeight(),  null);
+			//g.drawImage(folderImage, 0, 0, this.getWidth(), this.getHeight(),  null);
 		}
 		catch (IOException e) {
 			System.out.println("Failed to load chess image");
