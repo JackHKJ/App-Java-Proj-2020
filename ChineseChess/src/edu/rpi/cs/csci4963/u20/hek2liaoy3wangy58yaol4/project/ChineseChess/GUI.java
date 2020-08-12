@@ -119,8 +119,15 @@ public class GUI extends JFrame{
 			c.add(menuBar, BorderLayout.NORTH);
 
 //			Center the board panel (pre-filled in Gray)
-			this.boardPanel = new Board(9, 10, (this.deviceHeight-113)/10);
-			boardPanel.setPreferredSize(new Dimension(this.deviceHeight/12*9,this.deviceHeight/12*10));
+//			Original Version
+//			this.boardPanel = new Board(9, 10, (this.deviceHeight-113)/10);
+//			boardPanel.setPreferredSize(new Dimension(this.deviceHeight/12*9,this.deviceHeight/12*10));
+
+//			hardcoded:
+			this.boardPanel = new Board(9, 10, 80);
+			boardPanel.setPreferredSize(new Dimension(720,800));
+
+
 //			boardPanel.setPreferredSize(new Dimension(this.getWidth()-450, this.getHeight()-113));
 //			boardPanel.add(new JLabel("Load Board Needed"));
 //			boardPanel.setBackground(Color.gray);
@@ -134,7 +141,7 @@ public class GUI extends JFrame{
 			this.console.setFont(new Font("Georgia",Font.BOLD, 30));
 			this.consolePane = new JScrollPane(console);
 			this.consolePane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-			this.consolePane.setPreferredSize(new Dimension(280,deviceHeight/12*9));
+			this.consolePane.setPreferredSize(new Dimension(280,800));
 			c.add(consolePane, BorderLayout.EAST);
 
 //			South the configuration panel
@@ -144,7 +151,7 @@ public class GUI extends JFrame{
 				this.defeatBtn.setFont(new Font("Georgia",Font.BOLD, 40));
 				this.drawBtn = new JButton("Call Draw");
 				this.drawBtn.setFont(new Font("Georgia",Font.BOLD, 40));
-				this.hideBtn = new JButton("hide Config Panel");
+				this.hideBtn = new JButton("hide Conf"); //TODO:
 				this.hideBtn.setFont(new Font("Georgia",Font.BOLD, 40));
 				configPanel.add(defeatBtn);
 				configPanel.add(drawBtn);
@@ -245,7 +252,7 @@ public class GUI extends JFrame{
 
 //			end of the listeners
 			this.pack();
-			this.setResizable(false);
+			this.setResizable(true);
 			this.setVisible(true);
 	}
 
@@ -294,10 +301,10 @@ public class GUI extends JFrame{
 	/** helper function for changing the configpane's status */
 	private void changeConfigPaneStatus() {
 		if(this.configPanel.isVisible()) {
-			this.jmiHideConfigBar.setText("Display Config Bar");
+			this.jmiHideConfigBar.setText("Disp Conf");
 		}
 		else {
-			this.jmiHideConfigBar.setText("Hide Config Bar");
+			this.jmiHideConfigBar.setText("Hide Conf");
 		}
 		this.configPanel.setVisible(!this.configPanel.isVisible());
 	}

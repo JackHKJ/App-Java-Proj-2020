@@ -198,7 +198,6 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 		}
 
 
-
 		//----------- horizontal line--------------/
 		super.paintComponent(g);
 		for(int j = 1; j <= colSize; j++) {
@@ -241,6 +240,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 		}
 
 
+
 		for (int i = 1; i <= rowSize; i++) {
 			for (int k = 1; k <= colSize; k++) {
 				if(positionBoard[i][k].getPiece() != null) {
@@ -253,14 +253,14 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 
 		try {
 			folderImage = ImageIO.read(folderInput);
-		//	g.drawImage(folderImage, 0, 0, this.getWidth(), this.getHeight(), null);
+//			g.drawImage(folderImage, 0, 0, this.getWidth(), this.getHeight(), null);
 		}
 		catch (IOException e) {
 			System.out.println("Failed to load chess board image");
 		}
 
 		System.out.printf("Boardlen: %d, Boardwid: %d\n", this.getHeight(), this.getWidth());
-
+		System.out.printf("PieceSize: %s", positionBoard[1][1].getPiece().getHeight());
 
 
 	}
@@ -394,6 +394,8 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 		// TODO Auto-generated method stub
 
 	}
+
+
 
 
 
