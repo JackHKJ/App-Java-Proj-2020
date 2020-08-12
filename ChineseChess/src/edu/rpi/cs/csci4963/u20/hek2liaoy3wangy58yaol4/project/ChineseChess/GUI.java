@@ -119,8 +119,15 @@ public class GUI extends JFrame{
 			c.add(menuBar, BorderLayout.NORTH);
 
 //			Center the board panel (pre-filled in Gray)
-			this.boardPanel = new Board(9, 10, (this.deviceHeight-113)/10);
-			boardPanel.setPreferredSize(new Dimension(this.deviceHeight/12*9,this.deviceHeight/12*10));
+//			Original Version
+//			this.boardPanel = new Board(9, 10, (this.deviceHeight-113)/10);
+//			boardPanel.setPreferredSize(new Dimension(this.deviceHeight/12*9,this.deviceHeight/12*10));
+			
+//			hardcoded:
+			this.boardPanel = new Board(9, 10, 100);
+			boardPanel.setPreferredSize(new Dimension(900,1000));
+			
+			
 //			boardPanel.setPreferredSize(new Dimension(this.getWidth()-450, this.getHeight()-113));
 //			boardPanel.add(new JLabel("Load Board Needed"));
 //			boardPanel.setBackground(Color.gray);
@@ -134,7 +141,7 @@ public class GUI extends JFrame{
 			this.console.setFont(new Font("Georgia",Font.BOLD, 30));
 			this.consolePane = new JScrollPane(console);
 			this.consolePane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-			this.consolePane.setPreferredSize(new Dimension(280,deviceHeight/12*9));
+			this.consolePane.setPreferredSize(new Dimension(280,1000));
 			c.add(consolePane, BorderLayout.EAST);
 
 //			South the configuration panel

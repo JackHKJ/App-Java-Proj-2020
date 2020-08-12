@@ -257,7 +257,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 			System.out.println("Failed to load chess board image");
 		}
 
-//		System.out.printf("Boardlen: %d, Boardwid: %d\n", this.getHeight(), this.getWidth());
+		System.out.printf("Boardlen: %d, Boardwid: %d\n", this.getHeight(), this.getWidth());
 
 
 
