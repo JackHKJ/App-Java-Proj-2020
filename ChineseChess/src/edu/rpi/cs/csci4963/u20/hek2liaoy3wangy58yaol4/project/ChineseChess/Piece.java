@@ -18,7 +18,7 @@ public class Piece extends JLabel{
 	private static final long serialVersionUID = 1L;
 	private PieceName name; // the classification of the piece
 	private Side side; // the side of the chess piece
-	private int length; // the length of the piece to be painted
+	private int height; // the height of the piece to be painted
 	private int width; // the width of the piece to be painted
 	private int padding = 2; // the padding for drawing content
 	private Board board; // the board that this piece lies on
@@ -47,14 +47,14 @@ public class Piece extends JLabel{
 	/** the constructor of a piece
 	 * @param nameIn the classification of the piece
 	 * @param side the side of the piece
-	 * @param length length of the piece (length parameter)
+	 * @param height height of the piece (height parameter)
 	 * @param width the width of the piece
 	 * @param board the board this piece lies on
 	 */
-	public Piece(PieceName nameIn, Side side, int length, int width, Board board, String imageName) {
+	public Piece(PieceName nameIn, Side side, int height, int width, Board board, String imageName) {
 		this.name = nameIn;
 		this.side = side;
-		this.length = length;
+		this.height = height;
 		this.width = width;
 		this.board = board;
 		this.folderInput = new File(imageName);
@@ -62,7 +62,9 @@ public class Piece extends JLabel{
 		this.addMouseMotionListener(board);
 	}
 
-
+	/** the paint method will be called when initialize chess and dragging chess
+	 * @param g Graphics
+	 */
 	@Override
 	public void paint(Graphics g) {
 		//System.out.println("chess paint: " + this.getName() + " | side: " + this.getSide());
@@ -76,15 +78,16 @@ public class Piece extends JLabel{
 		else {
 			g.setColor(Board.colorChu); // getting public static variable from Board
 		}
-		g.fillOval(padding, padding, length-padding, length-padding);
+		g.fillOval(padding, padding, height-padding, height-padding);
 		g.setColor(Color.white);
 
-		//g.setFont(new Font("", Font.BOLD, length-8*padding));
-		g.drawString(this.nameConverter(), 2*padding, length - 8 * padding);
+		//g.setFont(new Font("", Font.BOLD, height-8*padding));
+		g.drawString(this.nameConverter(), 2*padding, height - 8 * padding);
 		g.setColor(Color.gray);
-		g.drawOval(padding, padding, length-padding, length-padding);
+		g.drawOval(padding, padding, height-padding, height-padding);
 */
 		try {
+			// System.out.println("chess paint image");
 			folderImage = ImageIO.read(folderInput);
 			g.drawImage(folderImage, 0, 0, this.getWidth(), this.getHeight(),  null);
 		}
@@ -157,22 +160,22 @@ public class Piece extends JLabel{
 		return this.side;
 	}
 
-	/** getter for length
-	 * @return length of the piece
+	/** getter for height
+	 * @return height of the piece
 	 */
-	public int getLength() {
-		return this.length;
+	public int getHeight() {
+		return this.height;
 	}
 
 	/** getter for width
 	 * @return width of the piece
 	 */
 	public int getWidth() {
-		return width;
+		return this.width;
 	}
 
 	public void setLength(int len) {
-		this.length = len;
+		this.height = len;
 	}
 
 	public void setWidth(int wid) {

@@ -67,11 +67,15 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	private Piece       R_C1,                              R_C2;
 	private Piece R_R1, R_K1, R_B1, R_A1, R_G ,R_A2, R_B2, R_K2, R_R2;
 
-//	the variable in operation
-	/** the current x coordinate under operation */
-	public int currentX;
-	/** the current y coordinate under operation */
-	public int currentY;
+//	the variable in operation for chess
+	public int currentX; 	// the current x position after pressed
+	public int currentY;	// the current y position after pressed
+	public int draggedX; // the current x position while dragging
+	public int draggedY; // the current y position while dragging
+	public int startI; // start I position of pressed chess
+	public int startJ; // start J position of pressed chess
+	public int endI; // end I position of released chess
+	public int endJ; // end J position of released chess
 
 	/** the constructor of the board
 	 * @param l the row size (up to down) of the board
@@ -261,12 +265,109 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 
 
 
+
 	@Override
-	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
+	public void mousePressed(MouseEvent e) {
+		Piece piece = null;
+		Rectangle area = null;
+
+		if(e.getSource() == this){
+			System.out.println("Board Pressed");
+			return;
+		}
+		if(e.getSource() instanceof Piece){
+			System.out.println("Chess Pressed");
+			// store the pressed coordinate of the chess
+			piece = (Piece)e.getSource(); // the piece gets pressed
+			area = piece.getBounds(); // area of pressed
+			currentX = area.x;
+			currentY = area.y;
+			for (int i = 1; i <= rowSize; i++) {
+				for (int j = 1; j <= colSize; j++) {
+					int x = positionBoard[i][j].getXLen();
+					int y = positionBoard[i][j].getYLen();
+					if(area.contains(x, y)){ // press within the area
+						System.out.println("press: " + x + " | " + y );
+						System.out.println("start: " + piece.getName() + " -> " + i + " | " + j);
+					//	System.out.println(area);
+						startI=i;
+						startJ=j;
+						break;
+					}
+				}
+			}
+
+		}
+
 
 	}
 
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		Piece piece = null;
+		if(e.getSource() instanceof Piece){
+			piece=(Piece)e.getSource();
+			// When dragging the chess, the coordiantes updates simultaneously
+			e=SwingUtilities.convertMouseEvent(piece, e, this);
+		}
+		if(e.getSource() instanceof Board && piece != null){ // dragging within the area of board
+			draggedX = e.getX();
+			draggedY = e.getY();
+			System.out.println(" dragged: " + draggedX + " | " + draggedY);
+			// setLocation is method of JLabel (chess)
+			piece.setLocation( draggedX - piece.getWidth()/2, draggedY - piece.getHeight()/2 );
+
+		}
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		Piece piece = null;
+		Rectangle area = null;
+		boolean containChessPoint=false;
+		if(e.getSource() instanceof Piece){
+			piece=(Piece)e.getSource();
+			area = piece.getBounds();
+			// When dragging the chess, the coordiantes updates simultaneously
+			e=SwingUtilities.convertMouseEvent(piece, e, this);
+		}
+		if(e.getSource() instanceof Board && piece != null){ // dragging within the area of board
+			// store the released coordinate of the chess
+			for (int i = 1; i <= rowSize; i++) {
+				for (int j = 1; j <= colSize; j++) {
+					int x = positionBoard[i][j].getXLen();
+					int y = positionBoard[i][j].getYLen();
+					if(area.contains(x, y)){ // press within the area
+						System.out.println("released: " + x + " | " + y );
+						System.out.println("end: " + piece.getName() + " -> " + i + " | " + j);
+						System.out.println();
+
+						// System.out.println(area);
+						containChessPoint = true;
+						endI=i;
+						endJ=j;
+						break;
+					}
+				}
+			}
+			// the released position is valid on the board
+			if(containChessPoint){
+				if(positionBoard[endI][endJ].hasPiece() ){
+					// if not the same side chess, eat chess and interactive with rule
+				}
+				else{
+					// set the chess to that position
+				}
+
+			}
+
+
+
+		}
+	}
+
+	// ------------------------- Unused override --------------------------------/
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -275,27 +376,6 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		Piece piece=null;
-		Rectangle rect=null;
-
-		if(e.getSource() == this){
-			System.out.println("Mouse Pressed");
-		}
-		if(e.getSource() instanceof Piece){
-			System.out.println("Chess Pressed");
-		}
-	}
-
-
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 
 	}
