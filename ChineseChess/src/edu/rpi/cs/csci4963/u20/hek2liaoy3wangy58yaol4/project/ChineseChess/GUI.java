@@ -140,7 +140,7 @@ public class GUI extends JFrame{
 			this.console.setEditable(false);
 			this.console.setWrapStyleWord(true);
 			this.console.setLineWrap(true);
-			this.console.setFont(new Font("Georgia",Font.BOLD, 30));
+			this.console.setFont(new Font("Georgia",Font.BOLD, UNIT_SIZE_CONSTANT/4*3));
 			this.consolePane = new JScrollPane(console);
 			this.consolePane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 			this.consolePane.setPreferredSize(new Dimension(280,10*UNIT_SIZE_CONSTANT));
