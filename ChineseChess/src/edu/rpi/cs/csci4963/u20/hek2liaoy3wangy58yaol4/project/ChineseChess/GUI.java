@@ -32,6 +32,8 @@ public class GUI extends JFrame{
 	private boolean actionPerformed;
 	/** double check of whether user wanna select defeat */
 	private boolean defeatSelection;
+	/** the constant of the full GUI */
+	private int UNIT_SIZE_CONSTANT = 40;
 
 //	GUI SEGMENT
 
@@ -95,32 +97,39 @@ public class GUI extends JFrame{
 //		north the JMenuBar
 		this.menuBar = new JMenuBar();
 			this.jmGame = new JMenu("Game Settings");
-			this.jmGame.setFont(new Font("Georgia",Font.BOLD, 40));
+			this.jmGame.setFont(new Font("Georgia",Font.BOLD, UNIT_SIZE_CONSTANT/2));
 				this.jmiSetCountDown = new JMenuItem("Set Count Down");
-				this.jmiSetCountDown.setFont(new Font("Georgia",Font.BOLD, 40));
+				this.jmiSetCountDown.setFont(new Font("Georgia",Font.BOLD, UNIT_SIZE_CONSTANT/2));
 				this.jmiAdmitDefeat = new JMenuItem("Admit Defeat");
-				this.jmiAdmitDefeat.setFont(new Font("Georgia",Font.BOLD, 40));
+				this.jmiAdmitDefeat.setFont(new Font("Georgia",Font.BOLD, UNIT_SIZE_CONSTANT/2));
 				this.jmiCallDraw = new JMenuItem("Call a Draw");
-				this.jmiCallDraw.setFont(new Font("Georgia",Font.BOLD, 40));
+				this.jmiCallDraw.setFont(new Font("Georgia",Font.BOLD, UNIT_SIZE_CONSTANT/2));
 				this.jmGame.add(jmiSetCountDown);
 				this.jmGame.add(jmiAdmitDefeat);
 				this.jmGame.add(jmiCallDraw);
 			this.menuBar.add(jmGame);
 
 			this.jmUtilities = new JMenu("Utilities");
-			this.jmUtilities.setFont(new Font("Georgia",Font.BOLD, 40));
+			this.jmUtilities.setFont(new Font("Georgia",Font.BOLD, UNIT_SIZE_CONSTANT/2));
 				this.jmiHideConfigBar = new JMenuItem("Hide Config Bar");
-				this.jmiHideConfigBar.setFont(new Font("Georgia",Font.BOLD, 40));
+				this.jmiHideConfigBar.setFont(new Font("Georgia",Font.BOLD, UNIT_SIZE_CONSTANT/2));
 				this.jmiSetUIColor = new JMenuItem("Set UI color");
-				this.jmiSetUIColor.setFont(new Font("Georgia",Font.BOLD, 40));
+				this.jmiSetUIColor.setFont(new Font("Georgia",Font.BOLD, UNIT_SIZE_CONSTANT/2));
 				this.jmUtilities.add(jmiHideConfigBar);
 				this.jmUtilities.add(jmiSetUIColor);
 			this.menuBar.add(jmUtilities);
 			c.add(menuBar, BorderLayout.NORTH);
 
 //			Center the board panel (pre-filled in Gray)
-			this.boardPanel = new Board(9, 10, (this.deviceHeight-113)/10);
-			boardPanel.setPreferredSize(new Dimension(this.deviceHeight/12*9,this.deviceHeight/12*10));
+//			Original Version
+//			this.boardPanel = new Board(9, 10, (this.deviceHeight-113)/10);
+//			boardPanel.setPreferredSize(new Dimension(this.deviceHeight/12*9,this.deviceHeight/12*10));
+
+//			hardcoded:
+			this.boardPanel = new Board(9, 10, UNIT_SIZE_CONSTANT);
+			boardPanel.setPreferredSize(new Dimension(9*UNIT_SIZE_CONSTANT,10*UNIT_SIZE_CONSTANT));
+			
+			
 //			boardPanel.setPreferredSize(new Dimension(this.getWidth()-450, this.getHeight()-113));
 //			boardPanel.add(new JLabel("Load Board Needed"));
 //			boardPanel.setBackground(Color.gray);
@@ -131,21 +140,21 @@ public class GUI extends JFrame{
 			this.console.setEditable(false);
 			this.console.setWrapStyleWord(true);
 			this.console.setLineWrap(true);
-			this.console.setFont(new Font("Georgia",Font.BOLD, 30));
+			this.console.setFont(new Font("Georgia",Font.BOLD, UNIT_SIZE_CONSTANT/4*3));
 			this.consolePane = new JScrollPane(console);
 			this.consolePane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-			this.consolePane.setPreferredSize(new Dimension(280,deviceHeight/12*9));
+			this.consolePane.setPreferredSize(new Dimension(280,10*UNIT_SIZE_CONSTANT));
 			c.add(consolePane, BorderLayout.EAST);
 
 //			South the configuration panel
 			this.configPanel = new JPanel();
 			configPanel.setLayout(new GridLayout(1,3));
 				this.defeatBtn = new JButton("Admit Defeat");
-				this.defeatBtn.setFont(new Font("Georgia",Font.BOLD, 40));
+				this.defeatBtn.setFont(new Font("Georgia",Font.BOLD, UNIT_SIZE_CONSTANT/2));
 				this.drawBtn = new JButton("Call Draw");
-				this.drawBtn.setFont(new Font("Georgia",Font.BOLD, 40));
-				this.hideBtn = new JButton("hide Config Panel");
-				this.hideBtn.setFont(new Font("Georgia",Font.BOLD, 40));
+				this.drawBtn.setFont(new Font("Georgia",Font.BOLD, UNIT_SIZE_CONSTANT/2));
+				this.hideBtn = new JButton("hide Config"); //TODO: 
+				this.hideBtn.setFont(new Font("Georgia",Font.BOLD, UNIT_SIZE_CONSTANT/2));
 				configPanel.add(defeatBtn);
 				configPanel.add(drawBtn);
 				configPanel.add(hideBtn);
@@ -245,7 +254,7 @@ public class GUI extends JFrame{
 
 //			end of the listeners
 			this.pack();
-			this.setResizable(false);
+			this.setResizable(true);
 			this.setVisible(true);
 	}
 
@@ -294,10 +303,10 @@ public class GUI extends JFrame{
 	/** helper function for changing the configpane's status */
 	private void changeConfigPaneStatus() {
 		if(this.configPanel.isVisible()) {
-			this.jmiHideConfigBar.setText("Display Config Bar");
+			this.jmiHideConfigBar.setText("Display Config");
 		}
 		else {
-			this.jmiHideConfigBar.setText("Hide Config Bar");
+			this.jmiHideConfigBar.setText("Hide Config");
 		}
 		this.configPanel.setVisible(!this.configPanel.isVisible());
 	}
@@ -306,17 +315,17 @@ public class GUI extends JFrame{
 		JDialog action = new JDialog(this, true);
 		action.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		action.setTitle("Set a new countdown time");
-		action.setBounds(deviceWidth/2 -deviceHeight*9/20 - 225,5 , 400, 200);
+		action.setBounds(deviceWidth/2 -deviceHeight*9/20 - 225,5 , UNIT_SIZE_CONSTANT/20, 200);
 		action.setLayout(new FlowLayout());
 		JLabel tempLabel = new JLabel("New countdown:");
-		tempLabel.setFont(new Font("Georgia",Font.BOLD, 40));
+		tempLabel.setFont(new Font("Georgia",Font.BOLD, UNIT_SIZE_CONSTANT/2));
 		action.add(tempLabel);
 		JTextArea countdownArea = new JTextArea("30");
-		countdownArea.setFont(new Font("Georgia",Font.BOLD, 40));
+		countdownArea.setFont(new Font("Georgia",Font.BOLD, UNIT_SIZE_CONSTANT/2));
 		countdownArea.setSize(new Dimension(200,50));
 		action.add(countdownArea);
 		JButton confirm = new JButton("Confirm");
-		confirm.setFont(new Font("Georgia",Font.BOLD, 40));
+		confirm.setFont(new Font("Georgia",Font.BOLD, UNIT_SIZE_CONSTANT/2));
 		this.actionPerformed = false;
 		confirm.addActionListener(new ActionListener() {
 			@Override
