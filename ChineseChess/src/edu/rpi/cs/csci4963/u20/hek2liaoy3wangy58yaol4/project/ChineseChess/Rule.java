@@ -95,7 +95,6 @@ public class Rule {
         move =  false;
       }
     } else if (piece.getName().equals(PieceName.Bishop.toString()) && piece.getSide().equals(Side.Han)) {  // xiang han(hong
-      System.out.println("应该来这");
       int mid_i = (starti + endi) / 2;
       int mid_j = (startj + endj) / 2;
       int x = Math.abs(starti - endi);
