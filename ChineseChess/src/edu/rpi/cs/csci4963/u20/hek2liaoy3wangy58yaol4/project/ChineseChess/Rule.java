@@ -26,7 +26,7 @@ public class Rule {
     boolean move = false;
     if (piece.getName().equals(PieceName.Chariot.toString())) {
       if (starti == endi) {
-        for (i = min_j+1; i<=max_j-1; i++) {
+        for (i = min_j+1; i <= max_j-1; i++) {
           if (pos[starti][i].hasPiece()) {
             move = false;
             break;
@@ -80,7 +80,7 @@ public class Rule {
       } else {
         move = false;
       }
-    } else if (piece.getName().equals(PieceName.Bishop.toString())) {  // 璞�
+    } else if (piece.getName().equals(PieceName.Bishop.toString()) && piece.getSide().equals(Side.Chu)) {  // xiang chu
       int mid_i = (starti + endi) / 2;
       int mid_j = (startj + endj) / 2;
       int x = Math.abs(starti - endi);
@@ -94,7 +94,8 @@ public class Rule {
       } else {
         move =  false;
       }
-    } else if (piece.getName().equals(PieceName.Bishop.toString())) {  // 鐩�
+    } else if (piece.getName().equals(PieceName.Bishop.toString()) && piece.getSide().equals(Side.Han)) {  // xiang han(hong
+      System.out.println("应该来这");
       int mid_i = (starti + endi) / 2;
       int mid_j = (startj + endj) / 2;
       int x = Math.abs(starti - endi);
@@ -121,23 +122,23 @@ public class Rule {
           if (pos[endi][endj].hasPiece()) {
             move = true;
           }
-        } else if (startj == endj) {
-          for (i = min_i+1; i<=max_i-1; i++) {
-            if (pos[i][startj].hasPiece()) {
-              count++;
-            }
-          } if (count > 1) {
-            move = false;
-          } else if (count == 1) {
-            if (pos[endi][endj].hasPiece()) {
-              move = true;
-            }
-          } else if (count == 0 && !pos[endi][endj].hasPiece()) {
-            move = true;
-          }
-        } else {
-           move = false;
         }
+	  } else if (startj == endj) {
+	    for (i = min_i+1; i<=max_i-1; i++) {
+	      if (pos[i][startj].hasPiece()) {
+	        count++;
+	      }
+	    } if (count > 1) {
+	      move = false;
+	    } else if (count == 1) {
+	      if (pos[endi][endj].hasPiece()) {
+	        move = true;
+	      }
+	    } else if (count == 0 && !pos[endi][endj].hasPiece()) {
+	      move = true;
+	    }
+      } else {
+       move = false;  
       }
     } else if (piece.getName().equals(PieceName.Pawn.toString()) && piece.getSide().equals(Side.Han)) {
       int x = Math.abs(starti - endi);
