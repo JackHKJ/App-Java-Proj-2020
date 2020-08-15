@@ -77,7 +77,7 @@ public class GUI extends JFrame {
 
 	/** the constructor of the GUI*/
 	public GUI() throws IOException{
-		setLayout(null);
+		//setLayout(null);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.deviceHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
 		this.deviceWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
@@ -128,7 +128,7 @@ public class GUI extends JFrame {
 //			hardcoded: (col, row, chess size)
 			this.boardPanel = new Board(9, 10, UNIT_SIZE_CONSTANT);
 			boardPanel.setPreferredSize(new Dimension(9*UNIT_SIZE_CONSTANT,10*UNIT_SIZE_CONSTANT));
-			boardPanel.setLayout(null);
+			//boardPanel.setLayout(null);
 
 
 //			boardPanel.setPreferredSize(new Dimension(this.getWidth()-450, this.getHeight()-113));
