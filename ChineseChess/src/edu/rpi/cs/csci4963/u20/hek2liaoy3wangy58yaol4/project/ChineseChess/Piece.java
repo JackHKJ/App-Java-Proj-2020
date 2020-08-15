@@ -87,7 +87,7 @@ public class Piece extends JLabel{
 		try {
 			// System.out.println("chess paint image");
 			folderImage = ImageIO.read(folderInput);
-			//g.drawImage(folderImage, 0, 0, this.getWidth(), this.getHeight(),  null);
+			g.drawImage(folderImage, 0, 0, this.getWidth(), this.getHeight(),  null);
 		}
 		catch (IOException e) {
 			System.out.println("Failed to load chess image");
