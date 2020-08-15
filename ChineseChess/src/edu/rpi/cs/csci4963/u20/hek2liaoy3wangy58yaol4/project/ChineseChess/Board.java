@@ -28,7 +28,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	public int unitX; // the length of the horizontal (X) axis
 	public int unitY; // the length of the vertical (Y) axis
 	public int pieceSize; // the size of a single piece to be created
-	public boolean moveable;
+	public boolean movable;
 	public static Color colorChu;
 	public static Color colorHan;
 	public File folderInput = new File("./image/chessBoard.png");
@@ -36,6 +36,8 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	public int i = 0;
 
 	private Piece currentPiece;
+	
+	private boolean isServer;
 
 
 	// chess piece image names:
@@ -83,6 +85,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	public int endJ; // end J position of released chess
 	static public int press;
 
+
 	// network
 	//GameAPP network = null;
 
@@ -114,6 +117,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 
 		initializeAllPieces();
 		rule = new Rule(this, positionBoard);
+		this.movable = false;
 
 	}
 
@@ -278,12 +282,25 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 
 
 	}
+	
+	/** set the moveable as true to enable client select next step */
+	public void setMovable() {
+		this.movable = true;
+	}
 
-
+	/** setter of server */
+	public void setServer() {
+		this.isServer = true;
+	}
 
 
 	@Override
 	public void mousePressed(MouseEvent e) {
+		/** if not this round then return */
+		if(!this.movable) {
+			return;
+		}		
+		
 		Piece piece = null;
 		Rectangle area = null;
 		press = 0;
@@ -322,6 +339,10 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	// set the location to the center point of the chess image
 	@Override
 	public void mouseDragged(MouseEvent e) {
+		/** if not this round then return */
+		if(!this.movable) {
+			return;
+		}
 		// TODO: use move to interact with network
 
 		Piece piece = null;
@@ -348,6 +369,10 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
+		/** if not this round then return */
+		if(!this.movable) {
+			return;
+		}
 		Piece piece = null;
 		Rectangle area = null;
 		boolean containChessPoint = false;
@@ -434,6 +459,10 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 						(positionBoard[endI][endJ]).setHasPiece(true);
 						positionBoard[endI][endJ].scaleBoardPosition();
 						// sendRunningMessage(this);
+//						Made a move, set movable as false, then pass message
+						this.movable = false;
+						GameApp.sendRunningMessage(this);
+						
 					}
 					 // unable to move, reset to where it starts
 					else if(!move){
