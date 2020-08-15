@@ -33,7 +33,11 @@ public class GUI extends JFrame {
 	/** double check of whether user wanna select defeat */
 	private boolean defeatSelection;
 	/** the constant of the full GUI */
-	private int UNIT_SIZE_CONSTANT = 40; // 80
+	private int UNIT_SIZE_CONSTANT = 40;
+	/** indicator of whether this is a server */
+	private boolean isServer;
+
+
 
 //	GUI SEGMENT
 
@@ -380,14 +384,46 @@ public class GUI extends JFrame {
 		//TODO implement the NET procedure of draw
 	}
 
-	public void reloadBoard() {
-		boardPanel.removeAll();
-		//TODO: implement this operation, boardPane shall be used as an container
-		boardPanel.validate();
+
+	/** set the board as able to move */
+	public void setBoardMovable() {
+		if(board == null) {
+			System.out.println("Error(in set board movable), board not initialized");
+			return;
+		}
+		else {
+			board.setMovable();
+			return;
+		}
 	}
+
+	public void setServer() {
+		this.isServer = true;
+
+	}
+
+
+
+	public void updateBoard(Board board) {
+		this.remove(boardPanel);
+		this.boardPanel = board;
+		boardPanel.setPreferredSize(new Dimension(9*UNIT_SIZE_CONSTANT,10*UNIT_SIZE_CONSTANT));
+		c.add(boardPanel, BorderLayout.CENTER);
+	}
+
+
+
+
+
 
 	public static void main(String[] args) throws IOException {
 		GUI gui = new GUI();
+
+////		TestCode for updateBoard
+//		Board board = new Board(9, 10, 40);
+//		board.positionBoard[1][1].removePiece(board.positionBoard[1][1].getPiece(), board);
+//		gui.updateBoard(board);
+
 		//Piece p1 = gui.boardPanel.positionBoard[1][1].getPiece();
 		//gui.boardPanel.positionBoard[1][1].removePiece(p1, gui.boardPanel);
 		//gui.boardPanel.positionBoard[1][2].placePiece(p1, gui.boardPanel);

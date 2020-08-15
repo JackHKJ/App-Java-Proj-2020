@@ -93,7 +93,7 @@ public class Rule {
           move = true;
         }
       } else {
-        move =  false;
+    	  System.out.println("Rule Break: 21");move = false;
       }
     } else if (piece.getName().equals(PieceName.Bishop.toString()) && piece.getSide().equals(Side.Han)) {  // xiang han(hong
       int mid_i = (starti + endi) / 2;
@@ -107,7 +107,7 @@ public class Rule {
           move = true;
         }
       } else {
-        move =  false;
+    	  System.out.println("Rule Break: 22");move =  false;
       }
     }else if (piece.getName().equals(PieceName.Cannon.toString())) {
       int count = 0;
