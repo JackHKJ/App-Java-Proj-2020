@@ -491,7 +491,6 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override

@@ -52,16 +52,17 @@ public class GameApp {
         int portNumber = Integer.parseInt(JOptionPane.showInputDialog("Please input your port number: "));
         if (choose == SERVER){
         	/** server will go first */
-        	gui.setServer();
         	server = new ChessServer(portNumber);
-            server.start();  
-            gui.setBoardMovable();            
+            server.start();
         }else{
             client = new ChessClient(serverName, portNumber);
             client.start();
         }
-   
-        
-        
+
+        gui = new GUI();
+        if (choose == SERVER){
+            gui.setServer();
+            gui.setBoardMovable();
+        }
     }
 }

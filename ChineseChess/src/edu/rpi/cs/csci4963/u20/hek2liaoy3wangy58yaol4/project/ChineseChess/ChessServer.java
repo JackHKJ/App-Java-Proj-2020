@@ -6,6 +6,9 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import static edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess.GameApp.gui;
+
+
 public class ChessServer extends Thread{
     private ServerSocket serverSocket;
     private ObjectInputStream objectInputStream = null;
@@ -74,10 +77,14 @@ public class ChessServer extends Thread{
                     }
 
                     // updating your board
+                    gui.updateBoard(message.getBoard());
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
             }
+
+            client.close();
+            serverSocket.close();
 
             // following will coming soon :)
         } catch (IOException ioException) {
