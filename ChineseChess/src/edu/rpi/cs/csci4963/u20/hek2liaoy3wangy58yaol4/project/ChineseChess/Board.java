@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
 import edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess.Piece.PieceName;
 import edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess.Piece.Side;
@@ -20,7 +21,7 @@ import edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess.Piece
  * @author JRE 1.8.0_231
  *
  */
-public class Board extends JPanel implements MouseListener, MouseMotionListener {
+public class Board extends JPanel implements MouseListener, MouseMotionListener, Serializable {
 	// the global variable segment
 	public Position positionBoard[][]; // use position to represent the layout of the board
 	public int colSize; // the row number of the board
@@ -539,7 +540,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 							return;
 						}
 						this.movable = false;
-						GameApp.sendRunningMessage(this);
+						GameApp.sendRunningMessage(forNetTransport());
 					}
 					 // unable to move, reset to where it starts
 					else if(!move){

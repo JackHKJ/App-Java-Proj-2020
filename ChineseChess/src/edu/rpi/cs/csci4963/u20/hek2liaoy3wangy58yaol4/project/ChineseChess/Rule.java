@@ -2,7 +2,9 @@ package edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess;
 import edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess.Piece.PieceName;
 import edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess.Piece.Side;
 
-public class Rule {
+import java.io.Serializable;
+
+public class Rule implements Serializable {
   Board board = null;
   Piece piece = null;
   Position pos[][];
