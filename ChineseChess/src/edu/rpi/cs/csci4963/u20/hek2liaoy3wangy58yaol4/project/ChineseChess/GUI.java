@@ -384,7 +384,7 @@ public class GUI extends JFrame {
 		//TODO implement the NET procedure of draw
 	}
 
-	
+
 	/** set the board as able to move */
 	public void setBoardMovable() {
 		if(board == null) {
@@ -396,34 +396,34 @@ public class GUI extends JFrame {
 			return;
 		}
 	}
-	
+
 	public void setServer() {
 		this.isServer = true;
-	
+
 	}
-	
-	
-	
+
+
+
 	public void updateBoard(Board board) {
 		this.remove(boardPanel);
 		this.boardPanel = board;
 		boardPanel.setPreferredSize(new Dimension(9*UNIT_SIZE_CONSTANT,10*UNIT_SIZE_CONSTANT));
-		c.add(boardPanel, BorderLayout.CENTER);		
+		c.add(boardPanel, BorderLayout.CENTER);
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 
 	public static void main(String[] args) throws IOException {
 		GUI gui = new GUI();
-		
+
 ////		TestCode for updateBoard
 //		Board board = new Board(9, 10, 40);
 //		board.positionBoard[1][1].removePiece(board.positionBoard[1][1].getPiece(), board);
 //		gui.updateBoard(board);
-		
+
 		//Piece p1 = gui.boardPanel.positionBoard[1][1].getPiece();
 		//gui.boardPanel.positionBoard[1][1].removePiece(p1, gui.boardPanel);
 		//gui.boardPanel.positionBoard[1][2].placePiece(p1, gui.boardPanel);
