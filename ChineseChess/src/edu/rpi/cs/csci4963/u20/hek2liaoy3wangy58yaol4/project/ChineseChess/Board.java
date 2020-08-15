@@ -38,7 +38,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	private Piece currentPiece;
 
 	private boolean isServer;
-
+	private boolean debugMode = true;
 
 	// chess piece image names:
 	// Chu
@@ -297,7 +297,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		/** if not this round then return */
-		if(!this.movable) {
+		if(!this.movable && !debugMode) {
 			return;
 		}
 
@@ -340,7 +340,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		/** if not this round then return */
-		if(!this.movable) {
+		if(!this.movable && !debugMode) {
 			return;
 		}
 		// TODO: use move to interact with network
@@ -370,7 +370,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		/** if not this round then return */
-		if(!this.movable) {
+		if(!this.movable && !debugMode) {
 			return;
 		}
 		Piece piece = null;
@@ -460,9 +460,10 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 						positionBoard[endI][endJ].scaleBoardPosition();
 						// sendRunningMessage(this);
 //						Made a move, set movable as false, then pass message
-						this.movable = false;
-						GameApp.sendRunningMessage(this);
-
+						if(!debugMode) {
+							this.movable = false;
+							GameApp.sendRunningMessage(this);
+						}
 					}
 					 // unable to move, reset to where it starts
 					else if(!move){
