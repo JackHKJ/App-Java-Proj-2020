@@ -38,7 +38,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	private Piece currentPiece;
 
 	private boolean isServer;
-	private boolean debugMode = true;
+	private boolean debugMode = false;
 
 	// chess piece image names:
 	// Chu
@@ -357,9 +357,14 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 			draggedX = e.getX();
 			draggedY = e.getY();
 			// System.out.println("-------------------------------");
-			// System.out.println(" dragged: " + draggedX + " | " + draggedY);
+//			 System.out.println(" dragged: " + draggedX + " | " + draggedY);
 			// System.out.println("set to: " + (draggedX - piece.getWidth()/2) + " | " +
 			// (draggedY - piece.getHeight()/2) );
+//			Outside of board condition
+			if(draggedX < pieceSize/2 || draggedY< pieceSize/2 || 
+					draggedX > (this.getWidth() - pieceSize/2) || draggedY > (this.getHeight()-pieceSize/2)) {
+				return;
+			} 
 			piece.setLocation( draggedX - piece.getWidth()/2, draggedY - piece.getHeight()/2 );
 			//System.out.println("CurrentLocation:" +  piece.getX() + "-" + piece.getY());
 			currentPiece = piece;
@@ -416,7 +421,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 					}
 					// not the same side chess and interactive with rule
 					System.out.println("end(I,J): " + endI + " | " + endJ );
-					boolean move = rule.moveJudge(piece, startI, startJ, endI, endI);
+					boolean move = rule.moveJudge(piece, startI, startJ, endI, endJ);
 					// eat a chess and move to its position
 					if(move){
 						System.out.println("eat a chess and move to its position");
@@ -460,10 +465,11 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 						positionBoard[endI][endJ].scaleBoardPosition();
 						// sendRunningMessage(this);
 //						Made a move, set movable as false, then pass message
-						if(!debugMode) {
-							this.movable = false;
-							GameApp.sendRunningMessage(this);
+						if(debugMode) {
+							return;
 						}
+						this.movable = false;
+						GameApp.sendRunningMessage(this);
 					}
 					 // unable to move, reset to where it starts
 					else if(!move){
@@ -480,6 +486,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 			} // containChessPoint
 
 		}
+		
 	}
 
 	// ------------------------- Unused override --------------------------------/
