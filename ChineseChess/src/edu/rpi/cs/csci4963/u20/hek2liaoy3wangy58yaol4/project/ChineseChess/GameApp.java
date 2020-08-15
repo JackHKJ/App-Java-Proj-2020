@@ -62,7 +62,10 @@ public class GameApp {
         gui = new GUI();
         if (choose == SERVER){
             gui.setServer();
+            gui.displayMsg("This is a server");
             gui.setBoardMovable();
+            
+            
         }
     }
 }

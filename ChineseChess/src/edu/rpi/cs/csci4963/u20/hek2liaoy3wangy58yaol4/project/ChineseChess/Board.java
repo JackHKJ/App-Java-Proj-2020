@@ -291,6 +291,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	/** setter of server */
 	public void setServer() {
 		this.isServer = true;
+//		System.out.println("Set as server");
 	}
 
 
@@ -312,6 +313,13 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 			System.out.println();
 			// store the pressed coordinate of the chess
 			piece = (Piece) e.getSource(); // the piece gets pressed
+//			decide which side this piece belongs to and check isServer
+			if(piece.getSide().equals(Side.Han) && !isServer) {
+				return;
+			}
+			if(piece.getSide().equals(Side.Chu) && isServer) {
+				return;
+			}
 			area = piece.getBounds(); // area of pressed
 			currentX = area.x;
 			currentY = area.y;
@@ -350,6 +358,12 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 		if(e.getSource() instanceof Piece){
 			//if(moveable == false) return;
 			piece = (Piece)e.getSource();
+			if(piece.getSide().equals(Side.Han) && !isServer) {
+				return;
+			}
+			if(piece.getSide().equals(Side.Chu) && isServer) {
+				return;
+			}
 			// When dragging the chess, the coordiantes updates simultaneously
 			e = SwingUtilities.convertMouseEvent(piece, e, this);
 		}
@@ -383,6 +397,12 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 		boolean containChessPoint = false;
 		if(e.getSource() instanceof Piece){
 			piece = (Piece)e.getSource();
+			if(piece.getSide().equals(Side.Han) && !isServer) {
+				return;
+			}
+			if(piece.getSide().equals(Side.Chu) && isServer) {
+				return;
+			}
 			area = piece.getBounds();
 			// When dragging the chess, the coordiantes updates simultaneously
 			e = SwingUtilities.convertMouseEvent(piece, e, this);
