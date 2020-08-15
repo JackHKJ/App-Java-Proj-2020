@@ -419,6 +419,15 @@ public class GUI extends JFrame {
 
 	public static void main(String[] args) throws IOException {
 		GUI gui = new GUI();
+		
+		
+		
+		String[][] rep = gui.boardPanel.forNetTransport();
+		System.out.println("SEP-------------------");
+		rep[1][1] = null;
+		gui.boardPanel.loadFromNetStream(rep);
+		
+		
 
 ////		TestCode for updateBoard
 //		Board board = new Board(9, 10, 40);

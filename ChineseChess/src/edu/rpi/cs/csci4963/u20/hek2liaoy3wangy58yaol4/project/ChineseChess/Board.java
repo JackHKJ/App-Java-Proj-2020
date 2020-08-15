@@ -209,6 +209,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 		// System.out.println("Board Paint Component called");
 		for (int i = 1; i <= colSize; i++) {
 			for (int j = 1; j <= rowSize; j++) {
+//				System.out.println(i + "-" + j);
 				positionBoard[i][j].setBoard(this);
 			}
 		}
@@ -292,6 +293,55 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	public void setServer() {
 		this.isServer = true;
 //		System.out.println("Set as server");
+	}
+	
+	public String[][] forNetTransport(){
+		String[][] ret = new String[this.colSize+1][this.rowSize+1];
+		for(int i = 0; i < colSize+1; i++) {
+			for(int j = 0; j < rowSize +1; j++) {
+				if(i == 0 || j == 0) {
+					ret[i][j] = null;
+					continue;
+				}				
+				if(positionBoard[i][j].hasPiece()) {
+					ret[i][j] = positionBoard[i][j].getPiece().getName() + "@" + positionBoard[i][j].getPiece().getSide();	
+					positionBoard[i][j].removePiece(positionBoard[i][j].getPiece(), this); ///J lang failure
+				}
+				else {
+					ret[i][j] = null;
+				}				
+			}
+		}
+		return ret;
+		
+	}
+	
+	
+	public void loadFromNetStream(String[][] inputGrid) {
+//		this.positionBoard = new Position[this.colSize+1][this.rowSize+1];
+		for(int i = 0; i < colSize+1; i++) {
+			for(int j = 0; j < rowSize +1; j++) {
+				
+				Position thisPosition = new Position(i, j);
+						
+				if(inputGrid[i][j] != null) {
+					try {
+						String thisInfo = inputGrid[i][j];
+						String thisPieceName = thisInfo.substring(0,thisInfo.indexOf("@"));
+						String thisPieceSide = thisInfo.substring(thisInfo.indexOf("@") +1);
+						Piece thisPiece = new Piece(PieceName.valueOf(thisPieceName), Side.valueOf(thisPieceSide), pieceSize, pieceSize, this, "");
+						thisPosition.placePiece(thisPiece, this);
+						}
+					catch(IndexOutOfBoundsException iob) {
+						System.out.println("Error(in loadfromnetStream): index out of range");
+					}
+				}
+				positionBoard[i][j] = thisPosition;
+				positionBoard[i][j].setBoard(this);	
+			}
+		}
+		this.repaint();
+		this.validate();	
 	}
 
 
