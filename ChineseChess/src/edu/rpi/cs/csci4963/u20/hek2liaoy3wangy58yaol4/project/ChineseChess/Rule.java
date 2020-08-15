@@ -29,7 +29,7 @@ public class Rule {
       if (starti == endi) {
         for (i = min_j+1; i <= max_j-1; i++) {
           if (pos[starti][i].hasPiece()) {
-            move = false;
+            System.out.println("Rule Break: 1"); move = false;
             break;
           }
         } if (i == max_j) {
@@ -38,14 +38,14 @@ public class Rule {
       } else if (startj == endj) {
         for (i = min_i+1; i<=max_i-1; i++) {
           if (pos[i][startj].hasPiece()) {
-            move = false;
+            System.out.println("Rule Break: 2"); move = false;
             break;
           }
         } if (i == max_i) {
           move = true;
         }
       } else {
-        move = false;
+        System.out.println("Rule Break: 3"); move = false;
       }
     } else if (piece.getName().equals(PieceName.Knight.toString())) {
       int x = Math.abs(starti - endi);
@@ -53,13 +53,13 @@ public class Rule {
       if (x == 2 && y == 1) {
         if (endi > starti) {
           if (pos[starti+1][startj].hasPiece()) {
-            move = false;
+            System.out.println("Rule Break: 4"); move = false;
           } else {
             move = true;
           }
         } if (endi < starti) {
           if (pos[starti-1][startj].hasPiece()) {
-            move = false;
+            System.out.println("Rule Break: 5"); move = false;
           } else {
             move = true;
           }
@@ -67,19 +67,19 @@ public class Rule {
       } else if (x == 1 && y == 2) {
         if (endj > startj) {
           if (pos[starti][startj+1].hasPiece()) {
-            move = false;
+            System.out.println("Rule Break: 6"); move = false;
           } else {
             move = true;
           }
         } if (endj < startj) {
           if (pos[starti][startj-1].hasPiece()) {
-            move = false;
+            System.out.println("Rule Break: 7"); move = false;
           } else {
             move = true;
           }
         }
       } else {
-        move = false;
+        System.out.println("Rule Break: 8"); move = false;
       }
     } else if (piece.getName().equals(PieceName.Bishop.toString()) && piece.getSide().equals(Side.Chu)) {  // xiang chu
       int mid_i = (starti + endi) / 2;
@@ -88,7 +88,7 @@ public class Rule {
       int y = Math.abs(startj - endj);
       if (x == 2 && y == 2 && endj <= 5) {
         if (pos[mid_i][mid_j].hasPiece()) {
-          move = false;
+          System.out.println("Rule Break: 9"); move = false;
         } else {
           move = true;
         }
@@ -102,7 +102,7 @@ public class Rule {
       int y = Math.abs(startj - endj);
       if (x == 2 && y == 2 && endj >= 6) {
         if (pos[mid_i][mid_j].hasPiece()) {
-          move = false;
+          System.out.println("Rule Break: 10"); move = false;
         } else {
           move = true;
         }
@@ -117,7 +117,7 @@ public class Rule {
             count++;
           }
         } if (count > 1) {
-          move = false;
+          System.out.println("Rule Break: 11"); move = false;
         } else if (count == 1) {
           if (pos[endi][endj].hasPiece()) {
             move = true;
@@ -129,7 +129,7 @@ public class Rule {
 	        count++;
 	      }
 	    } if (count > 1) {
-	      move = false;
+	      System.out.println("Rule Break: 12"); move = false;
 	    } else if (count == 1) {
 	      if (pos[endi][endj].hasPiece()) {
 	        move = true;
@@ -138,7 +138,7 @@ public class Rule {
 	      move = true;
 	    }
       } else {
-       move = false;
+       System.out.println("Rule Break: 13"); move = false;
       }
     } else if (piece.getName().equals(PieceName.Pawn.toString()) && piece.getSide().equals(Side.Han)) {
       int x = Math.abs(starti - endi);
@@ -147,7 +147,7 @@ public class Rule {
         if (startj - endj == 1 && x == 0) {
           move = true;
         } else {
-          move = false;
+          System.out.println("Rule Break: 14"); move = false;
         }
       } else if (endj <= 5) {
         if (startj - endj == 1 && x == 0) {
@@ -155,7 +155,7 @@ public class Rule {
         } else if (endj - startj == 0 && x == 1) {
           move = true;
         } else {
-          move = false;
+          System.out.println("Rule Break: 15"); move = false;
         }
       }
     } else if (piece.getName().equals(PieceName.Pawn.toString()) && piece.getSide().equals(Side.Chu)) {
@@ -165,7 +165,7 @@ public class Rule {
         if (endj - startj == 1 && x == 0) {
           move = true;
         } else {
-          move = false;
+          System.out.println("Rule Break: 16"); move = false;
         }
       } else if (endj >= 6) {
         if (endj - startj == 1 && x == 0) {
@@ -173,7 +173,7 @@ public class Rule {
         } else if (endj- startj == 0 && x == 1) {
           move = true;
         } else {
-          move = false;
+          System.out.println("Rule Break: 17"); move = false;
         }
       }
     } else if (piece.getName().equals(PieceName.Advisor.toString())) {
@@ -182,7 +182,7 @@ public class Rule {
       if (endi >= 4 && endi <= 6 && x == 1 && y == 1) {
         move = true;
       } else {
-        move = false;
+        System.out.println("Rule Break: 18"); move = false;
       }
     } else if (piece.getName().equals(PieceName.General.toString())) {
       int x = Math.abs(starti - endi);
@@ -191,10 +191,10 @@ public class Rule {
         if ((x == 1 && y == 0) || (x == 0 && y== 1)) {
           move = true;
         } else {
-          move = false;
+          System.out.println("Rule Break: 19"); move = false;
         }
       } else {
-        move = false;
+        System.out.println("Rule Break: 20"); move = false;
       }
     }
     return move;
