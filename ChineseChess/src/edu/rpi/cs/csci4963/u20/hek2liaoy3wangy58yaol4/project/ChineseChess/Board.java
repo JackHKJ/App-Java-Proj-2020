@@ -36,7 +36,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	public int i = 0;
 
 	private Piece currentPiece;
-	
+
 	private boolean isServer;
 
 
@@ -90,14 +90,14 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	//GameAPP network = null;
 
 	/** the constructor of the board
-	 * @param l the row size (up to down) of the board
-	 * @param w the col size (left to right) of the board
-	 * @param s the size of a single piece
+	 * @param col the row size (up to down) of the board
+	 * @param row the col size (left to right) of the board
+	 * @param unitSize the size of a single piece
 	 */
-	public Board(int row, int col, int unitSize) {
+	public Board(int col, int row, int unitSize) {
 		//setLayout(null);
-		this.colSize = row;
-		this.rowSize = col;
+		this.colSize = col;
+		this.rowSize = row;
 		this.pieceSize = unitSize;
 		this.colorChu = new Color(0, 0, 0);
 		this.colorHan = new Color(255, 0, 0);
@@ -282,7 +282,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 
 
 	}
-	
+
 	/** set the moveable as true to enable client select next step */
 	public void setMovable() {
 		this.movable = true;
@@ -299,8 +299,8 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 		/** if not this round then return */
 		if(!this.movable) {
 			return;
-		}		
-		
+		}
+
 		Piece piece = null;
 		Rectangle area = null;
 		press = 0;
@@ -462,7 +462,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 //						Made a move, set movable as false, then pass message
 						this.movable = false;
 						GameApp.sendRunningMessage(this);
-						
+
 					}
 					 // unable to move, reset to where it starts
 					else if(!move){
