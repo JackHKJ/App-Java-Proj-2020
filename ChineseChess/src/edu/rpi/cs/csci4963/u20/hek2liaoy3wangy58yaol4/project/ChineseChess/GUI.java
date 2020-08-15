@@ -33,7 +33,7 @@ public class GUI extends JFrame {
 	/** double check of whether user wanna select defeat */
 	private boolean defeatSelection;
 	/** the constant of the full GUI */
-	private int UNIT_SIZE_CONSTANT = 80;
+	private int UNIT_SIZE_CONSTANT = 40; // 80
 
 //	GUI SEGMENT
 
