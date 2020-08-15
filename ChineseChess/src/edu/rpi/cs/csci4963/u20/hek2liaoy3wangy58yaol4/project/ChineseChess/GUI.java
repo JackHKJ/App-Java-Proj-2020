@@ -16,7 +16,7 @@ import java.awt.event.WindowListener;
  * @author Kejie Jack He
  * @version JRE 1.8.0_231
  */
-public class GUI extends JFrame{
+public class GUI extends JFrame {
 //	GLOBAL DATA SEGMENT
 	/** the reference of the board */
 	private Board board;
@@ -77,7 +77,7 @@ public class GUI extends JFrame{
 
 	/** the constructor of the GUI*/
 	public GUI() throws IOException{
-//		sizing
+		setLayout(null);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.deviceHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
 		this.deviceWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
@@ -125,9 +125,10 @@ public class GUI extends JFrame{
 //			this.boardPanel = new Board(9, 10, (this.deviceHeight-113)/10);
 //			boardPanel.setPreferredSize(new Dimension(this.deviceHeight/12*9,this.deviceHeight/12*10));
 
-//			hardcoded:
+//			hardcoded: (col, row, chess size)
 			this.boardPanel = new Board(9, 10, UNIT_SIZE_CONSTANT);
 			boardPanel.setPreferredSize(new Dimension(9*UNIT_SIZE_CONSTANT,10*UNIT_SIZE_CONSTANT));
+			boardPanel.setLayout(null);
 
 
 //			boardPanel.setPreferredSize(new Dimension(this.getWidth()-450, this.getHeight()-113));

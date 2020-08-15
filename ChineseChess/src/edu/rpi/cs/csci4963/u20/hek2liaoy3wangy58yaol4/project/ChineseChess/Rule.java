@@ -137,7 +137,7 @@ public class Rule {
 	      move = true;
 	    }
       } else {
-       move = false;  
+       move = false;
       }
     } else if (piece.getName().equals(PieceName.Pawn.toString()) && piece.getSide().equals(Side.Han)) {
       int x = Math.abs(starti - endi);

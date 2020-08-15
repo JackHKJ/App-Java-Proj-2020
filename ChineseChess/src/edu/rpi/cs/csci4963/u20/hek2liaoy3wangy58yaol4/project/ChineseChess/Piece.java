@@ -13,7 +13,7 @@ import java.io.IOException;
 
 
 /** the single chess piece to be implemented */
-public class Piece extends JLabel{
+public class Piece extends JButton{
 
 	private static final long serialVersionUID = 1L;
 	private PieceName name; // the classification of the piece
@@ -68,10 +68,8 @@ public class Piece extends JLabel{
 	@Override
 	public void paint(Graphics g) {
 		//System.out.println("chess paint: " + this.getName() + " | side: " + this.getSide());
-//		/*
-		//super.paintComponent(g);
-		// set the color according to the side
-		// System.out.println("paint");
+		System.out.println("paint by " + Board.press + " (should equal to set): " + this.getX() + " | " + this.getY() );
+		//super.paint(g);
 		if(this.side.toString().equals("Han")) {
 			g.setColor(Board.colorHan); // getting public static variable from Board
 		}

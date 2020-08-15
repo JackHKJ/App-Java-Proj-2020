@@ -94,11 +94,7 @@ public class Position {
 		this.x_len = this.x * len - len /2;
 		this.y_len = this.y * wid - wid /2;
 		this.piece.setLength(len);
-		this.piece.setWidth(wid);
-
-//		System.out.println("wid:" + wid + "len:" + len);
-
-//		int size = p.getHeight();
+		this.piece.setWidth(wid);;
 		this.board.add(this.piece); // add the chess piece to the [x][y] coordinate
 		// set the position to the center of drawing by halving the unit size
 		piece.setBounds(this.x * wid - wid, this.y*len - len, wid, len);
