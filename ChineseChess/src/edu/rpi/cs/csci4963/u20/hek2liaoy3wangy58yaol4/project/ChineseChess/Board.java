@@ -34,9 +34,9 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	public File folderInput = new File("./image/chessBoard.png");
 	public BufferedImage folderImage;
 	public int i = 0;
-	
+
 	private Piece currentPiece;
-	
+
 
 	// chess piece image names:
 	// Chu
@@ -113,6 +113,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 		}
 
 		initializeAllPieces();
+		rule = new Rule(this, positionBoard);
 
 	}
 
@@ -201,13 +202,13 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	@Override
 	// called automatically
 	public void paintComponent(Graphics g) {
-		System.out.println("Board Paint Component called");
+		// System.out.println("Board Paint Component called");
 		for (int i = 1; i <= colSize; i++) {
 			for (int j = 1; j <= rowSize; j++) {
 				positionBoard[i][j].setBoard(this);
 			}
 		}
-
+		/*
 		//----------- horizontal line--------------/
 		super.paintComponent(g);
 		for(int j = 1; j <= rowSize; j++) {
@@ -249,7 +250,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 			j++;
 		}
 
-
+*/
 
 		for (int i = 1; i <= colSize; i++) {
 			for (int k = 1; k <= rowSize; k++) {
@@ -266,7 +267,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 
 		try {
 			folderImage = ImageIO.read(folderInput);
-//			g.drawImage(folderImage, 0, 0, this.getWidth(), this.getHeight(), null);
+			g.drawImage(folderImage, 0, 0, this.getWidth(), this.getHeight(), null);
 		}
 		catch (IOException e) {
 			System.out.println("Failed to load chess board image");
@@ -291,7 +292,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 			return;
 		}
 		if(e.getSource() instanceof Piece){
-			//System.out.println("Chess Pressed");
+			System.out.println();
 			// store the pressed coordinate of the chess
 			piece = (Piece) e.getSource(); // the piece gets pressed
 			area = piece.getBounds(); // area of pressed
@@ -303,10 +304,10 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 					int y = positionBoard[i][j].getYLen();
 					if(area.contains(x, y)){ // press within the area
 						System.out.println("press: " + x + " | " + y );
-						System.out.println("start: " + piece.getName() + " -> " + i + " | " + j);
-						piece.setLocation( currentX - piece.getWidth()/2, currentY - piece.getHeight()/2 );
-						startI=i;
-						startJ=j;
+						System.out.println("start: " + piece.getName() + "(" + piece.getSide() + ")" +
+						" -> " + i + " | " + j);
+						startI = i;
+						startJ = j;
 						break;
 					}
 				}
@@ -334,12 +335,12 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 		if(e.getSource() instanceof Board && piece != null){ // dragging within the area of board
 			draggedX = e.getX();
 			draggedY = e.getY();
-			System.out.println("-------------------------------");
-			//System.out.println(" dragged: " + draggedX + " | " + draggedY);
-			System.out.println("set to: " + (draggedX - piece.getWidth()/2) + " | " +
-			(draggedY - piece.getHeight()/2) );
+			// System.out.println("-------------------------------");
+			// System.out.println(" dragged: " + draggedX + " | " + draggedY);
+			// System.out.println("set to: " + (draggedX - piece.getWidth()/2) + " | " +
+			// (draggedY - piece.getHeight()/2) );
 			piece.setLocation( draggedX - piece.getWidth()/2, draggedY - piece.getHeight()/2 );
-			System.out.println("CurrentLocation:" +  piece.getX() + "-" + piece.getY());
+			//System.out.println("CurrentLocation:" +  piece.getX() + "-" + piece.getY());
 			currentPiece = piece;
 		}
 
@@ -357,18 +358,16 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 			e = SwingUtilities.convertMouseEvent(piece, e, this);
 		}
 		// dragging within the area of board
-		if(e.getSource() == this && piece != null){ // instanceof Board && piece != null
+		if(e.getSource() instanceof Board && piece != null){ // instanceof Board && piece != null
 			// store the released coordinate of the chess
 			for (int i = 1; i <= colSize; i++) {
 				for (int j = 1; j <= rowSize; j++) {
 					int x = positionBoard[i][j].getXLen();
 					int y = positionBoard[i][j].getYLen();
-					//System.out.print("(" + i + " , " + j + ") | " );
 					if(area.contains(x, y)){ // press within the area
 						System.out.println("released: " + x + " | " + y );
 						System.out.println("New pos: " + piece.getName() + "(" + piece.getSide() + ")" +
 						" -> (col, row) " + i + " | " + j);
-						System.out.println();
 						containChessPoint = true;
 						endI = i;
 						endJ = j;
@@ -383,18 +382,22 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 				if(releasedPosition.hasPiece() ){
 					// same side, reset to where it starts
 					if( piece.getSide().equals( releasedPosition.getPiece().getSide() ) ){
-						System.out.println("same side, reset to where it starts");
+						System.out.print("same side, reset to where it starts: ");
+						System.out.println(startI + " | " + startJ);
 						piece.setLocation(startI,startJ);
 						(positionBoard[startI][startJ]).setHasPiece(true);
+						positionBoard[startI][startJ].scaleBoardPosition();
 						return;
 					}
 					// not the same side chess and interactive with rule
-					boolean move = rule.moveJudge(piece, startI, startJ, endI, endJ);
+					System.out.println("end(I,J): " + endI + " | " + endJ );
+					boolean move = rule.moveJudge(piece, startI, startJ, endI, endI);
 					// eat a chess and move to its position
 					if(move){
 						System.out.println("eat a chess and move to its position");
 						Piece removedPiece = positionBoard[endI][endJ].getPiece();
-						System.out.println("removed chess:" + removedPiece.getName() );
+						System.out.println("removed chess: " + removedPiece.getName()
+						+ " (" + removedPiece.getSide() + ")");
 						if(removedPiece.getName().equals( "General" ) ){
 							// sendTerminateMessage(this);
 						}
@@ -402,22 +405,25 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 						(positionBoard[startI][startJ]).setHasPiece(false);
 						positionBoard[endI][endJ].placePiece(piece, this);
 						(positionBoard[endI][endJ]).setHasPiece(true);
+						positionBoard[endI][endJ].scaleBoardPosition();
+
 						//TODO: change side and interact with network
 						// sendRunningMessage(this);
-						validate();
-						repaint();
+					//	validate();
+					//	repaint();
 					}
 					// unable to eat(replace) the opponent's chess
 					else if(!move){
 						System.out.println("unable to eat(replace) the opponent's chess");
 						piece.setLocation(startI,startJ);
 						positionBoard[startI][startJ].setHasPiece(true);
-						return;
+						positionBoard[startI][startJ].scaleBoardPosition();
+						//return;
 					}
-
 				}
 				//-----------------move the chess to a new position--------------------
 				else{
+					System.out.println(piece.getName() );
 					boolean move = rule.moveJudge(piece, startI, startJ, endI, endJ);
 					// able to move the chess to a new position
 					if(move){
@@ -426,14 +432,17 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 						(positionBoard[startI][startJ]).setHasPiece(false);
 						positionBoard[endI][endJ].placePiece(piece, this);
 						(positionBoard[endI][endJ]).setHasPiece(true);
+						positionBoard[endI][endJ].scaleBoardPosition();
 						// sendRunningMessage(this);
 					}
 					 // unable to move, reset to where it starts
 					else if(!move){
 						System.out.println("unable to move, reset to where it starts");
+						System.out.println("start :" + startI + " | " + startJ );
 						piece.setLocation(startI,startJ);
 						(positionBoard[startI][startJ]).setHasPiece(true);
-						return;
+						positionBoard[startI][startJ].scaleBoardPosition();
+						//return;
 					}
 
 				}

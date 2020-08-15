@@ -24,6 +24,7 @@ public class Rule {
     int max_j = Math.max(startj,endj);
     int i = 0;
     boolean move = false;
+    //System.out.println(piece.getName() );
     if (piece.getName().equals(PieceName.Chariot.toString())) {
       if (starti == endi) {
         for (i = min_j+1; i <= max_j-1; i++) {

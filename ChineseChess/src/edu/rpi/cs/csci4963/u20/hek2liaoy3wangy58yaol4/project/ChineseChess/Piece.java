@@ -67,9 +67,8 @@ public class Piece extends JLabel{
 	 */
 	@Override
 	public void paint(Graphics g) {
-		//System.out.println("chess paint: " + this.getName() + " | side: " + this.getSide());
-		System.out.println("paint by " + Board.press + " (should equal to set): " + this.getX() + " | " + this.getY() );
-		//super.paint(g);
+		//System.out.println("paint by " + Board.press + " (should equal to set): " + this.getX() + " | " + this.getY() );
+		/*
 		if(this.side.toString().equals("Han")) {
 			g.setColor(Board.colorHan); // getting public static variable from Board
 		}
@@ -83,7 +82,7 @@ public class Piece extends JLabel{
 		g.drawString(this.nameConverter(), 2*padding, height - 8 * padding);
 		g.setColor(Color.gray);
 		g.drawOval(padding, padding, height-padding, height-padding);
-//		*/
+		*/
 		try {
 			// System.out.println("chess paint image");
 			folderImage = ImageIO.read(folderInput);
