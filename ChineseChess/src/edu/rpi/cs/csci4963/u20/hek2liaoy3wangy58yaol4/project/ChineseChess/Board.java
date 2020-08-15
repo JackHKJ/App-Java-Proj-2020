@@ -34,6 +34,9 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	public File folderInput = new File("./image/chessBoard.png");
 	public BufferedImage folderImage;
 	public int i = 0;
+	
+	private Piece currentPiece;
+	
 
 	// chess piece image names:
 	// Chu
@@ -198,7 +201,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	@Override
 	// called automatically
 	public void paintComponent(Graphics g) {
-
+		System.out.println("Board Paint Component called");
 		for (int i = 1; i <= colSize; i++) {
 			for (int j = 1; j <= rowSize; j++) {
 				positionBoard[i][j].setBoard(this);
@@ -253,6 +256,9 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 				if(positionBoard[i][k].getPiece() != null) {
 				//	System.out.println(positionBoard[i][k].getPiece().getName() + " | "
 				//	+ positionBoard[i][k].getPiece().getSide() + " -> (" + i + ", " + k + ")");
+					if(positionBoard[i][k].getPiece().equals(currentPiece)){
+						continue;
+					}
 					positionBoard[i][k].scaleBoardPosition();
 				}
 			}
@@ -333,7 +339,8 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 			System.out.println("set to: " + (draggedX - piece.getWidth()/2) + " | " +
 			(draggedY - piece.getHeight()/2) );
 			piece.setLocation( draggedX - piece.getWidth()/2, draggedY - piece.getHeight()/2 );
-
+			System.out.println("CurrentLocation:" +  piece.getX() + "-" + piece.getY());
+			currentPiece = piece;
 		}
 
 	}

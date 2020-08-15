@@ -13,7 +13,7 @@ import java.io.IOException;
 
 
 /** the single chess piece to be implemented */
-public class Piece extends JButton{
+public class Piece extends JLabel{
 
 	private static final long serialVersionUID = 1L;
 	private PieceName name; // the classification of the piece
@@ -87,7 +87,7 @@ public class Piece extends JButton{
 		try {
 			// System.out.println("chess paint image");
 			folderImage = ImageIO.read(folderInput);
-			//g.drawImage(folderImage, 0, 0, this.getWidth(), this.getHeight(),  null);
+			g.drawImage(folderImage, 0, 0, this.getWidth(), this.getHeight(),  null);
 		}
 		catch (IOException e) {
 			System.out.println("Failed to load chess image");
