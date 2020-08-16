@@ -306,7 +306,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 				}				
 				if(positionBoard[i][j].hasPiece()) {
 					ret[i][j] = positionBoard[i][j].getPiece().getName() + "@" + positionBoard[i][j].getPiece().getSide();	
-					positionBoard[i][j].removePiece(positionBoard[i][j].getPiece(), this); ///J lang failure
+//					positionBoard[i][j].removePiece(positionBoard[i][j].getPiece(), this); ///J lang failure
 				}
 				else {
 					ret[i][j] = null;
@@ -320,6 +320,15 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 	
 	public void loadFromNetStream(String[][] inputGrid) {
 //		this.positionBoard = new Position[this.colSize+1][this.rowSize+1];
+		for(int i = 1; i < colSize+1; i++) {
+			for(int j = 1; j < rowSize +1; j++) {
+				if(positionBoard[i][j].hasPiece()) {
+					positionBoard[i][j].removePiece(positionBoard[i][j].getPiece(), this);
+				}
+			}
+		}
+		
+		
 		for(int i = 0; i < colSize+1; i++) {
 			for(int j = 0; j < rowSize +1; j++) {
 				
