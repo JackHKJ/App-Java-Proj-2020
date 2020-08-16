@@ -508,8 +508,9 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 						Piece removedPiece = positionBoard[endI][endJ].getPiece();
 						System.out.println("removed chess: " + removedPiece.getName()
 						+ " (" + removedPiece.getSide() + ")");
-						if(removedPiece.getName().equals( "General" ) ){
-							 GameApp.sendLoseMessage(forNetTransport());
+						if(removedPiece.getName().equals("General") ){
+							System.out.println("game end, you win");
+							GameApp.sendLoseMessage(forNetTransport());
 						}
 						positionBoard[endI][endJ].removePiece(removedPiece, this);
 						(positionBoard[startI][startJ]).setHasPiece(false);
