@@ -5,6 +5,7 @@ import java.awt.*;
 import java.io.IOException;
 
 public class GameApp {
+    public static String frameName;
     public static final int SERVER = 1;
     public static final int CLIENT = 0;
     public static ChessClient client;
@@ -46,6 +47,7 @@ public class GameApp {
     public static void sendLoseMessage(String[][] boardInfo){
         if (choose == CLIENT){
             client.sendLoseMessage(boardInfo);
+
         }else{
             server.sendLoseMessage(boardInfo);
         }
@@ -54,14 +56,16 @@ public class GameApp {
     public static void main(String[] args) throws IOException{
         choose = ChooseClientOrServer();
         String serverName = "";
-        
+
         if (choose == CLIENT){
+            frameName = "Client";
             serverName = JOptionPane.showInputDialog("Please input your server name/address: ",
                     "localhost");
         }
         int portNumber = Integer.parseInt(JOptionPane.showInputDialog("Please input your port number: "));
         if (choose == SERVER){
-        	/** server will go first */
+        	// server will go first
+          frameName = "Server";
         	server = new ChessServer(portNumber);
             server.start();
         }else{
@@ -72,7 +76,7 @@ public class GameApp {
         gui = new GUI();
         if (choose == SERVER){
             gui.setServer();
-            gui.displayMsg("This is a server");
+            //gui.displayMsg("This is a server");
             gui.setBoardMovable();
         }
     }

@@ -36,10 +36,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 	public BufferedImage folderImage;
 	public int i = 0;
 
-	private Piece currentPiece;
 
-	private boolean isServer;
-	private boolean debugMode = false;
 
 	// chess piece image names:
 	// Chu
@@ -85,10 +82,12 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 	public int endI; // end I position of released chess
 	public int endJ; // end J position of released chess
 	static public int press;
-	private boolean gameOver = false;
 
 	// network
-	//GameAPP network = null;
+	private boolean gameOver = false;
+	private Piece currentPiece;
+	private boolean isServer;
+	private boolean debugMode = false;
 
 	/** the constructor of the board
 	 * @param col the row size (up to down) of the board
@@ -207,10 +206,9 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 	@Override
 	// called automatically
 	public void paintComponent(Graphics g) {
-		// System.out.println("Board Paint Component called");
+
 		for (int i = 1; i <= colSize; i++) {
 			for (int j = 1; j <= rowSize; j++) {
-//				System.out.println(i + "-" + j);
 				positionBoard[i][j].setBoard(this);
 			}
 		}
@@ -456,6 +454,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 		Piece piece = null;
 		Rectangle area = null;
 		boolean containChessPoint = false;
+		String message = "";
 		if(e.getSource() instanceof Piece){
 			piece = (Piece)e.getSource();
 			if(piece.getSide().equals(Side.Han) && !isServer) {
@@ -507,6 +506,11 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 					if(move){
 						System.out.println("eat a chess and move to its position");
 						Piece removedPiece = positionBoard[endI][endJ].getPiece();
+
+						message += piece.getName()
+						+ "(" + piece.getSide() + ") eats " + removedPiece.getName() + "("
+						+ removedPiece.getSide() + ") at " + "(" + endI + " , " + endJ + ")";
+
 						System.out.println("removed chess: " + removedPiece.getName()
 						+ " (" + removedPiece.getSide() + ")");
 
@@ -519,19 +523,18 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 						if(removedPiece.getName().equals( "General" ) ){
 							gameOver = true;
 							this.movable = false;
-							 GameApp.sendLoseMessage(forNetTransport());
-							 GameApp.STATE = GameApp.WIN;
-							 JOptionPane.showMessageDialog(null, "You Win!", "Win",
-									 JOptionPane.INFORMATION_MESSAGE);
-							 GameApp.closeSocket();
+							GUI.displayMsg("You Win!");
+							GameApp.sendLoseMessage(forNetTransport());
+							GameApp.STATE = GameApp.WIN;
+							JOptionPane.showMessageDialog(null, "You Win!", "Win",
+							JOptionPane.INFORMATION_MESSAGE);
+							GameApp.closeSocket();
 						}
+						else{
+							GUI.displayMsg(message);
+							GameApp.sendRunningMessage(forNetTransport());
 
-
-						GameApp.sendRunningMessage(forNetTransport());
-						//TODO: change side and interact with network
-						// sendRunningMessage(this);
-					//	validate();
-					//	repaint();
+						}
 					}
 					// unable to eat(replace) the opponent's chess
 					else if(!move){
@@ -549,6 +552,8 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 					// able to move the chess to a new position
 					if(move){
 						System.out.println("able to move the chess to a new position");
+						message += "Move " + piece.getName()
+						+ "(" + piece.getSide() + ") to " + "(" + endI + " , " + endJ + ")";
 						System.out.println("new position:" + endI + " | " + endJ );
 						(positionBoard[startI][startJ]).setHasPiece(false);
 						positionBoard[endI][endJ].placePiece(piece, this);
@@ -560,6 +565,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 							return;
 						}
 						this.movable = false;
+						GUI.displayMsg(message);
 						GameApp.sendRunningMessage(forNetTransport());
 					}
 					 // unable to move, reset to where it starts

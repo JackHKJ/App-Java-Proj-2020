@@ -81,6 +81,7 @@ public class ChessClient extends Thread{
             }
             JOptionPane.showMessageDialog(null, "You Lose!", "Lose",
                     JOptionPane.INFORMATION_MESSAGE);
+
             server.close();
             // following will coming soon :)
         } catch (IOException ioException) {

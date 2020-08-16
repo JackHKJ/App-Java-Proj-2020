@@ -37,6 +37,8 @@ public class GUI extends JFrame {
 	/** indicator of whether this is a server */
 	private boolean isServer;
 
+	private Color lightBrown = new Color(153, 102 ,0);
+
 
 
 //	GUI SEGMENT
@@ -68,7 +70,7 @@ public class GUI extends JFrame {
 
 //	the Console
 	private JScrollPane consolePane;
-	private JTextArea console;
+	public static JTextArea console;
 
 //	the Configuration Panel
 	private JPanel configPanel;
@@ -82,6 +84,7 @@ public class GUI extends JFrame {
 	/** the constructor of the GUI*/
 	public GUI() throws IOException{
 		//setLayout(null);
+		this.setTitle("Chinese Chess - " + GameApp.frameName);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.deviceHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
 		this.deviceWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
@@ -137,7 +140,7 @@ public class GUI extends JFrame {
 
 //			boardPanel.setPreferredSize(new Dimension(this.getWidth()-450, this.getHeight()-113));
 //			boardPanel.add(new JLabel("Load Board Needed"));
-//			boardPanel.setBackground(Color.gray);
+			boardPanel.setBackground(Color.WHITE);
 			c.add(boardPanel, BorderLayout.CENTER); // paintComponent of Board at this moment
 
 //			East the Console
@@ -145,7 +148,7 @@ public class GUI extends JFrame {
 			this.console.setEditable(false);
 			this.console.setWrapStyleWord(true);
 			this.console.setLineWrap(true);
-			this.console.setFont(new Font("Georgia",Font.BOLD, UNIT_SIZE_CONSTANT/4*3));
+			//this.console.setFont(new Font("Georgia",Font.BOLD, UNIT_SIZE_CONSTANT/4*3));
 			this.consolePane = new JScrollPane(console);
 			this.consolePane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 			this.consolePane.setPreferredSize(new Dimension(280,10*UNIT_SIZE_CONSTANT));
@@ -268,9 +271,9 @@ public class GUI extends JFrame {
 	/** display the message by appending to the end of the console
 	 * @param message message to be appended
 	 */
-	public void displayMsg(String message) {
-		this.console.append(message);
-		this.console.append("\n");
+	public static void displayMsg(String message) {
+		console.append(message);
+		console.append("\n");
 	}
 
 	/** use the color chooser to change the color of the UI	 */
@@ -378,6 +381,7 @@ public class GUI extends JFrame {
 	/** net operation of defeat procedure */
 	private void defeat() {
 		//TODO: implement the NET procedure of defeat
+		GameApp.sendLoseMessage( this.boardPanel.forNetTransport() );
 	}
 
 	/** net operation of the draw procedure */
@@ -419,15 +423,15 @@ public class GUI extends JFrame {
 
 	public static void main(String[] args) throws IOException {
 		GUI gui = new GUI();
-		
-		
-		
+
+
+
 		String[][] rep = gui.boardPanel.forNetTransport();
 		System.out.println("SEP-------------------");
 		rep[1][1] = null;
 		gui.boardPanel.loadFromNetStream(rep);
-		
-		
+
+
 
 ////		TestCode for updateBoard
 //		Board board = new Board(9, 10, 40);
