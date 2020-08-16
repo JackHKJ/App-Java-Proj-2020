@@ -64,7 +64,7 @@ public class GUI extends JFrame {
 
 
 // the main board area
-	private Board boardPanel;
+	public Board boardPanel;
 
 //	the Console
 	private JScrollPane consolePane;
@@ -164,25 +164,6 @@ public class GUI extends JFrame {
 				configPanel.add(drawBtn);
 				configPanel.add(hideBtn);
 			c.add(configPanel, BorderLayout.SOUTH);
-//			window listener of this game
-			this.addWindowListener(new WindowListener() {
-				@Override
-				public void windowOpened(WindowEvent e) {}
-				@Override
-				public void windowIconified(WindowEvent e) {}
-				@Override
-				public void windowDeiconified(WindowEvent e) {}
-				@Override
-				public void windowDeactivated(WindowEvent e) {}
-				@Override
-				public void windowClosing(WindowEvent e) {}
-				@Override
-				public void windowClosed(WindowEvent e) {
-					// TODO implement NET operation, signal losing game
-				}
-				@Override
-				public void windowActivated(WindowEvent e) {}
-			});
 
 //			add the listeners to the GUI
 
@@ -256,6 +237,26 @@ public class GUI extends JFrame {
 				}
 			});
 
+
+//			window listener of this game
+			this.addWindowListener(new WindowListener() {
+				@Override
+				public void windowOpened(WindowEvent e) {}
+				@Override
+				public void windowIconified(WindowEvent e) {}
+				@Override
+				public void windowDeiconified(WindowEvent e) {}
+				@Override
+				public void windowDeactivated(WindowEvent e) {}
+				@Override
+				public void windowClosing(WindowEvent e) {}
+				@Override
+				public void windowClosed(WindowEvent e) {
+					// TODO implement NET operation, signal losing game
+				}
+				@Override
+				public void windowActivated(WindowEvent e) {}
+			});
 
 //			end of the listeners
 			this.pack();
@@ -387,19 +388,19 @@ public class GUI extends JFrame {
 
 	/** set the board as able to move */
 	public void setBoardMovable() {
-		if(board == null) {
+		if(this.boardPanel == null) {
 			System.out.println("Error(in set board movable), board not initialized");
 			return;
 		}
 		else {
-			board.setMovable();
+			this.boardPanel.setMovable();
 			return;
 		}
 	}
 
 	public void setServer() {
 		this.isServer = true;
-
+		this.boardPanel.setServer();
 	}
 
 
@@ -418,6 +419,15 @@ public class GUI extends JFrame {
 
 	public static void main(String[] args) throws IOException {
 		GUI gui = new GUI();
+		
+		
+		
+		String[][] rep = gui.boardPanel.forNetTransport();
+		System.out.println("SEP-------------------");
+		rep[1][1] = null;
+		gui.boardPanel.loadFromNetStream(rep);
+		
+		
 
 ////		TestCode for updateBoard
 //		Board board = new Board(9, 10, 40);

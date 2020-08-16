@@ -1,24 +1,26 @@
 package edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess;
 
+import java.io.Serializable;
+
 /** this class implements a "position" on the Chinese chess board that allows the user to
  * place a piece on that
  * @version JRE 1.8.0_231
  */
-public class Position {
+public class Position implements Serializable {
 	/** the x coordinate of the position */
-	private int x;
+	private int x; //
 	/** the y coordinate of the position */
-	private int y;
+	private int y; //
 	/** the length of the x times the scalar for locating */
-	private int x_len;
+	private int x_len; //
 	/** the length of the y times the scalar for locating */
-	private int y_len;
+	private int y_len; //
 	/** the piece representation on this position */
 	private Piece piece;
 	/** indicator of whether this position is being taken*/
 	private boolean hasPiece;
 	/** the board */
-	private Board board;
+	private Board board; //
 	//TODO: implement the relationship of this point and the chess board(not yet implemented)
 
 

@@ -17,27 +17,27 @@ public class GameApp {
                 "Click a button",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
     }
-    public static void sendRunningMessage(Board board){
+    public static void sendRunningMessage(String[][] boardInfo){
         if (choose == CLIENT){
-            client.sendRunningMessage(board);
+            client.sendRunningMessage(boardInfo);
         }else{
-            server.sendRunningMessage(board);
+            server.sendRunningMessage(boardInfo);
         }
     }
 
-    public static void sendTerminateMessage(Board board){
+    public static void sendTerminateMessage(String[][] boardInfo){
         if (choose == CLIENT){
-            client.sendTerminateMessage(board);
+            client.sendTerminateMessage(boardInfo);
         }else{
-            server.sendTerminateMessage(board);
+            server.sendTerminateMessage(boardInfo);
         }
     }
 
-    public static void sendLoseMessage(Board board){
+    public static void sendLoseMessage(String[][] boardInfo){
         if (choose == CLIENT){
-            client.sendLoseMessage(board);
+            client.sendLoseMessage(boardInfo);
         }else{
-            server.sendLoseMessage(board);
+            server.sendLoseMessage(boardInfo);
         }
     }
 
@@ -62,7 +62,10 @@ public class GameApp {
         gui = new GUI();
         if (choose == SERVER){
             gui.setServer();
+            gui.displayMsg("This is a server");
             gui.setBoardMovable();
+            
+            
         }
     }
 }

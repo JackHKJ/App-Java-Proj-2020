@@ -21,8 +21,8 @@ public class ChessClient extends Thread{
         this.port = port;
     }
 
-    public void sendRunningMessage(Board board){
-        Message message = new Message(board, Message.RUNNING);
+    public void sendRunningMessage(String[][] info){
+        Message message = new Message(info, Message.RUNNING);
         try {
             objectOutputStream.writeObject(message);
         } catch (IOException ioException) {
@@ -30,8 +30,8 @@ public class ChessClient extends Thread{
         }
     }
 
-    public void sendTerminateMessage(Board board){
-        Message message = new Message(board, Message.TERMINATE);
+    public void sendTerminateMessage(String[][] info){
+        Message message = new Message(info, Message.TERMINATE);
         try {
             objectOutputStream.writeObject(message);
         } catch (IOException ioException) {
@@ -39,8 +39,8 @@ public class ChessClient extends Thread{
         }
     }
 
-    public void sendLoseMessage(Board board){
-        Message message = new Message(board, Message.LOSE);
+    public void sendLoseMessage(String[][] info){
+        Message message = new Message(info, Message.LOSE);
         try {
             objectOutputStream.writeObject(message);
         } catch (IOException ioException) {
@@ -63,7 +63,9 @@ public class ChessClient extends Thread{
                     }
 
                     // updating your board
-                    gui.updateBoard(message.getBoard());
+                    gui.boardPanel.loadFromNetStream(message.getBoardInfo());
+                    gui.boardPanel.setMovable();
+                    System.out.println("Client has been updated!");
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }

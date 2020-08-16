@@ -25,8 +25,8 @@ public class ChessServer extends Thread{
      * When you send a normal board during running game
      * @param board the board you want to pass
      */
-    public void sendRunningMessage(Board board){
-        Message message = new Message(board, Message.RUNNING);
+    public void sendRunningMessage(String[][] info){
+        Message message = new Message(info, Message.RUNNING);
         try {
             objectOutputStream.writeObject(message);
         } catch (IOException ioException) {
@@ -38,8 +38,8 @@ public class ChessServer extends Thread{
      * When you want to HeQi
      * @param board the board you want to pass
      */
-    public void sendTerminateMessage(Board board){
-        Message message = new Message(board, Message.TERMINATE);
+    public void sendTerminateMessage(String[][] info){
+        Message message = new Message(info, Message.TERMINATE);
         try {
             objectOutputStream.writeObject(message);
         } catch (IOException ioException) {
@@ -51,8 +51,8 @@ public class ChessServer extends Thread{
      * When you want to lose
      * @param board the board you want to pass
      */
-    public void sendLoseMessage(Board board){
-        Message message = new Message(board, Message.LOSE);
+    public void sendLoseMessage(String[][] info){
+        Message message = new Message(info, Message.LOSE);
         try {
             objectOutputStream.writeObject(message);
         } catch (IOException ioException) {
@@ -77,7 +77,9 @@ public class ChessServer extends Thread{
                     }
 
                     // updating your board
-                    gui.updateBoard(message.getBoard());
+                    gui.boardPanel.loadFromNetStream(message.getBoardInfo());
+                    gui.boardPanel.setMovable();
+                    System.out.println("Server has been already updated!");
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }

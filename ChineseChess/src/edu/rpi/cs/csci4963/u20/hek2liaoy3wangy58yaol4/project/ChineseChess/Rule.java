@@ -2,7 +2,9 @@ package edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess;
 import edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess.Piece.PieceName;
 import edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess.Piece.Side;
 
-public class Rule {
+import java.io.Serializable;
+
+public class Rule implements Serializable {
   Board board = null;
   Piece piece = null;
   Position pos[][];
@@ -123,6 +125,9 @@ public class Rule {
             move = true;
           }
         }
+        else if (count == 0 && !pos[endi][endj].hasPiece()) {
+  	      move = true;
+  	  	}
 	  } else if (startj == endj) {
 	    for (i = min_i+1; i<=max_i-1; i++) {
 	      if (pos[i][startj].hasPiece()) {
