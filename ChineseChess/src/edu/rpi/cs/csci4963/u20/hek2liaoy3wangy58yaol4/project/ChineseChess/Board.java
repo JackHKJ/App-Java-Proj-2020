@@ -85,7 +85,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 	public int endI; // end I position of released chess
 	public int endJ; // end J position of released chess
 	static public int press;
-
+	private boolean gameOver = false;
 
 	// network
 	//GameAPP network = null;
@@ -358,7 +358,8 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 	@Override
 	public void mousePressed(MouseEvent e) {
 		/** if not this round then return */
-		if(!this.movable && !debugMode) {
+		System.out.print("gameOver: " + gameOver);
+		if(!this.movable && gameOver && !debugMode) {
 			return;
 		}
 
@@ -408,7 +409,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		/** if not this round then return */
-		if(!this.movable && !debugMode) {
+		if(!this.movable && gameOver && !debugMode) {
 			return;
 		}
 		// TODO: use move to interact with network
@@ -449,7 +450,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		/** if not this round then return */
-		if(!this.movable && !debugMode) {
+		if(!this.movable && gameOver && !debugMode) {
 			return;
 		}
 		Piece piece = null;
@@ -508,18 +509,23 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 						Piece removedPiece = positionBoard[endI][endJ].getPiece();
 						System.out.println("removed chess: " + removedPiece.getName()
 						+ " (" + removedPiece.getSide() + ")");
+
+						positionBoard[endI][endJ].removePiece(removedPiece, this);
+						(positionBoard[startI][startJ]).setHasPiece(false);
+						positionBoard[endI][endJ].placePiece(piece, this);
+						(positionBoard[endI][endJ]).setHasPiece(true);
+						positionBoard[endI][endJ].scaleBoardPosition();
+
 						if(removedPiece.getName().equals( "General" ) ){
+							gameOver = true;
+							this.movable = false;
 							 GameApp.sendLoseMessage(forNetTransport());
 							 GameApp.STATE = GameApp.WIN;
 							 JOptionPane.showMessageDialog(null, "You Win!", "Win",
 									 JOptionPane.INFORMATION_MESSAGE);
 							 GameApp.closeSocket();
 						}
-						positionBoard[endI][endJ].removePiece(removedPiece, this);
-						(positionBoard[startI][startJ]).setHasPiece(false);
-						positionBoard[endI][endJ].placePiece(piece, this);
-						(positionBoard[endI][endJ]).setHasPiece(true);
-						positionBoard[endI][endJ].scaleBoardPosition();
+
 
 						GameApp.sendRunningMessage(forNetTransport());
 						//TODO: change side and interact with network
