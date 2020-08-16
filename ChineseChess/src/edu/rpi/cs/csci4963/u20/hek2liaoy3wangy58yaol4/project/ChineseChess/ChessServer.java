@@ -78,6 +78,7 @@ public class ChessServer extends Thread{
 
                     // updating your board
                     gui.boardPanel.loadFromNetStream(message.getBoardInfo());
+                    gui.boardPanel.setMovable();
                     System.out.println("Server has been already updated!");
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();

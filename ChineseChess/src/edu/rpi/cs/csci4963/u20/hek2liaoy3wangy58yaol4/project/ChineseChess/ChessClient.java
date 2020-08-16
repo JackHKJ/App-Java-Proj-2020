@@ -64,6 +64,7 @@ public class ChessClient extends Thread{
 
                     // updating your board
                     gui.boardPanel.loadFromNetStream(message.getBoardInfo());
+                    gui.boardPanel.setMovable();
                     System.out.println("Client has been updated!");
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
