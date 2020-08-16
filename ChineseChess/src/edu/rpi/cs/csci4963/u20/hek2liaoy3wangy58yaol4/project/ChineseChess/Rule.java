@@ -125,6 +125,9 @@ public class Rule implements Serializable {
             move = true;
           }
         }
+        else if (count == 0 && !pos[endi][endj].hasPiece()) {
+  	      move = true;
+  	  	}
 	  } else if (startj == endj) {
 	    for (i = min_i+1; i<=max_i-1; i++) {
 	      if (pos[i][startj].hasPiece()) {
