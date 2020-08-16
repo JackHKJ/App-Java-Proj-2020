@@ -256,6 +256,8 @@ public class GUI extends JFrame {
 				@Override
 				public void windowClosed(WindowEvent e) {
 					// TODO implement NET operation, signal losing game
+					GameApp.closeSocket();
+
 				}
 				@Override
 				public void windowActivated(WindowEvent e) {}
@@ -382,6 +384,7 @@ public class GUI extends JFrame {
 	private void defeat() {
 		//TODO: implement the NET procedure of defeat
 		GameApp.sendLoseMessage( this.boardPanel.forNetTransport() );
+		GameApp.closeSocket();
 	}
 
 	/** net operation of the draw procedure */
