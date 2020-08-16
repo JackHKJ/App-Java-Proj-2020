@@ -515,8 +515,9 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 						(positionBoard[startI][startJ]).setHasPiece(false);
 						positionBoard[endI][endJ].placePiece(piece, this);
 						(positionBoard[endI][endJ]).setHasPiece(true);
-						positionBoard[endI][endJ].scaleBoardPosition();
-
+						positionBoard[endI][endJ].scaleBoardPosition();						
+						
+						GameApp.sendRunningMessage(forNetTransport());
 						//TODO: change side and interact with network
 						// sendRunningMessage(this);
 					//	validate();
