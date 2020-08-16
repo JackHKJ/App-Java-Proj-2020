@@ -9,6 +9,9 @@ public class GameApp {
     public static final int CLIENT = 0;
     public static ChessClient client;
     public static ChessServer server;
+    public static final int WIN = -1;
+    public static final int LOSE = -2;
+    public static int STATE;
     public static int choose;
     public static GUI gui;
     public static int ChooseClientOrServer(){
@@ -22,6 +25,13 @@ public class GameApp {
             client.sendRunningMessage(boardInfo);
         }else{
             server.sendRunningMessage(boardInfo);
+        }
+    }
+    public static void closeSocket(){
+        if (choose == CLIENT){
+            client.closeSocket();
+        }else{
+            server.closeServer();
         }
     }
 

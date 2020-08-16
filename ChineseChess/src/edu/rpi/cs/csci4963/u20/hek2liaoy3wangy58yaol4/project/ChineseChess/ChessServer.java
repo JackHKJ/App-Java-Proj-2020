@@ -1,5 +1,6 @@
 package edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -60,6 +61,16 @@ public class ChessServer extends Thread{
         }
     }
 
+    public void closeServer(){
+        try {
+            client.close();
+            serverSocket.close();
+        } catch (IOException ioException) {
+
+        }
+
+    }
+
     @Override
     public void run(){
         try {
@@ -73,6 +84,7 @@ public class ChessServer extends Thread{
                 try {
                     Message message = (Message)objectInputStream.readObject();
                     if (message.gameOver()){
+                        gui.boardPanel.loadFromNetStream(message.getBoardInfo());
                         break;
                     }
 
@@ -84,7 +96,8 @@ public class ChessServer extends Thread{
                     e.printStackTrace();
                 }
             }
-
+            JOptionPane.showMessageDialog(null, "You Lose!", "Lose",
+                    JOptionPane.INFORMATION_MESSAGE);
             client.close();
             serverSocket.close();
 
