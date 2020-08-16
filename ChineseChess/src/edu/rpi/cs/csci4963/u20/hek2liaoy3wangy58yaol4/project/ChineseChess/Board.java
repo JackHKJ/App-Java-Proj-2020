@@ -298,7 +298,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	public void mousePressed(MouseEvent e) {
 		/** if not this round then return */
 		if(!this.movable) {
-			return;
+			//return;
 		}
 
 		Piece piece = null;
@@ -341,7 +341,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	public void mouseDragged(MouseEvent e) {
 		/** if not this round then return */
 		if(!this.movable) {
-			return;
+			//return;
 		}
 		// TODO: use move to interact with network
 
@@ -371,7 +371,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	public void mouseReleased(MouseEvent e) {
 		/** if not this round then return */
 		if(!this.movable) {
-			return;
+			//return;
 		}
 		Piece piece = null;
 		Rectangle area = null;
