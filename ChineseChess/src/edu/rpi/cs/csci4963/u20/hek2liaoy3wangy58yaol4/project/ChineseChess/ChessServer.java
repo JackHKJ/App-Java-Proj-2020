@@ -31,7 +31,6 @@ public class ChessServer extends Thread{
         try {
             objectOutputStream.writeObject(message);
         } catch (IOException ioException) {
-            ioException.printStackTrace();
         }
     }
 
@@ -103,7 +102,6 @@ public class ChessServer extends Thread{
 
             // following will coming soon :)
         } catch (IOException ioException) {
-            ioException.printStackTrace();
         }
     }
 }

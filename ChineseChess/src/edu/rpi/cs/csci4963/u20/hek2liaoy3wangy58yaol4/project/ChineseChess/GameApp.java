@@ -74,8 +74,6 @@ public class GameApp {
             gui.setServer();
             gui.displayMsg("This is a server");
             gui.setBoardMovable();
-            
-            
         }
     }
 }
