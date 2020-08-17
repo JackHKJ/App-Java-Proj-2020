@@ -62,10 +62,10 @@ public class ChessClient extends Thread{
             server = new Socket(this.serverAddress, this.port);
             objectOutputStream = new ObjectOutputStream(server.getOutputStream());
             objectInputStream = new ObjectInputStream(server.getInputStream());
-
+            Message message;
             while(true){
                 try {
-                    Message message = (Message)objectInputStream.readObject();
+                    message = (Message)objectInputStream.readObject();
                     if (message.gameOver()){
                         gui.boardPanel.loadFromNetStream(message.getBoardInfo());
                         break;
@@ -79,8 +79,15 @@ public class ChessClient extends Thread{
                     e.printStackTrace();
                 }
             }
-            JOptionPane.showMessageDialog(null, "You Lose!", "Lose",
-                    JOptionPane.INFORMATION_MESSAGE);
+            if (message.getState() == Message.LOSE) {
+                JOptionPane.showMessageDialog(null, "You Lose!", "Lose",
+                        JOptionPane.INFORMATION_MESSAGE);
+                GUI.displayMsg("you Lose");
+            }else{
+                JOptionPane.showMessageDialog(null, "You Win!", "Win",
+                        JOptionPane.INFORMATION_MESSAGE);
+                GUI.displayMsg("you Win");
+            }
 
             server.close();
             // following will coming soon :)
