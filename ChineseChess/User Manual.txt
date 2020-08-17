@@ -1,0 +1,8 @@
+Welcome to the Chinese Chess Game
+
+The rule of the game:
+
+Rule for each chess type:
+General("Shuai" or "Jiang") -
+
+Advior("Shi") -

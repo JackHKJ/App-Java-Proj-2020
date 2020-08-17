@@ -69,6 +69,9 @@ public class Position implements Serializable {
 		return y_len;
 	}
 
+	/** set the board with the correct x and y length
+	 * @param b passed a board class to the position
+	 */
 	public void setBoard(Board b) {
 		this.board = b;
 		int len = board.getHeight()/10;
@@ -85,8 +88,10 @@ public class Position implements Serializable {
 		this.hasPiece = tf;
 	}
 
-
-	/** place the piece p on this (position) on the board b */
+	/** place the piece p on this (position) on the board b
+	 * @param p passed a piece class to the position
+	 * @param b passed a Board class to the position
+	 */
 	public void placePiece(Piece p, Board b) {
 		this.piece = p;
 		this.board = b;
@@ -100,10 +105,11 @@ public class Position implements Serializable {
 		this.board.add(this.piece); // add the chess piece to the [x][y] coordinate
 		// set the position to the center of drawing by halving the unit size
 		piece.setBounds(this.x * wid - wid, this.y*len - len, wid, len);
-		//this.board.validate();
 	}
 
-	/** place the piece p on this (position) on the board b */
+	/**
+	 * place the piece p on this (position) on the board b
+	 */
 	public void scaleBoardPosition() {
 		int len = board.getHeight()/10;
 		int wid = board.getWidth()/9;

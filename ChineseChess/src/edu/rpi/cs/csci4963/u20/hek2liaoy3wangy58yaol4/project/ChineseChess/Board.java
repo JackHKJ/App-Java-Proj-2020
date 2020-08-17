@@ -11,14 +11,14 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-
 import edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess.Piece.PieceName;
 import edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess.Piece.Side;
 
 
-
-/** the main board of the Chinese chess game
- * @author JRE 1.8.0_231
+/**
+ * Board class contains the main data structure of the chinese chess
+ * Board extends JPanel and enables Mouse listeners to allow the user to interact with the board
+ * It is initialized inside of GUI class
  *
  */
 public class Board extends JPanel implements MouseListener, MouseMotionListener, Serializable {
@@ -29,15 +29,14 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 	public int unitX; // the length of the horizontal (X) axis
 	public int unitY; // the length of the vertical (Y) axis
 	public int pieceSize; // the size of a single piece to be created
-	public boolean movable;
-	public static Color colorChu;
-	public static Color colorHan;
-	public File folderInput = new File("./image/chessBoard.png");
+	public boolean movable; // determine if the chess can be moved
+	public static Color colorChu; // red color
+	public static Color colorHan; // black color
 	public BufferedImage folderImage;
 	public int i = 0;
 
 
-
+	public File folderInput = new File("./image/chessBoard.png");
 	// chess piece image names:
 	// Chu
 	private String B_R = "./image/chess4.png";
@@ -81,9 +80,8 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 	public int startJ; // start J position of pressed chess
 	public int endI; // end I position of released chess
 	public int endJ; // end J position of released chess
-	static public int press;
 
-	// network
+	// network varibles
 	private boolean gameOver = false;
 	private Piece currentPiece;
 	private boolean isServer;
@@ -121,11 +119,11 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 
 	}
 
-	/** this is the method that initialize all the pieces and place them to the desired position
+	/**
+	 * this is the method that initialize all the pieces and place them to the desired position
 	 */
 	public void initializeAllPieces() {
 		// Han side chess
-		// piece parameters: (PieceName, Side, size, Board)
 		R_R1 = new Piece(PieceName.Chariot, Side.Han, pieceSize,pieceSize, this, R_R);
 		R_K1 = new Piece(PieceName.Knight, Side.Han, pieceSize,pieceSize, this, R_K);
 		R_B1 = new Piece(PieceName.Bishop, Side.Han, pieceSize,pieceSize, this, R_B);
@@ -166,7 +164,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 		B_P4 = new Piece(PieceName.Pawn, Side.Chu, pieceSize,pieceSize, this, B_P);
 		B_P5 = new Piece(PieceName.Pawn, Side.Chu, pieceSize,pieceSize, this, B_P);
 
-		// (x , y)
+		// assign the created piece into the position matrix
 		positionBoard[1][10].placePiece(R_R1, this);
 		positionBoard[2][10].placePiece(R_K1,this);
 		positionBoard[3][10].placePiece(R_B1,this);
@@ -203,10 +201,13 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 	}
 
 
-	@Override
-	// called automatically
-	public void paintComponent(Graphics g) {
 
+	/**
+	 * paintComponent will be called automatically everytime the board is modified
+	 */
+	@Override
+	public void paintComponent(Graphics g) {
+		// set the board by calculating the x and y length
 		for (int i = 1; i <= colSize; i++) {
 			for (int j = 1; j <= rowSize; j++) {
 				positionBoard[i][j].setBoard(this);
@@ -254,13 +255,10 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 			j++;
 		}
 
-
-
+		// place the chess in the correct position
 		for (int i = 1; i <= colSize; i++) {
 			for (int k = 1; k <= rowSize; k++) {
 				if(positionBoard[i][k].getPiece() != null) {
-				//	System.out.println(positionBoard[i][k].getPiece().getName() + " | "
-				//	+ positionBoard[i][k].getPiece().getSide() + " -> (" + i + ", " + k + ")");
 					if(positionBoard[i][k].getPiece().equals(currentPiece)){
 						continue;
 					}
@@ -277,23 +275,28 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 //			System.out.println("Failed to load chess board image");
 //		}
 
-		// System.out.printf("Boardlen: %d, Boardwid: %d\n", this.getHeight(), this.getWidth());
-		// System.out.printf("PieceSize: %s\n", positionBoard[1][1].getPiece().getHeight());
-
 
 	}
 
-	/** set the moveable as true to enable client select next step */
+	/**
+	 * set the moveable as true to enable client select next step
+	 */
 	public void setMovable() {
 		this.movable = true;
 	}
 
-	/** setter of server */
+	/**
+	 * setter function for the server
+	 */
 	public void setServer() {
 		this.isServer = true;
-//		System.out.println("Set as server");
 	}
 
+	/**
+	 * for transfering the data structure of the board to another side of connection
+	 * sending the data
+	 @return ret, the 2d array uses to transfering data
+	 */
 	public String[][] forNetTransport(){
 		String[][] ret = new String[this.colSize+1][this.rowSize+1];
 		for(int i = 0; i < colSize+1; i++) {
@@ -312,12 +315,15 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 			}
 		}
 		return ret;
-
 	}
 
-
+	/**
+	 * for transfering the data structure of the board to another side of connection
+	 * recieving the data
+	 *@param inputGrid passed in a 2d matrix 
+	 */
 	public void loadFromNetStream(String[][] inputGrid) {
-//		this.positionBoard = new Position[this.colSize+1][this.rowSize+1];
+		// this.positionBoard = new Position[this.colSize+1][this.rowSize+1];
 		for(int i = 1; i < colSize+1; i++) {
 			for(int j = 1; j < rowSize +1; j++) {
 				if(positionBoard[i][j].hasPiece()) {
@@ -326,12 +332,9 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 			}
 		}
 
-
 		for(int i = 0; i < colSize+1; i++) {
 			for(int j = 0; j < rowSize +1; j++) {
-
 				Position thisPosition = new Position(i, j);
-
 				if(inputGrid[i][j] != null) {
 					try {
 						String thisInfo = inputGrid[i][j];
@@ -352,20 +355,20 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 		this.validate();
 	}
 
-
+	/**
+	 * mousePressed method reacts to the user when user presses the chess on the board
+	 * @param e the mouse event
+	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
 		/** if not this round then return */
-		System.out.print("gameOver: " + gameOver);
 		if(!this.movable && gameOver && !debugMode) {
 			return;
 		}
 
 		Piece piece = null;
 		Rectangle area = null;
-		press = 0;
 		if(e.getSource() == this){
-			System.out.println("Board Pressed");
 			return;
 		}
 		if(e.getSource() instanceof Piece){
@@ -387,35 +390,30 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 					int x = positionBoard[i][j].getXLen();
 					int y = positionBoard[i][j].getYLen();
 					if(area.contains(x, y)){ // press within the area
-						System.out.println("press: " + x + " | " + y );
-						System.out.println("start: " + piece.getName() + "(" + piece.getSide() + ")" +
-						" -> " + i + " | " + j);
 						startI = i;
 						startJ = j;
 						break;
 					}
 				}
 			}
-
 		}
-
 
 	}
 
-	// setLocation is method of JLabel (chess)
-	// set the location to the center point of the chess image
+	/**
+	* mouseDragged method reacts to the user when user dragging the chess on the board
+	* setLocation is method of JLabel (chess)
+	* @param e the mouse event
+	*/
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		/** if not this round then return */
 		if(!this.movable && gameOver && !debugMode) {
 			return;
 		}
-		// TODO: use move to interact with network
 
 		Piece piece = null;
-		press = 1;
 		if(e.getSource() instanceof Piece){
-			//if(moveable == false) return;
 			piece = (Piece)e.getSource();
 			if(piece.getSide().equals(Side.Han) && !isServer) {
 				return;
@@ -429,22 +427,22 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 		if(e.getSource() instanceof Board && piece != null){ // dragging within the area of board
 			draggedX = e.getX();
 			draggedY = e.getY();
-			// System.out.println("-------------------------------");
-//			 System.out.println(" dragged: " + draggedX + " | " + draggedY);
-			// System.out.println("set to: " + (draggedX - piece.getWidth()/2) + " | " +
-			// (draggedY - piece.getHeight()/2) );
-//			Outside of board condition
+
 			if(draggedX < pieceSize/2 || draggedY< pieceSize/2 ||
 					draggedX > (this.getWidth() - pieceSize/2) || draggedY > (this.getHeight()-pieceSize/2)) {
 				return;
 			}
 			piece.setLocation( draggedX - piece.getWidth()/2, draggedY - piece.getHeight()/2 );
-			//System.out.println("CurrentLocation:" +  piece.getX() + "-" + piece.getY());
 			currentPiece = piece;
 		}
 
 	}
 
+	/**
+	* mouseReleased method reacts to the user when user releases the chess on the board
+	* this method interat with the rule class and is the core of the game play
+	* @param e the mouse event
+	*/
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		/** if not this round then return */
@@ -475,9 +473,6 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 					int x = positionBoard[i][j].getXLen();
 					int y = positionBoard[i][j].getYLen();
 					if(area.contains(x, y)){ // press within the area
-						System.out.println("released: " + x + " | " + y );
-						System.out.println("New pos: " + piece.getName() + "(" + piece.getSide() + ")" +
-						" -> (col, row) " + i + " | " + j);
 						containChessPoint = true;
 						endI = i;
 						endJ = j;
@@ -492,15 +487,12 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 				if(releasedPosition.hasPiece() ){
 					// same side, reset to where it starts
 					if( piece.getSide().equals( releasedPosition.getPiece().getSide() ) ){
-						System.out.print("same side, reset to where it starts: ");
-						System.out.println(startI + " | " + startJ);
 						piece.setLocation(startI,startJ);
 						(positionBoard[startI][startJ]).setHasPiece(true);
 						positionBoard[startI][startJ].scaleBoardPosition();
 						return;
 					}
 					// not the same side chess and interactive with rule
-					System.out.println("end(I,J): " + endI + " | " + endJ );
 					boolean move = rule.moveJudge(piece, startI, startJ, endI, endJ);
 					// eat a chess and move to its position
 					if(move){
@@ -511,15 +503,13 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 						+ "(" + piece.getSide() + ") eats " + removedPiece.getName() + "("
 						+ removedPiece.getSide() + ") at " + "(" + endI + " , " + endJ + ")";
 
-						System.out.println("removed chess: " + removedPiece.getName()
-						+ " (" + removedPiece.getSide() + ")");
-
 						positionBoard[endI][endJ].removePiece(removedPiece, this);
 						(positionBoard[startI][startJ]).setHasPiece(false);
 						positionBoard[endI][endJ].placePiece(piece, this);
 						(positionBoard[endI][endJ]).setHasPiece(true);
 						positionBoard[endI][endJ].scaleBoardPosition();
 
+						// game over event, the network is closed after this
 						if(removedPiece.getName().equals( "General" ) ){
 							gameOver = true;
 							this.movable = false;
@@ -530,15 +520,13 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 							JOptionPane.INFORMATION_MESSAGE);
 							GameApp.closeSocket();
 						}
-						else{
+						else{ // normal case
 							GUI.displayMsg(message);
 							GameApp.sendRunningMessage(forNetTransport());
-
 						}
 					}
 					// unable to eat(replace) the opponent's chess
 					else if(!move){
-						System.out.println("unable to eat(replace) the opponent's chess");
 						piece.setLocation(startI,startJ);
 						positionBoard[startI][startJ].setHasPiece(true);
 						positionBoard[startI][startJ].scaleBoardPosition();
@@ -551,7 +539,6 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 					boolean move = rule.moveJudge(piece, startI, startJ, endI, endJ);
 					// able to move the chess to a new position
 					if(move){
-						System.out.println("able to move the chess to a new position");
 						message += "Move " + piece.getName()
 						+ "(" + piece.getSide() + ") to " + "(" + endI + " , " + endJ + ")";
 						System.out.println("new position:" + endI + " | " + endJ );
@@ -570,18 +557,13 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 					}
 					 // unable to move, reset to where it starts
 					else if(!move){
-						System.out.println("unable to move, reset to where it starts");
-						System.out.println("start :" + startI + " | " + startJ );
 						piece.setLocation(startI,startJ);
 						(positionBoard[startI][startJ]).setHasPiece(true);
 						positionBoard[startI][startJ].scaleBoardPosition();
-						//return;
+						return;
 					}
-
 				}
-
 			} // containChessPoint
-
 		}
 
 	}
@@ -590,7 +572,6 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -607,10 +588,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-
 	}
-
-
 
 
 

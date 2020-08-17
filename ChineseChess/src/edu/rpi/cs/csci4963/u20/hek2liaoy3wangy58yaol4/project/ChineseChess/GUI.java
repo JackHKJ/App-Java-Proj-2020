@@ -324,7 +324,7 @@ public class GUI extends JFrame {
 			this.configPanel.setVisible(!this.configPanel.isVisible());
 			this.pack();
 		}
-		
+
 	}
 
 	private void setCountDown() {
@@ -388,14 +388,9 @@ public class GUI extends JFrame {
 	/** net operation of defeat procedure */
 	private void defeat() {
 		//TODO: implement the NET procedure of defeat
-		GameApp.sendLoseMessage( this.boardPanel.forNetTransport() );
+		GameApp.sendTerminateMessage( this.boardPanel.forNetTransport() );
 		GameApp.closeSocket();
 	}
-
-//	/** net operation of the draw procedure */
-//	public void callDraw() {
-//		//TODO implement the NET procedure of draw
-//	}
 
 
 	/** set the board as able to move */
