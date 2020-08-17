@@ -56,7 +56,7 @@ public class GUI extends JFrame {
 			private JMenuItem jmiAdmitDefeat;
 			// send Draw request to the rival, if confirmed then both party gets a point,
 			// otherwise, game continues
-			private JMenuItem jmiCallDraw;
+//			private JMenuItem jmiCallDraw;
 		// the utilities selection
 		private JMenu jmUtilities;
 			// set the UI Color;
@@ -77,7 +77,7 @@ public class GUI extends JFrame {
 		// defeat
 		private JButton defeatBtn;
 		// draw
-		private JButton drawBtn;
+//		private JButton drawBtn;
 		// hide
 		private JButton hideBtn;
 
@@ -109,11 +109,11 @@ public class GUI extends JFrame {
 				this.jmiSetCountDown.setFont(new Font("Georgia",Font.BOLD, UNIT_SIZE_CONSTANT/2));
 				this.jmiAdmitDefeat = new JMenuItem("Admit Defeat");
 				this.jmiAdmitDefeat.setFont(new Font("Georgia",Font.BOLD, UNIT_SIZE_CONSTANT/2));
-				this.jmiCallDraw = new JMenuItem("Call a Draw");
-				this.jmiCallDraw.setFont(new Font("Georgia",Font.BOLD, UNIT_SIZE_CONSTANT/2));
+//				this.jmiCallDraw = new JMenuItem("Call a Draw");
+//				this.jmiCallDraw.setFont(new Font("Georgia",Font.BOLD, UNIT_SIZE_CONSTANT/2));
 				this.jmGame.add(jmiSetCountDown);
 				this.jmGame.add(jmiAdmitDefeat);
-				this.jmGame.add(jmiCallDraw);
+//				this.jmGame.add(jmiCallDraw);
 			this.menuBar.add(jmGame);
 
 			this.jmUtilities = new JMenu("Utilities");
@@ -156,15 +156,16 @@ public class GUI extends JFrame {
 
 //			South the configuration panel
 			this.configPanel = new JPanel();
-			configPanel.setLayout(new GridLayout(1,3));
+//			configPanel.setLayout(new GridLayout(1,3));
+			configPanel.setLayout(new GridLayout(1,2));
 				this.defeatBtn = new JButton("Admit Defeat");
 				this.defeatBtn.setFont(new Font("Georgia",Font.BOLD, UNIT_SIZE_CONSTANT/2));
-				this.drawBtn = new JButton("Call Draw");
-				this.drawBtn.setFont(new Font("Georgia",Font.BOLD, UNIT_SIZE_CONSTANT/2));
+//				this.drawBtn = new JButton("Call Draw");
+//				this.drawBtn.setFont(new Font("Georgia",Font.BOLD, UNIT_SIZE_CONSTANT/2));
 				this.hideBtn = new JButton("hide Config"); //TODO:
 				this.hideBtn.setFont(new Font("Georgia",Font.BOLD, UNIT_SIZE_CONSTANT/2));
 				configPanel.add(defeatBtn);
-				configPanel.add(drawBtn);
+//				configPanel.add(drawBtn);
 				configPanel.add(hideBtn);
 			c.add(configPanel, BorderLayout.SOUTH);
 
@@ -224,21 +225,21 @@ public class GUI extends JFrame {
 				}
 			});
 
-//			call draw
-			this.jmiCallDraw.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					displayMsg("Asking for a DRAW");
-					callDraw();
-				}
-			});
-			this.drawBtn.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					displayMsg("Asking for a DRAW");
-					callDraw();
-				}
-			});
+////			call draw
+//			this.jmiCallDraw.addActionListener(new ActionListener() {
+//				@Override
+//				public void actionPerformed(ActionEvent e) {
+//					displayMsg("Asking for a DRAW");
+//					callDraw();
+//				}
+//			});
+//			this.drawBtn.addActionListener(new ActionListener() {
+//				@Override
+//				public void actionPerformed(ActionEvent e) {
+//					displayMsg("Asking for a DRAW");
+//					callDraw();
+//				}
+//			});
 
 
 //			window listener of this game
@@ -265,7 +266,7 @@ public class GUI extends JFrame {
 
 //			end of the listeners
 			this.pack();
-			this.setResizable(true);
+			this.setResizable(false);
 			this.setVisible(true);
 	}
 
@@ -315,11 +316,15 @@ public class GUI extends JFrame {
 	private void changeConfigPaneStatus() {
 		if(this.configPanel.isVisible()) {
 			this.jmiHideConfigBar.setText("Display Config");
+			this.configPanel.setVisible(!this.configPanel.isVisible());
+			this.pack();
 		}
 		else {
 			this.jmiHideConfigBar.setText("Hide Config");
+			this.configPanel.setVisible(!this.configPanel.isVisible());
+			this.pack();
 		}
-		this.configPanel.setVisible(!this.configPanel.isVisible());
+		
 	}
 
 	private void setCountDown() {
@@ -387,10 +392,10 @@ public class GUI extends JFrame {
 		GameApp.closeSocket();
 	}
 
-	/** net operation of the draw procedure */
-	public void callDraw() {
-		//TODO implement the NET procedure of draw
-	}
+//	/** net operation of the draw procedure */
+//	public void callDraw() {
+//		//TODO implement the NET procedure of draw
+//	}
 
 
 	/** set the board as able to move */
