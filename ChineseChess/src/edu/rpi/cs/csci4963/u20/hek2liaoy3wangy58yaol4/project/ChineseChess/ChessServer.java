@@ -104,8 +104,9 @@ public class ChessServer extends Thread{
                         JOptionPane.INFORMATION_MESSAGE);
                 GUI.displayMsg("you Win");
             }
-            client.close();
+            client.close();            
             serverSocket.close();
+            gui.closeProcedure();
 
             // following will coming soon :)
         } catch (IOException ioException) {

@@ -51,7 +51,7 @@ public class GUI extends JFrame {
 		// the game selection
 		private JMenu jmGame;
 			// set the count down of a single round, will be in effect from next round
-			private JMenuItem jmiSetCountDown;
+			private JMenuItem jmiSetExit;
 			// set self to be defeated and continues to the nextGame stage
 			private JMenuItem jmiAdmitDefeat;
 			// send Draw request to the rival, if confirmed then both party gets a point,
@@ -105,13 +105,13 @@ public class GUI extends JFrame {
 		this.menuBar = new JMenuBar();
 			this.jmGame = new JMenu("Game Settings");
 			this.jmGame.setFont(new Font("Georgia",Font.BOLD, UNIT_SIZE_CONSTANT/2));
-				this.jmiSetCountDown = new JMenuItem("Set Count Down");
-				this.jmiSetCountDown.setFont(new Font("Georgia",Font.BOLD, UNIT_SIZE_CONSTANT/2));
+				this.jmiSetExit= new JMenuItem("Exit the program");
+				this.jmiSetExit.setFont(new Font("Georgia",Font.BOLD, UNIT_SIZE_CONSTANT/2));
 				this.jmiAdmitDefeat = new JMenuItem("Admit Defeat");
 				this.jmiAdmitDefeat.setFont(new Font("Georgia",Font.BOLD, UNIT_SIZE_CONSTANT/2));
 //				this.jmiCallDraw = new JMenuItem("Call a Draw");
 //				this.jmiCallDraw.setFont(new Font("Georgia",Font.BOLD, UNIT_SIZE_CONSTANT/2));
-				this.jmGame.add(jmiSetCountDown);
+				this.jmGame.add(jmiSetExit);
 				this.jmGame.add(jmiAdmitDefeat);
 //				this.jmGame.add(jmiCallDraw);
 			this.menuBar.add(jmGame);
@@ -191,11 +191,12 @@ public class GUI extends JFrame {
 					changeConfigPaneStatus();
 				}
 			});
-//			set countdown
-			this.jmiSetCountDown.addActionListener(new ActionListener() {
+//			exit the program
+			this.jmiSetExit.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					setCountDown();
+					closeApp();
+					return;
 				}
 			});
 //			admit defeat
@@ -389,6 +390,16 @@ public class GUI extends JFrame {
 	private void defeat() {
 		//TODO: implement the NET procedure of defeat
 		GameApp.sendTerminateMessage( this.boardPanel.forNetTransport() );
+//		disable all the buttons
+		this.closeProcedure();
+	}
+	
+	/** set the piece as not clickable and disable the buttons*/
+	public void closeProcedure() {
+		this.displayMsg("Starting close procedure");
+		defeatBtn.setEnabled(false);
+		this.boardPanel.setNotMovable();
+		jmiAdmitDefeat.setEnabled(false);
 		GameApp.closeSocket();
 	}
 
@@ -419,7 +430,10 @@ public class GUI extends JFrame {
 		c.add(boardPanel, BorderLayout.CENTER);
 	}
 
-
+	/** method to close the application */
+	private void closeApp() {
+		this.dispose();
+	}
 
 
 

@@ -13,8 +13,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess.Piece.PieceName;
 import edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess.Piece.Side;
-
-
+import static edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess.GameApp.gui;
 /**
  * Board class contains the main data structure of the chinese chess
  * Board extends JPanel and enables Mouse listeners to allow the user to interact with the board
@@ -82,7 +81,6 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 	public int endJ; // end J position of released chess
 
 	// network varibles
-	private boolean gameOver = false;
 	private Piece currentPiece;
 	private boolean isServer;
 	private boolean debugMode = false;
@@ -284,6 +282,13 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 	public void setMovable() {
 		this.movable = true;
 	}
+	
+	/**
+	 * set the moveable as false to enable client select next step
+	 */
+	public void setNotMovable() {
+		this.movable = false;
+	}
 
 	/**
 	 * setter function for the server
@@ -362,9 +367,9 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 	@Override
 	public void mousePressed(MouseEvent e) {
 		/** if not this round then return */
-		if(!this.movable && gameOver && !debugMode) {
+		if(!this.movable) {
 			return;
-		}
+		}		
 
 		Piece piece = null;
 		Rectangle area = null;
@@ -408,10 +413,9 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		/** if not this round then return */
-		if(!this.movable && gameOver && !debugMode) {
+		if(!this.movable) {
 			return;
-		}
-
+		}		
 		Piece piece = null;
 		if(e.getSource() instanceof Piece){
 			piece = (Piece)e.getSource();
@@ -446,9 +450,10 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		/** if not this round then return */
-		if(!this.movable && gameOver && !debugMode) {
+		if(!this.movable) {
 			return;
 		}
+
 		Piece piece = null;
 		Rectangle area = null;
 		boolean containChessPoint = false;
@@ -511,7 +516,6 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 
 						// game over event, the network is closed after this
 						if(removedPiece.getName().equals( "General" ) ){
-							gameOver = true;
 							this.movable = false;
 							GUI.displayMsg("You Win!");
 							GameApp.sendLoseMessage(forNetTransport());
@@ -519,6 +523,8 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 							JOptionPane.showMessageDialog(null, "You Win!", "Win",
 							JOptionPane.INFORMATION_MESSAGE);
 							GameApp.closeSocket();
+//							disable all the pieces from moving and notify GUI to disable the buttons
+							gui.closeProcedure();							
 						}
 						else{ // normal case
 							GUI.displayMsg(message);
