@@ -6,6 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 
 import static edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess.GameApp.gui;
 
@@ -46,7 +47,6 @@ public class ChessServer extends Thread{
         try {
             objectOutputStream.writeObject(message);
         } catch (IOException ioException) {
-            ioException.printStackTrace();
         }
     }
 
@@ -59,7 +59,6 @@ public class ChessServer extends Thread{
         try {
             objectOutputStream.writeObject(message);
         } catch (IOException ioException) {
-            ioException.printStackTrace();
         }
     }
 
