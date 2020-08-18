@@ -32,18 +32,19 @@ public class ChessClient extends Thread{
     }
 
     public void sendTerminateMessage(String[][] info){
+    	if(!server.isConnected()) {
+    		return;
+    	}
         Message message = new Message(info, Message.TERMINATE);
         try {
             objectOutputStream.writeObject(message);
         } catch (IOException ioException) {
-            ioException.printStackTrace();
         }
     }
     public void closeSocket(){
         try {
             server.close();
         } catch (IOException ioException) {
-
         }
     }
 
@@ -52,8 +53,11 @@ public class ChessClient extends Thread{
         try {
             objectOutputStream.writeObject(message);
         } catch (IOException ioException) {
-            ioException.printStackTrace();
         }
+    }
+    
+    public boolean isConnected() {
+    	return server.isConnected();
     }
 
     @Override
@@ -88,8 +92,13 @@ public class ChessClient extends Thread{
                         JOptionPane.INFORMATION_MESSAGE);
                 GUI.displayMsg("you Win");
             }
-
-            server.close();
+//            disable all the button and make piece not movable            
+    		GameApp.closeSocket();
+    		server.close();
+    		gui.closeProcedure();
+            
+            
+          
             // following will coming soon :)
         } catch (IOException ioException) {
         }

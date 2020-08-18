@@ -37,9 +37,10 @@ public class GameApp {
     }
 
     public static void sendTerminateMessage(String[][] boardInfo){
+    
         if (choose == CLIENT){
             client.sendTerminateMessage(boardInfo);
-        }else{
+        }else{   
             server.sendTerminateMessage(boardInfo);
         }
     }
@@ -54,30 +55,33 @@ public class GameApp {
     }
 
     public static void main(String[] args) throws IOException{
-        choose = ChooseClientOrServer();
-        String serverName = "";
+        try {
+            choose = ChooseClientOrServer();
+            String serverName = "";
+            if (choose == CLIENT) {
+                frameName = "Client";
+                serverName = JOptionPane.showInputDialog("Please input your server name/address: ",
+                        "localhost");
+            }
+            int portNumber = Integer.parseInt(JOptionPane.showInputDialog("Please input your port number: "));
+            if (choose == SERVER) {
+                // server will go first
+                frameName = "Server";
+                server = new ChessServer(portNumber);
+                server.start();
+            } else {
+                client = new ChessClient(serverName, portNumber);
+                client.start();
+            }
 
-        if (choose == CLIENT){
-            frameName = "Client";
-            serverName = JOptionPane.showInputDialog("Please input your server name/address: ",
-                    "localhost");
-        }
-        int portNumber = Integer.parseInt(JOptionPane.showInputDialog("Please input your port number: "));
-        if (choose == SERVER){
-        	// server will go first
-          frameName = "Server";
-        	server = new ChessServer(portNumber);
-            server.start();
-        }else{
-            client = new ChessClient(serverName, portNumber);
-            client.start();
-        }
+            gui = new GUI();
+            if (choose == SERVER) {
+                gui.setServer();
+                //gui.displayMsg("This is a server");
+                gui.setBoardMovable();
+            }
+        }catch (NumberFormatException e){
 
-        gui = new GUI();
-        if (choose == SERVER){
-            gui.setServer();
-            //gui.displayMsg("This is a server");
-            gui.setBoardMovable();
         }
     }
 }

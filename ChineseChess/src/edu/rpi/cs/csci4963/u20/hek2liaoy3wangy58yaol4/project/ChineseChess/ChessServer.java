@@ -6,6 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 
 import static edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess.GameApp.gui;
 
@@ -39,11 +40,13 @@ public class ChessServer extends Thread{
      * @param board the board you want to pass
      */
     public void sendTerminateMessage(String[][] info){
+    	if(!client.isConnected()) {
+    		return;
+    	}
         Message message = new Message(info, Message.TERMINATE);
         try {
             objectOutputStream.writeObject(message);
         } catch (IOException ioException) {
-            ioException.printStackTrace();
         }
     }
 
@@ -56,7 +59,6 @@ public class ChessServer extends Thread{
         try {
             objectOutputStream.writeObject(message);
         } catch (IOException ioException) {
-            ioException.printStackTrace();
         }
     }
 
@@ -69,6 +71,7 @@ public class ChessServer extends Thread{
         }
 
     }
+
 
     @Override
     public void run(){
@@ -104,8 +107,9 @@ public class ChessServer extends Thread{
                         JOptionPane.INFORMATION_MESSAGE);
                 GUI.displayMsg("you Win");
             }
-            client.close();
+            client.close();            
             serverSocket.close();
+            gui.closeProcedure();
 
             // following will coming soon :)
         } catch (IOException ioException) {
