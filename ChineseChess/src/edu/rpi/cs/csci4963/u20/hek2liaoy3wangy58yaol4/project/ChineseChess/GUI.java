@@ -36,8 +36,7 @@ public class GUI extends JFrame {
 	private int UNIT_SIZE_CONSTANT = 40;
 	/** indicator of whether this is a server */
 	private boolean isServer;
-
-	private Color lightBrown = new Color(153, 102 ,0);
+	
 
 
 
@@ -258,6 +257,7 @@ public class GUI extends JFrame {
 				@Override
 				public void windowClosed(WindowEvent e) {
 					// TODO implement NET operation, signal losing game
+					defeat();
 					GameApp.closeSocket();
 
 				}

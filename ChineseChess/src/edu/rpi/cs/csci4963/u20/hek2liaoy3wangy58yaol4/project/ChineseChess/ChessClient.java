@@ -36,14 +36,12 @@ public class ChessClient extends Thread{
         try {
             objectOutputStream.writeObject(message);
         } catch (IOException ioException) {
-            ioException.printStackTrace();
         }
     }
     public void closeSocket(){
         try {
             server.close();
         } catch (IOException ioException) {
-
         }
     }
 
@@ -52,7 +50,6 @@ public class ChessClient extends Thread{
         try {
             objectOutputStream.writeObject(message);
         } catch (IOException ioException) {
-            ioException.printStackTrace();
         }
     }
 
