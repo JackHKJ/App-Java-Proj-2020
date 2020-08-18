@@ -39,7 +39,7 @@ public class ChessServer extends Thread{
      * @param board the board you want to pass
      */
     public void sendTerminateMessage(String[][] info){
-    	if(!client.isConnected()) {
+    	if(client.isClosed()) {
     		return;
     	}
         Message message = new Message(info, Message.TERMINATE);

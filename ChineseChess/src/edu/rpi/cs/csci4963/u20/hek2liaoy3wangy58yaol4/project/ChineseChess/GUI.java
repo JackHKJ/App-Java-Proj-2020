@@ -416,6 +416,7 @@ public class GUI extends JFrame {
 		}
 	}
 
+	/** set this model as server */
 	public void setServer() {
 		this.isServer = true;
 		this.boardPanel.setServer();
