@@ -38,10 +38,7 @@ public class GUI extends JFrame {
 	private boolean isServer;
 	
 
-
-
 //	GUI SEGMENT
-
 	private Container c;
 
 
@@ -328,6 +325,7 @@ public class GUI extends JFrame {
 
 	}
 
+	/** helper function to set the countdown*/
 	private void setCountDown() {
 		JDialog action = new JDialog(this, true);
 		action.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -396,7 +394,7 @@ public class GUI extends JFrame {
 	
 	/** set the piece as not clickable and disable the buttons*/
 	public void closeProcedure() {
-		this.displayMsg("Starting close procedure");
+		GUI.displayMsg("Starting close procedure");
 		defeatBtn.setEnabled(false);
 		this.boardPanel.setNotMovable();
 		jmiAdmitDefeat.setEnabled(false);
@@ -423,7 +421,9 @@ public class GUI extends JFrame {
 	}
 
 
-
+	/** this is a method that updates the board to the current board area
+	 * @param board the board to be loaded
+	 */
 	public void updateBoard(Board board) {
 		this.remove(boardPanel);
 		this.boardPanel = board;
@@ -438,7 +438,10 @@ public class GUI extends JFrame {
 
 
 
-
+	/** test code
+	 * @param args not needed
+	 * @throws IOException the potential IO exception to be handled
+	 */
 	public static void main(String[] args) throws IOException {
 		GUI gui = new GUI();
 
