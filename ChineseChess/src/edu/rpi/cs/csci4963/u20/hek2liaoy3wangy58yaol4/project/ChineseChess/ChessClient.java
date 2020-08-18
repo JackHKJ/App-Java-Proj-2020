@@ -32,7 +32,7 @@ public class ChessClient extends Thread{
     }
 
     public void sendTerminateMessage(String[][] info){
-    	if(!server.isConnected()) {
+    	if(server.isClosed()) {
     		return;
     	}
         Message message = new Message(info, Message.TERMINATE);
