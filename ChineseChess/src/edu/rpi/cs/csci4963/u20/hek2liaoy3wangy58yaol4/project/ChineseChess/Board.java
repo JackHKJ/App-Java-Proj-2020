@@ -116,6 +116,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 		initializeAllPieces();
 		rule = new Rule(this, positionBoard);
 		this.movable = false;
+		System.out.println(GameApp.STATE);
 
 	}
 
@@ -320,7 +321,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 	/**
 	 * for transfering the data structure of the board to another side of connection
 	 * recieving the data
-	 *@param inputGrid passed in a 2d matrix 
+	 *@param inputGrid passed in a 2d matrix
 	 */
 	public void loadFromNetStream(String[][] inputGrid) {
 		// this.positionBoard = new Position[this.colSize+1][this.rowSize+1];
