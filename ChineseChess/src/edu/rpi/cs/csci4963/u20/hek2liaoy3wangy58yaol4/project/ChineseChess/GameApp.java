@@ -5,6 +5,8 @@ import java.awt.*;
 import java.io.IOException;
 
 public class GameApp {
+
+    // private member variable
     public static String frameName;
     public static final int SERVER = 1;
     public static final int CLIENT = 0;
@@ -15,12 +17,22 @@ public class GameApp {
     public static int STATE;
     public static int choose;
     public static GUI gui;
+
+    /**
+     * The function to choose client or server
+     * @return the option number for client and server
+     */
     public static int ChooseClientOrServer(){
         String[] options = {"Client", "Server"};
         return JOptionPane.showOptionDialog(null, "Please choose your option: ",
                 "Click a button",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
     }
+
+    /**
+     * The method to send normal running message
+     * @param boardInfo the board information in string[][] format
+     */
     public static void sendRunningMessage(String[][] boardInfo){
         if (choose == CLIENT){
             client.sendRunningMessage(boardInfo);
@@ -28,6 +40,10 @@ public class GameApp {
             server.sendRunningMessage(boardInfo);
         }
     }
+
+    /**
+     * The socket close method
+     */
     public static void closeSocket(){
         if (choose == CLIENT){
             client.closeSocket();
@@ -36,6 +52,10 @@ public class GameApp {
         }
     }
 
+    /**
+     * The method to send terminate message
+     * @param boardInfo the board information you want to use
+     */
     public static void sendTerminateMessage(String[][] boardInfo){
     
         if (choose == CLIENT){
@@ -45,6 +65,10 @@ public class GameApp {
         }
     }
 
+    /**
+     * The method to send lose message
+     * @param boardInfo the board information you want to use
+     */
     public static void sendLoseMessage(String[][] boardInfo){
         if (choose == CLIENT){
             client.sendLoseMessage(boardInfo);
@@ -54,17 +78,22 @@ public class GameApp {
         }
     }
 
+    /**
+     * The main method to run the whole program
+     * @param args the arguments you want to pass
+     * @throws IOException when the input is invalid
+     */
     public static void main(String[] args) throws IOException{
-        try {
+        try { // evaluate client and server method
             choose = ChooseClientOrServer();
             String serverName = "";
-            if (choose == CLIENT) {
+            if (choose == CLIENT) { // When the choose is client
                 frameName = "Client";
                 serverName = JOptionPane.showInputDialog("Please input your server name/address: ",
                         "localhost");
             }
             int portNumber = Integer.parseInt(JOptionPane.showInputDialog("Please input your port number: "));
-            if (choose == SERVER) {
+            if (choose == SERVER) { // When the choose is server
                 // server will go first
                 frameName = "Server";
                 server = new ChessServer(portNumber);
@@ -75,7 +104,7 @@ public class GameApp {
             }
 
             gui = new GUI();
-            if (choose == SERVER) {
+            if (choose == SERVER) { // When the choose is server
                 gui.setServer();
                 //gui.displayMsg("This is a server");
                 gui.setBoardMovable();
