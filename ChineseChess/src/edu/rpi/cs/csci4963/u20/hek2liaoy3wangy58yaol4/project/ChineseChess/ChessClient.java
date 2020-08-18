@@ -32,6 +32,9 @@ public class ChessClient extends Thread{
     }
 
     public void sendTerminateMessage(String[][] info){
+    	if(!server.isConnected()) {
+    		return;
+    	}
         Message message = new Message(info, Message.TERMINATE);
         try {
             objectOutputStream.writeObject(message);
@@ -51,6 +54,10 @@ public class ChessClient extends Thread{
             objectOutputStream.writeObject(message);
         } catch (IOException ioException) {
         }
+    }
+    
+    public boolean isConnected() {
+    	return server.isConnected();
     }
 
     @Override

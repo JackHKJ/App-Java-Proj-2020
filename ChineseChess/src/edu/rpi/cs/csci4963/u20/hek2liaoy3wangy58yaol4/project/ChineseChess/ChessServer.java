@@ -39,6 +39,9 @@ public class ChessServer extends Thread{
      * @param board the board you want to pass
      */
     public void sendTerminateMessage(String[][] info){
+    	if(!client.isConnected()) {
+    		return;
+    	}
         Message message = new Message(info, Message.TERMINATE);
         try {
             objectOutputStream.writeObject(message);
@@ -69,6 +72,7 @@ public class ChessServer extends Thread{
         }
 
     }
+
 
     @Override
     public void run(){

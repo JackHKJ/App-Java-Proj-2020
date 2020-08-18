@@ -37,9 +37,10 @@ public class GameApp {
     }
 
     public static void sendTerminateMessage(String[][] boardInfo){
+    
         if (choose == CLIENT){
             client.sendTerminateMessage(boardInfo);
-        }else{
+        }else{   
             server.sendTerminateMessage(boardInfo);
         }
     }
