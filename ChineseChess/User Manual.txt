@@ -3,6 +3,25 @@ Welcome to the Chinese Chess Game
 The rule of the game:
 
 Rule for each chess type:
-General("Shuai" or "Jiang") -
+General("Shuai" or "Jiang") - labelled as 將 on the black side and  帥 on the red side. The general starts the game at the midpoint of the back edge, within the palace. 
+The general may move and capture one point orthogonally and may not leave the palace, with the following exception.
+If the two generals face each other along the same file with no intervening pieces, the 飛將 ("flying general") move may be executed, in which the general to move crosses the board to capture the enemy general. In practice, this rule means that creating this situation in the first place means moving into check, and is therefore not allowed.
 
-Advior("Shi") -
+Advisor("Shi") - labelled as 士 for Black and 仕 for Red. 
+The advisors start on either side of the general. They move and capture one point diagonally and may not leave the palace, which confines them to five points on the board. 
+
+Bishop("Xiang") - labeled as 象 for Black and 相 for Red. 
+They are located next to the advisors. These pieces move and capture exactly two points diagonally and may not jump over intervening pieces.
+Bishops may not cross the river to attack the enemy general, and serve as defensive pieces. Because a Bishop's movement is restricted to just seven board positions, it can be easily trapped or threatened. The two Bishops are often used to defend each other.
+
+Knight("Ma") - labelled 馬 for each side.
+A horse moves and captures one point orthogonally and then one point diagonally away from its former position.
+
+Chariot("Ju") - labelled as 車 for both sides.
+The chariot moves and captures any distance orthogonally, but may not jump over intervening pieces. The chariots begin the game on the points at the corners of the board. The chariot is often considered to be the strongest piece in the game due to its freedom of movement and lack of restrictions.
+
+Cannon("Pao") - labelled as 炮 for both sides.
+Each player has two cannons, which start on the row behind the pawns, two points in front of the Knights. Cannons move like chariots, any distance orthogonally without jumping, but can only capture by jumping a single piece, friend or foe, along the path of attack.
+
+Pawn("Bing" or "Zu") - labelled as 卒 for Black and 兵 for Red.
+Each side starts with five pawns. They move and capture by advancing one point. Once they have crossed the river, they may also move and capture one point horizontally. Soldiers cannot move backward, and therefore cannot retreat; after advancing to the last rank of the board, however, a soldier may still move sideways at the enemy's edge.
