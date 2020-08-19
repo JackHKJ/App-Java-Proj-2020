@@ -4,36 +4,16 @@ import edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess.Piece
 
 import java.io.Serializable;
 
-
-/*
- * Rule class contains the rule for different types of chess pieces.
- * Rule is initialized in Board class to judge whether a move of the piece is legal.
- * @author Kristen Yao
- */
 public class Rule implements Serializable {
-	// global variables
-  Board board = null;  // board taken in
-  Piece piece = null;  // specific piece to judge the movement
-  Position pos[][];    // the position of current pieces to help make judgment
-  int starti,endi,startj,endj;  // the start and end coordinates of the piece
-  
-  /** Constructor function
-	 * @param board: Board object where the piece belongs to
-	 * @param pos: Position object describes the position of all pieces
-	 */
+  Board board = null;
+  Piece piece = null;
+  Position pos[][];
+  int starti,endi,startj,endj;
   public Rule(Board board, Position pos[][]){
     this.board = board;
     this.pos = pos;
   }
 
-  /** Judge the legality of a mouse movement of the piece
-	 * @param piece: the piece dragged by mouse
-	 * @param starti: start x coordinate
-	 * @param startj: start y coordinate
-	 * @param endi: end x coordinate
-	 * @param endj: end y coordinate
-	 * @return boolean: true => this move of the piece is legal; false => the move of the piece is illegal
-	 */
   public boolean moveJudge(Piece piece, int starti, int startj, int endi, int endj){
     this.piece = piece;
     this.starti = starti;
@@ -47,7 +27,7 @@ public class Rule implements Serializable {
     int i = 0;
     boolean move = false;
     //System.out.println(piece.getName() );
-    if (piece.getName().equals(PieceName.Chariot.toString())) {  // Zu
+    if (piece.getName().equals(PieceName.Chariot.toString())) {
       if (starti == endi) {
         for (i = min_j+1; i <= max_j-1; i++) {
           if (pos[starti][i].hasPiece()) {
