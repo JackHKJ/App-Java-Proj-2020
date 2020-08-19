@@ -6,12 +6,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketException;
 
 import static edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess.GameApp.gui;
 
-
+/**
+ * The server class for the whole game
+ */
 public class ChessServer extends Thread{
+
+    // private member variable
     private ServerSocket serverSocket;
     private ObjectInputStream objectInputStream = null;
     private ObjectOutputStream objectOutputStream = null;
@@ -19,13 +22,17 @@ public class ChessServer extends Thread{
 
     private int port;
 
+    /**
+     * The constructor of the server
+     * @param port the port number
+     */
     public ChessServer(int port){
         this.port = port;
     }
 
     /**
      * When you send a normal board during running game
-     * @param board the board you want to pass
+     * @param info the board you want to pass
      */
     public void sendRunningMessage(String[][] info){
         Message message = new Message(info, Message.RUNNING);
@@ -37,7 +44,7 @@ public class ChessServer extends Thread{
 
     /**
      * When you want to HeQi
-     * @param board the board you want to pass
+     * @param info the board you want to pass
      */
     public void sendTerminateMessage(String[][] info){
     	if(client.isClosed()) {
@@ -52,7 +59,7 @@ public class ChessServer extends Thread{
 
     /**
      * When you want to lose
-     * @param board the board you want to pass
+     * @param info the board you want to pass
      */
     public void sendLoseMessage(String[][] info){
         Message message = new Message(info, Message.LOSE);
@@ -62,6 +69,9 @@ public class ChessServer extends Thread{
         }
     }
 
+    /**
+     * The close method for the server
+     */
     public void closeServer(){
         try {
             client.close();
@@ -69,13 +79,15 @@ public class ChessServer extends Thread{
         } catch (IOException ioException) {
 
         }
-
     }
 
-
+    /**
+     * run the server and continously
+     */
     @Override
     public void run(){
         try {
+            // utilize socket to accept
             serverSocket = new ServerSocket(port);
 
             client = serverSocket.accept();
@@ -98,6 +110,8 @@ public class ChessServer extends Thread{
                     e.printStackTrace();
                 }
             }
+
+            // When the game terminates
             if (message.getState() == Message.LOSE) {
                 JOptionPane.showMessageDialog(null, "You Lose!", "Lose",
                         JOptionPane.INFORMATION_MESSAGE);
@@ -107,11 +121,11 @@ public class ChessServer extends Thread{
                         JOptionPane.INFORMATION_MESSAGE);
                 GUI.displayMsg("you Win");
             }
+
+            // close all sockets and GUI
             client.close();            
             serverSocket.close();
             gui.closeProcedure();
-
-            // following will coming soon :)
         } catch (IOException ioException) {
         }
     }
