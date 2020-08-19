@@ -110,7 +110,7 @@ public class GameApp {
             if (choose == SERVER) { // When the choose is server
                 gui.setServer();
                 //gui.displayMsg("This is a server");
-                gui.setBoardMovable();
+                // gui.setBoardMovable();
             }
         }catch (NumberFormatException e){
 

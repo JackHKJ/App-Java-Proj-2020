@@ -91,6 +91,7 @@ public class ChessServer extends Thread{
             serverSocket = new ServerSocket(port);
 
             client = serverSocket.accept();
+            gui.setBoardMovable();
             objectInputStream = new ObjectInputStream(client.getInputStream());
             objectOutputStream = new ObjectOutputStream(client.getOutputStream());
             Message message;
