@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
+/** this is the main logic interface of both the Server-side and the Client side that initializes the service and try to start the network connection
+ * @version JDK 14.0.2
+ */
 public class GameApp {
 
     // private member variable

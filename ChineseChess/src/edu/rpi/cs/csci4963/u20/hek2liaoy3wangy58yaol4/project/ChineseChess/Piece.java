@@ -184,8 +184,8 @@ public class Piece extends JLabel{
 	public void setWidth(int wid) {
 		this.width = wid;
 	}
-
-
+	
+	/** test code that shows a piece object */
 	public static void main(String[] args) {
 		JFrame example = new JFrame();
 		example.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
