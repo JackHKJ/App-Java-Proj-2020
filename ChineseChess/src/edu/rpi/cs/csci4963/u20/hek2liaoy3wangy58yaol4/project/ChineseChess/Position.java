@@ -1,12 +1,12 @@
 package edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess;
 
-
+import java.io.Serializable;
 
 /** this class implements a "position" on the Chinese chess board that allows the user to
  * place a piece on that
  * @version JRE 1.8.0_231
  */
-public class Position {
+public class Position implements Serializable {
 	/** the x coordinate of the position */
 	private int x; //
 	/** the y coordinate of the position */

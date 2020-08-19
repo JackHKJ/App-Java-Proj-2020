@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess.Piece.PieceName;
 import edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess.Piece.Side;
 import static edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess.GameApp.gui;
@@ -19,7 +20,7 @@ import static edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChes
  * It is initialized inside of GUI class
  *
  */
-public class Board extends JPanel implements MouseListener, MouseMotionListener {
+public class Board extends JPanel implements MouseListener, MouseMotionListener, Serializable {
 	// the global variable segment
 	public Position positionBoard[][]; // use position to represent the layout of the board
 	public int colSize; // the row number of the board
@@ -580,18 +581,26 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	}
 
 	// ------------------------- Unused override --------------------------------/
-	/** unused */
-	@Override	
-	public void mouseMoved(MouseEvent e) {}	
-	/** unused */
 	@Override
-	public void mouseClicked(MouseEvent e) {}
-	/** unused */
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+	}
+
 	@Override
-	public void mouseEntered(MouseEvent e) {}
-	/** unused */
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+	}
+
 	@Override
-	public void mouseExited(MouseEvent e) {}
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+	}
 
 
 

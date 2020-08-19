@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess"},{"l":"所有程序包","url":"allpackages-index.html"}]
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess"}]

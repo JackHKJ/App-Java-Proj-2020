@@ -2,33 +2,18 @@ package edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess;
 import edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess.Piece.PieceName;
 import edu.rpi.cs.csci4963.u20.hek2liaoy3wangy58yaol4.project.ChineseChess.Piece.Side;
 
+import java.io.Serializable;
 
+public class Rule implements Serializable {
+  Board board = null;
+  Piece piece = null;
+  Position pos[][];
+  int starti,endi,startj,endj;
+  public Rule(Board board, Position pos[][]){
+    this.board = board;
+    this.pos = pos;
+  }
 
-/** the class that used to decide whether a move of a piece from one "position" to another "Position" is valid or not
- * @version JDK 14.0.2
- *
- */
-public class Rule {
-
-	private static final long serialVersionUID = 1L;
-	Board board = null;
-	Piece piece = null;
-	Position pos[][];
-	int starti,endi,startj,endj;
-	
-	public Rule(Board board, Position pos[][]){
-		this.board = board;
-		this.pos = pos;
-	}
-
-  /** the function that decide whether a move is valid or not
-   * @param piece the piece to be moved
-   * @param starti the starting x-coordinate
-   * @param startj the starting y-coordinate
-   * @param endi the ending x-coordinate
-   * @param endj the ending y-coordinate
-   * @return true if the move is valid, false otherwise
-   */
   public boolean moveJudge(Piece piece, int starti, int startj, int endi, int endj){
     this.piece = piece;
     this.starti = starti;

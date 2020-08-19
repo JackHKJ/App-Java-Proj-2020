@@ -77,9 +77,7 @@ public class GUI extends JFrame {
 		// hide
 		private JButton hideBtn;
 
-	/** the constructor of the GUI
-	 * @throws IOException May due to Network connection failures
-	 */
+	/** the constructor of the GUI*/
 	public GUI() throws IOException{
 		//setLayout(null);
 		this.setTitle("Chinese Chess - " + GameApp.frameName);
