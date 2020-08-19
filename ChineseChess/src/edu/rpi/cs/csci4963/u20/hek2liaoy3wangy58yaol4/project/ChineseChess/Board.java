@@ -296,6 +296,11 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	public void setServer() {
 		this.isServer = true;
 	}
+	
+	/** enable the debug mode*/
+	public void setDebugMode() {
+		this.debugMode = true;
+	}
 
 	/**
 	 * for transfering the data structure of the board to another side of connection
@@ -367,7 +372,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		/** if not this round then return */
-		if(!this.movable) {
+		if(!this.movable && !this.debugMode) {
 			return;
 		}		
 
@@ -381,10 +386,10 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 			// store the pressed coordinate of the chess
 			piece = (Piece) e.getSource(); // the piece gets pressed
 //			decide which side this piece belongs to and check isServer
-			if(piece.getSide().equals(Side.Han) && !isServer) {
+			if(piece.getSide().equals(Side.Han) && !isServer && !this.debugMode) {
 				return;
 			}
-			if(piece.getSide().equals(Side.Chu) && isServer) {
+			if(piece.getSide().equals(Side.Chu) && isServer && !this.debugMode) {
 				return;
 			}
 			area = piece.getBounds(); // area of pressed
@@ -413,16 +418,16 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		/** if not this round then return */
-		if(!this.movable) {
+		if(!this.movable && !this.debugMode) {
 			return;
 		}		
 		Piece piece = null;
 		if(e.getSource() instanceof Piece){
 			piece = (Piece)e.getSource();
-			if(piece.getSide().equals(Side.Han) && !isServer) {
+			if(piece.getSide().equals(Side.Han) && !isServer && !this.debugMode) {
 				return;
 			}
-			if(piece.getSide().equals(Side.Chu) && isServer) {
+			if(piece.getSide().equals(Side.Chu) && isServer && !this.debugMode) {
 				return;
 			}
 			// When dragging the chess, the coordiantes updates simultaneously
@@ -450,7 +455,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		/** if not this round then return */
-		if(!this.movable) {
+		if(!this.movable && !this.debugMode) {
 			return;
 		}
 
@@ -460,10 +465,10 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 		String message = "";
 		if(e.getSource() instanceof Piece){
 			piece = (Piece)e.getSource();
-			if(piece.getSide().equals(Side.Han) && !isServer) {
+			if(piece.getSide().equals(Side.Han) && !isServer && !this.debugMode) {
 				return;
 			}
-			if(piece.getSide().equals(Side.Chu) && isServer) {
+			if(piece.getSide().equals(Side.Chu) && isServer && !this.debugMode) {
 				return;
 			}
 			area = piece.getBounds();

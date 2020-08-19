@@ -446,13 +446,13 @@ public class GUI extends JFrame {
 	 */
 	public static void main(String[] args) throws IOException {
 		GUI gui = new GUI();
+		gui.boardPanel.setDebugMode();
 
 
-
-		String[][] rep = gui.boardPanel.forNetTransport();
-		System.out.println("SEP-------------------");
-		rep[1][1] = null;
-		gui.boardPanel.loadFromNetStream(rep);
+//		String[][] rep = gui.boardPanel.forNetTransport();
+//		System.out.println("SEP-------------------");
+//		rep[1][1] = null;
+//		gui.boardPanel.loadFromNetStream(rep);
 
 
 
