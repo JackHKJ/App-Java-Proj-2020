@@ -6,7 +6,7 @@ import java.io.Serializable;
  * place a piece on that
  * @version JRE 1.8.0_231
  */
-public class Position {
+public class Position implements Serializable {
 	/** the x coordinate of the position */
 	private int x; //
 	/** the y coordinate of the position */

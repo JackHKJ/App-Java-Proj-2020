@@ -10,21 +10,13 @@ import java.io.Serializable;
  * Rule is initialized in Board class to judge whether a move of the piece is legal.
  * @author Kristen Yao
  */
-<<<<<<< HEAD
 public class Rule implements Serializable {
-=======
-public class Rule {
->>>>>>> 0bdcb48968152c21353f30ff481c985f8b3c6c79
 	// global variables
   Board board = null;  // board taken in
   Piece piece = null;  // specific piece to judge the movement
   Position pos[][];    // the position of current pieces to help make judgment
   int starti,endi,startj,endj;  // the start and end coordinates of the piece
-<<<<<<< HEAD
   
-=======
-
->>>>>>> 0bdcb48968152c21353f30ff481c985f8b3c6c79
   /** Constructor function
 	 * @param board: Board object where the piece belongs to
 	 * @param pos: Position object describes the position of all pieces
