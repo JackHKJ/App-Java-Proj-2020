@@ -24,8 +24,8 @@ public class Piece extends JLabel{
 	private int width; // the width of the piece to be painted
 	private int padding = 2; // the padding for drawing content
 	private Board board; // the board that this piece lies on
-	public File folderInput;
-	public BufferedImage folderImage;
+//	public File folderInput;
+//	public BufferedImage folderImage;
 
 	//  The list for the name of the pieces
  	enum PieceName{
@@ -58,7 +58,7 @@ public class Piece extends JLabel{
 		this.height = height;
 		this.width = width;
 		this.board = board;
-		this.folderInput = new File(imageName);
+//		this.folderInput = new File(imageName);
 		this.addMouseListener(board);
 		this.addMouseMotionListener(board);
 	}
@@ -186,6 +186,15 @@ public class Piece extends JLabel{
 	}
 
 
+	public static void main(String[] args) {
+		JFrame example = new JFrame();
+		example.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		example.setBounds(100,100,200,200);
+		example.add(new Piece(PieceName.General, Side.Chu, 50, 50, null, null));
+		example.setVisible(true);
+	}
+	
+	
 
 
 
